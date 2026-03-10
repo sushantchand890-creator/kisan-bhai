@@ -90,7 +90,7 @@ export class GeminiService {
 
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash-preview-tts",
-      contents: [{ parts: [{ text: `Say in ${lang}: ${text}` }] }],
+      contents: [{ parts: [{ text }] }],
       config: {
         responseModalities: [Modality.AUDIO],
         speechConfig: {
@@ -125,12 +125,11 @@ export class GeminiService {
     contents.push({ role: 'user', parts: currentParts });
 
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-3.1-flash-lite-preview',
       contents,
       config: {
         systemInstruction: `You are Kisan-Bhai, the friendly AI Farmer advisor. ${this.getLanguageContext(lang)} 
-        Help with diseases, irrigation, and crop planning. Use real-time data from Google Search to provide the most up-to-date and accurate information.`,
-        tools: [{ googleSearch: {} }]
+        Help with diseases, irrigation, and crop planning. Provide the most up-to-date and accurate information.`,
       }
     });
     return response.text || "I'm sorry, I'm resting my voice right now.";
@@ -139,7 +138,7 @@ export class GeminiService {
   async analyzeDisease(imageBase64: string, lang: string = 'en') {
     const ai = this.getAI();
     const response = await ai.models.generateContent({
-      model: 'gemini-3.1-pro-preview',
+      model: 'gemini-3-flash-preview',
       contents: {
         parts: [
           { inlineData: { mimeType: 'image/jpeg', data: imageBase64.split(',')[1] || imageBase64 } },
@@ -163,6 +162,20 @@ export class GeminiService {
     return this.extractJSON(response.text);
   }
 
+  async reverseGeocode(lat: number, lng: number): Promise<string> {
+    const ai = this.getAI();
+    try {
+      const response = await ai.models.generateContent({
+        model: 'gemini-3.1-flash-lite-preview',
+        contents: `What is the city and state/province for the coordinates ${lat}, ${lng}? Respond ONLY with the location name in the format "City, State, Country". Do not include any other text.`,
+      });
+      return response.text?.trim() || 'Unknown Location';
+    } catch (e) {
+      console.error("Reverse geocoding failed", e);
+      return 'Unknown Location';
+    }
+  }
+
   async getRealTimeWeather(location: string, lang: string = 'en') {
     const cacheKey = `weather_${location}_${lang}`;
     const cached = this.getCached(cacheKey);
@@ -170,11 +183,8 @@ export class GeminiService {
 
     const ai = this.getAI();
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
-      contents: `Use real-time data from Google Search to get the current weather and 5-day forecast for ${location} in ${lang}. Respond strictly in JSON format with this structure: { "current": { "temp": number, "humidity": number, "condition": string, "wind": number, "uv": string }, "forecast": [ { "day": string, "high": number, "low": number, "condition": string } ] }`,
-      config: {
-        tools: [{ googleSearch: {} }]
-      }
+      model: 'gemini-3.1-flash-lite-preview',
+      contents: `Get the current weather and 5-day forecast for ${location} in ${lang}. Respond strictly in JSON format with this structure: { "current": { "temp": number, "humidity": number, "condition": string, "wind": number, "uv": string }, "forecast": [ { "day": string, "high": number, "low": number, "condition": string } ] }`,
     });
     const data = this.extractJSON(response.text);
     this.setCache(cacheKey, data, WEATHER_CACHE_TIME);
@@ -188,11 +198,8 @@ export class GeminiService {
 
     const ai = this.getAI();
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
-      contents: `Use real-time data from Google Search to generate 2 proactive agricultural alerts for ${profile.location} in ${profile.language}. Respond strictly in JSON format with this structure: { "alerts": [ { "title": string, "type": string, "description": string, "urgency": string } ] }`,
-      config: {
-        tools: [{ googleSearch: {} }]
-      }
+      model: 'gemini-3.1-flash-lite-preview',
+      contents: `Generate 2 proactive agricultural alerts for ${profile.location} in ${profile.language}. Respond strictly in JSON format with this structure: { "alerts": [ { "title": string, "type": string, "description": string, "urgency": string } ] }`,
     });
     const parsed = this.extractJSON(response.text);
     const data = parsed.alerts ? parsed.alerts : (Array.isArray(parsed) ? parsed : []);
@@ -203,7 +210,7 @@ export class GeminiService {
   async getFertilizerAdvice(crop: string, soil: string, stage: string, lang: string = 'en'): Promise<FertilizerAdvice> {
     const ai = this.getAI();
     const response = await ai.models.generateContent({
-      model: 'gemini-3.1-pro-preview',
+      model: 'gemini-3.1-flash-lite-preview',
       contents: `Fertilizer advice for ${crop} at ${stage} in ${soil} soil in ${lang}.`,
       config: {
         responseMimeType: 'application/json',
@@ -225,7 +232,7 @@ export class GeminiService {
   async getIrrigationAdvice(crop: string, moisture: number, rain: number, lang: string = 'en') {
     const ai = this.getAI();
     const response = await ai.models.generateContent({
-      model: 'gemini-3.1-pro-preview',
+      model: 'gemini-3.1-flash-lite-preview',
       contents: `Irrigation for ${crop}, ${moisture}% moisture, ${rain}mm rain in ${lang}.`,
       config: {
         responseMimeType: 'application/json',
@@ -246,11 +253,8 @@ export class GeminiService {
   async checkUpcomingRain(location: string, lang: string = 'en') {
     const ai = this.getAI();
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
-      contents: `Use real-time data from Google Search to check if heavy rain is predicted in ${location} next 24h. Respond strictly in JSON format with this structure: { "isRainExpected": boolean, "intensity": string, "timing": string, "recommendation": string }`,
-      config: {
-        tools: [{ googleSearch: {} }]
-      }
+      model: 'gemini-3.1-flash-lite-preview',
+      contents: `Check if heavy rain is predicted in ${location} next 24h. Respond strictly in JSON format with this structure: { "isRainExpected": boolean, "intensity": string, "timing": string, "recommendation": string }`,
     });
     const data = this.extractJSON(response.text);
     return data.isRainExpected !== undefined ? data : { isRainExpected: false };
@@ -263,11 +267,8 @@ export class GeminiService {
 
     const ai = this.getAI();
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
-      contents: `Use real-time data from Google Search to find critical weather alerts for farmers in ${location} in ${lang}. Respond strictly in JSON format with this structure: { "alerts": [ { "title": string, "severity": string, "description": string, "action": string } ] }`,
-      config: {
-        tools: [{ googleSearch: {} }]
-      }
+      model: 'gemini-3.1-flash-lite-preview',
+      contents: `Find critical weather alerts for farmers in ${location} in ${lang}. Respond strictly in JSON format with this structure: { "alerts": [ { "title": string, "severity": string, "description": string, "action": string } ] }`,
     });
     const parsed = this.extractJSON(response.text);
     const data = parsed.alerts ? parsed.alerts : (Array.isArray(parsed) ? parsed : []);
@@ -278,7 +279,7 @@ export class GeminiService {
   async analyzeGrowth(imageBase64: string, cropType: string, lang: string = 'en') {
     const ai = this.getAI();
     const response = await ai.models.generateContent({
-      model: 'gemini-3.1-pro-preview',
+      model: 'gemini-3-flash-preview',
       contents: {
         parts: [
           { inlineData: { mimeType: 'image/jpeg', data: imageBase64.split(',')[1] || imageBase64 } },
@@ -308,11 +309,8 @@ export class GeminiService {
 
     const ai = this.getAI();
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
-      contents: `Use real-time data from Google Search to find active, currently ongoing Indian agricultural schemes specifically for farmers in ${location} in ${lang}. Exclude any schemes that have ended or are no longer active. Respond strictly in JSON format with this structure: { "schemes": [ { "name": string, "category": string, "description": string, "eligibility": string, "benefits": string } ] }`,
-      config: {
-        tools: [{ googleSearch: {} }]
-      }
+      model: 'gemini-3.1-flash-lite-preview',
+      contents: `Find active, currently ongoing Indian agricultural schemes specifically for farmers in ${location} in ${lang}. Exclude any schemes that have ended or are no longer active. Respond strictly in JSON format with this structure: { "schemes": [ { "name": string, "category": string, "description": string, "eligibility": string, "benefits": string } ] }`,
     });
     const parsed = this.extractJSON(response.text);
     const data = parsed.schemes ? parsed.schemes : (Array.isArray(parsed) ? parsed : []);
@@ -323,11 +321,8 @@ export class GeminiService {
   async getCropRecommendations(location: string, season: string, soil: string, lang: string = 'en') {
     const ai = this.getAI();
     const response = await ai.models.generateContent({
-      model: 'gemini-3.1-pro-preview',
-      contents: `Use real-time data from Google Search to recommend crops for ${location}, ${season}, ${soil} in ${lang}. Respond strictly in JSON format with this structure: { "crops": [ { "name": string, "risk": string, "profitPotential": string, "waterNeed": string } ] }`,
-      config: {
-        tools: [{ googleSearch: {} }]
-      }
+      model: 'gemini-3.1-flash-lite-preview',
+      contents: `Recommend crops for ${location}, ${season}, ${soil} in ${lang}. Respond strictly in JSON format with this structure: { "crops": [ { "name": string, "risk": string, "profitPotential": string, "waterNeed": string } ] }`,
     });
     const data = this.extractJSON(response.text);
     return data.crops ? data : { crops: Array.isArray(data) ? data : [] };
@@ -336,7 +331,7 @@ export class GeminiService {
   async getWeatherAdvice(temp: number, humidity: number, condition: string, lang: string = 'en') {
     const ai = this.getAI();
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-3.1-flash-lite-preview',
       contents: `Tips for ${temp}C, ${humidity}%, ${condition} in ${lang}.`,
       config: {
         responseMimeType: 'application/json',
@@ -357,11 +352,8 @@ export class GeminiService {
 
     const ai = this.getAI();
     const response = await ai.models.generateContent({
-      model: 'gemini-3.1-pro-preview',
-      contents: `Use real-time data from Google Search to estimate the farming costs and revenue for ${landSize} acres of ${cropType} in ${location} in ${lang}. Respond strictly in JSON format with this structure: { "seedsCost": number, "laborCost": number, "fertilizerCost": number, "expectedYield": number, "marketPrice": number }`,
-      config: {
-        tools: [{ googleSearch: {} }]
-      }
+      model: 'gemini-3.1-flash-lite-preview',
+      contents: `Estimate the farming costs and revenue for ${landSize} acres of ${cropType} in ${location} in ${lang}. Respond strictly in JSON format with this structure: { "seedsCost": number, "laborCost": number, "fertilizerCost": number, "expectedYield": number, "marketPrice": number }`,
     });
     const parsed = this.extractJSON(response.text);
     const data = {

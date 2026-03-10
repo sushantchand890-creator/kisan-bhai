@@ -1,7 +1,8 @@
 
-import React, { useState } from 'react';
-import { Sprout, LogIn, UserPlus, ArrowRight, Loader2, Landmark } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Sprout, LogIn, UserPlus, ArrowRight, Loader2, Landmark, MapPin } from 'lucide-react';
 import { FarmProfile } from '../types';
+import { geminiService } from '../services/geminiService';
 
 interface AuthProps {
   onAuth: (user: FarmProfile) => void;
@@ -10,46 +11,90 @@ interface AuthProps {
 export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [loadingText, setLoadingText] = useState('');
+  const [autoLocation, setAutoLocation] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  useEffect(() => {
+    // Pre-fetch location if possible
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          try {
+            const loc = await geminiService.reverseGeocode(position.coords.latitude, position.coords.longitude);
+            if (loc && loc !== 'Unknown Location') {
+              setAutoLocation(loc);
+            }
+          } catch (e) {
+            console.error(e);
+          }
+        },
+        (error) => console.error("Geolocation error:", error),
+        { timeout: 10000 }
+      );
+    }
+  }, []);
+
+  const detectLocationAndAuth = async (baseProfile: Partial<FarmProfile>) => {
     setLoading(true);
-    // Simulating authentication
+    
+    let finalLocation = autoLocation || 'Punjab, India';
+
+    if (!autoLocation && 'geolocation' in navigator) {
+      setLoadingText('Detecting location...');
+      try {
+        const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 10000 });
+        });
+        const loc = await geminiService.reverseGeocode(position.coords.latitude, position.coords.longitude);
+        if (loc && loc !== 'Unknown Location') {
+          finalLocation = loc;
+          setAutoLocation(loc);
+        }
+      } catch (e) {
+        console.error("Failed to detect location during auth", e);
+      }
+    }
+
+    setLoadingText('Setting up your farm...');
+    
     setTimeout(() => {
       const newUser: FarmProfile = {
-        name: formData.name || 'Farmer',
-        location: 'Punjab, India',
-        size: '5 Acres',
-        soilType: 'Alluvial',
-        primaryCrops: ['Wheat'],
-        waterResources: 'Tubewell',
-        language: 'en'
+        name: baseProfile.name || 'Farmer',
+        location: finalLocation,
+        size: baseProfile.size || '5 Acres',
+        soilType: baseProfile.soilType || 'Alluvial',
+        primaryCrops: baseProfile.primaryCrops || ['Wheat'],
+        waterResources: baseProfile.waterResources || 'Tubewell',
+        language: baseProfile.language || 'en',
+        isGuest: baseProfile.isGuest || false
       };
       onAuth(newUser);
       setLoading(false);
-    }, 1500);
+      setLoadingText('');
+    }, 1000);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    detectLocationAndAuth({
+      name: formData.name || 'Farmer',
+    });
   };
 
   const handleGuest = () => {
-    setLoading(true);
-    setTimeout(() => {
-      onAuth({
-        name: 'Guest Farmer',
-        location: 'Not Set',
-        size: 'Not Set',
-        soilType: 'Not Set',
-        primaryCrops: [],
-        waterResources: 'Not Set',
-        language: 'en',
-        isGuest: true
-      });
-      setLoading(false);
-    }, 1000);
+    detectLocationAndAuth({
+      name: 'Guest Farmer',
+      size: 'Not Set',
+      soilType: 'Not Set',
+      primaryCrops: [],
+      waterResources: 'Not Set',
+      isGuest: true
+    });
   };
 
   return (
@@ -118,8 +163,20 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
             disabled={loading}
             className="w-full bg-green-600 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-green-700 transition-all shadow-lg shadow-green-100 disabled:opacity-50 active:scale-[0.98]"
           >
-            {loading ? <Loader2 className="w-6 h-6 animate-spin" /> : isLogin ? <LogIn className="w-5 h-5" /> : <UserPlus className="w-5 h-5" />}
-            {isLogin ? 'Enter Your Farm' : 'Create Account'}
+            {loading ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                {loadingText || 'Loading...'}
+              </>
+            ) : isLogin ? (
+              <>
+                <LogIn className="w-5 h-5" /> Enter Your Farm
+              </>
+            ) : (
+              <>
+                <UserPlus className="w-5 h-5" /> Create Account
+              </>
+            )}
           </button>
         </form>
 
@@ -130,10 +187,17 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
 
         <button 
           onClick={handleGuest}
-          className="w-full bg-white border-2 border-gray-100 text-gray-600 font-bold py-3.5 rounded-2xl flex items-center justify-center gap-2 hover:bg-gray-50 transition-all active:scale-[0.98]"
+          disabled={loading}
+          className="w-full bg-white border-2 border-gray-100 text-gray-600 font-bold py-3.5 rounded-2xl flex items-center justify-center gap-2 hover:bg-gray-50 transition-all active:scale-[0.98] disabled:opacity-50"
         >
           <Landmark className="w-5 h-5" /> Continue as Guest
         </button>
+
+        {autoLocation && (
+          <div className="mt-6 flex items-center justify-center gap-1.5 text-xs font-bold text-green-600 bg-green-50 py-2 px-3 rounded-full w-max mx-auto">
+            <MapPin className="w-3.5 h-3.5" /> Auto-detected: {autoLocation}
+          </div>
+        )}
 
         <p className="mt-8 text-center text-xs text-gray-400 px-4">
           By continuing, you agree to RuralAssist's <span className="underline">Terms of Service</span> and <span className="underline">Privacy Policy</span>.

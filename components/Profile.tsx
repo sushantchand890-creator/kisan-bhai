@@ -74,13 +74,40 @@ export const Profile: React.FC = () => {
 
           <div className="space-y-2">
             <label className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Location</label>
-            <div className="relative">
-              <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-green-500" />
-              <input 
-                value={profile.location}
-                onChange={(e) => setProfile({...profile, location: e.target.value})}
-                className="w-full bg-gray-50 border border-gray-100 rounded-2xl pl-12 pr-5 py-4 focus:ring-4 focus:ring-green-100 outline-none transition-all font-bold"
-              />
+            <div className="relative flex gap-2">
+              <div className="relative flex-1">
+                <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-green-500" />
+                <input 
+                  value={profile.location}
+                  onChange={(e) => setProfile({...profile, location: e.target.value})}
+                  className="w-full bg-gray-50 border border-gray-100 rounded-2xl pl-12 pr-5 py-4 focus:ring-4 focus:ring-green-100 outline-none transition-all font-bold"
+                />
+              </div>
+              <button
+                onClick={() => {
+                  if ('geolocation' in navigator) {
+                    navigator.geolocation.getCurrentPosition(
+                      async (position) => {
+                        try {
+                          const { geminiService } = await import('../services/geminiService');
+                          const loc = await geminiService.reverseGeocode(position.coords.latitude, position.coords.longitude);
+                          if (loc && loc !== 'Unknown Location') {
+                            setProfile(prev => ({ ...prev, location: loc }));
+                          }
+                        } catch (e) {
+                          console.error(e);
+                        }
+                      },
+                      (error) => console.error("Geolocation error:", error),
+                      { timeout: 10000 }
+                    );
+                  }
+                }}
+                className="bg-green-100 text-green-700 px-4 rounded-2xl font-bold text-sm hover:bg-green-200 transition-all flex items-center justify-center shrink-0"
+                title="Auto-detect location"
+              >
+                <MapPin className="w-5 h-5" />
+              </button>
             </div>
           </div>
 
