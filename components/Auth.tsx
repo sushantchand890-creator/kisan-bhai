@@ -114,32 +114,32 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
         <div className="hidden lg:flex lg:col-span-7 flex-col justify-between h-full py-8 pr-12 relative">
           <div>
             {/* Top Pill Badge */}
-            <div className="inline-flex items-center gap-2.5 bg-emerald-950/40 border border-white/30 backdrop-blur-md px-4 py-2 rounded-full text-white text-xs font-bold mb-8 shadow-md">
+            <div className="animate-slide-in-left opacity-0 [animation-delay:100ms] [animation-fill-mode:forwards] inline-flex items-center gap-2.5 bg-emerald-950/40 border border-white/30 backdrop-blur-md px-4 py-2 rounded-full text-white text-xs font-bold mb-8 shadow-md hover:bg-emerald-950/60 transition-colors">
               <img 
                 src="/wheat_stalks.png" 
                 alt="Kisan-Bhai Wheat Logo" 
-                className="w-7 h-7 object-contain filter drop-shadow-sm" 
+                className="w-7 h-7 object-contain filter drop-shadow-sm animate-float" 
               />
               <span className="uppercase tracking-wider">RuralAssist AI Platform</span>
             </div>
 
             {/* Bright Hero Heading matching reference */}
-            <h1 className="font-heading text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight drop-shadow-md">
+            <h1 className="animate-slide-in-left opacity-0 [animation-delay:250ms] [animation-fill-mode:forwards] font-heading text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight drop-shadow-md">
               Kisan-Bhai <br />
               <span className="text-emerald-400">Digital Farmer </span> <br />
               <span className="text-emerald-200">Advisor</span>
             </h1>
 
             {/* Subtitle */}
-            <p className="mt-6 text-base lg:text-lg text-white font-medium max-w-xl leading-relaxed drop-shadow-md">
+            <p className="animate-slide-in-left opacity-0 [animation-delay:400ms] [animation-fill-mode:forwards] mt-6 text-base lg:text-lg text-white font-medium max-w-xl leading-relaxed drop-shadow-md">
               Empowering farmers with AI-driven crop diagnostics, real-time weather advisories, multilingual voice support, and government scheme navigation.
             </p>
           </div>
 
           {/* 4 Glass Feature Badges Grid */}
-          <div className="grid grid-cols-2 gap-4 max-w-xl mt-12">
-            <div className="bg-emerald-950/45 border border-white/30 backdrop-blur-xl p-4 rounded-2xl flex items-center gap-3.5 shadow-lg">
-              <div className="p-3 bg-white/20 rounded-xl text-emerald-300">
+          <div className="animate-fade-in-up opacity-0 [animation-delay:550ms] [animation-fill-mode:forwards] grid grid-cols-2 gap-4 max-w-xl mt-12">
+            <div className="bg-emerald-950/45 border border-white/30 backdrop-blur-xl p-4 rounded-2xl flex items-center gap-3.5 shadow-lg hover:border-emerald-400/50 hover:bg-emerald-950/60 hover:scale-[1.02] transition-all duration-300 group">
+              <div className="p-3 bg-white/20 rounded-xl text-emerald-300 group-hover:scale-110 transition-transform">
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
@@ -148,8 +148,8 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
               </div>
             </div>
 
-            <div className="bg-emerald-950/45 border border-white/30 backdrop-blur-xl p-4 rounded-2xl flex items-center gap-3.5 shadow-lg">
-              <div className="p-3 bg-white/20 rounded-xl text-emerald-300">
+            <div className="bg-emerald-950/45 border border-white/30 backdrop-blur-xl p-4 rounded-2xl flex items-center gap-3.5 shadow-lg hover:border-emerald-400/50 hover:bg-emerald-950/60 hover:scale-[1.02] transition-all duration-300 group">
+              <div className="p-3 bg-white/20 rounded-xl text-emerald-300 group-hover:scale-110 transition-transform">
                 <Speech className="w-5 h-5" />
               </div>
               <div>
@@ -158,8 +158,8 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
               </div>
             </div>
 
-            <div className="bg-emerald-950/45 border border-white/30 backdrop-blur-xl p-4 rounded-2xl flex items-center gap-3.5 shadow-lg">
-              <div className="p-3 bg-white/20 rounded-xl text-emerald-300">
+            <div className="bg-emerald-950/45 border border-white/30 backdrop-blur-xl p-4 rounded-2xl flex items-center gap-3.5 shadow-lg hover:border-emerald-400/50 hover:bg-emerald-950/60 hover:scale-[1.02] transition-all duration-300 group">
+              <div className="p-3 bg-white/20 rounded-xl text-emerald-300 group-hover:scale-110 transition-transform">
                 <Sun className="w-5 h-5" />
               </div>
               <div>
@@ -168,8 +168,8 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
               </div>
             </div>
 
-            <div className="bg-emerald-950/45 border border-white/30 backdrop-blur-xl p-4 rounded-2xl flex items-center gap-3.5 shadow-lg">
-              <div className="p-3 bg-white/20 rounded-xl text-emerald-300">
+            <div className="bg-emerald-950/45 border border-white/30 backdrop-blur-xl p-4 rounded-2xl flex items-center gap-3.5 shadow-lg hover:border-emerald-400/50 hover:bg-emerald-950/60 hover:scale-[1.02] transition-all duration-300 group">
+              <div className="p-3 bg-white/20 rounded-xl text-emerald-300 group-hover:scale-110 transition-transform">
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
@@ -180,27 +180,27 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
           </div>
         </div>
 
-        {/* Right Side Glass Card Container (Light, translucent frosted glass matching screenshot) */}
+        {/* Right Side Glass Card Container */}
         <div className="col-span-1 lg:col-span-5 flex items-center justify-center">
-          <div className="w-full max-w-md bg-white/40 backdrop-blur-2xl border border-white/60 shadow-2xl rounded-3xl p-6 sm:p-10 transition-all text-slate-900">
+          <div className="animate-scale-in opacity-0 [animation-delay:200ms] [animation-fill-mode:forwards] w-full max-w-md bg-white/40 backdrop-blur-2xl border border-white/60 shadow-2xl rounded-3xl p-6 sm:p-10 transition-all duration-300 text-slate-900 hover:shadow-[0_25px_60px_-15px_rgba(22,163,74,0.25)]">
 
             {/* Logo Icon & Header */}
             <div className="flex flex-col items-center mb-6 text-center">
               <img 
                 src="/wheat_stalks.png" 
                 alt="Kisan-Bhai Wheat Logo" 
-                className="w-24 h-24 sm:w-28 sm:h-28 object-contain mb-3 filter drop-shadow-xl transition-transform duration-300 hover:scale-110" 
+                className="w-24 h-24 sm:w-28 sm:h-28 object-contain mb-3 filter drop-shadow-xl animate-float cursor-pointer hover:rotate-6 transition-transform duration-500" 
               />
-              <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight transition-all duration-300">
+              <h2 className="animate-fade-in-up opacity-0 [animation-delay:300ms] [animation-fill-mode:forwards] font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight transition-all duration-300">
                 {isLogin ? 'Welcome Back' : 'Create Account'}
               </h2>
-              <p className="text-slate-700 text-xs sm:text-sm font-semibold mt-1 transition-all duration-300">
+              <p className="animate-fade-in-up opacity-0 [animation-delay:350ms] [animation-fill-mode:forwards] text-slate-700 text-xs sm:text-sm font-semibold mt-1 transition-all duration-300">
                 {isLogin ? 'Sign in to manage your farm & crops' : 'Join Kisan-Bhai to empower your farm'}
               </p>
             </div>
 
             {/* Login / Sign Up Pill Tabs with Smooth Animated Background Slider */}
-            <div className="relative flex p-1 bg-black/10 backdrop-blur-md border border-white/40 rounded-2xl mb-6 overflow-hidden">
+            <div className="animate-fade-in-up opacity-0 [animation-delay:400ms] [animation-fill-mode:forwards] relative flex p-1 bg-black/10 backdrop-blur-md border border-white/40 rounded-2xl mb-6 overflow-hidden">
               {/* Sliding Pill Indicator */}
               <div
                 className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-xl shadow-md transition-all duration-300 ease-out ${isLogin ? 'left-1' : 'left-[calc(50%+2px)]'
@@ -233,7 +233,7 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
             </div>
 
             {/* Auth Form with Smooth Field Collapsing */}
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="animate-fade-in-up opacity-0 [animation-delay:450ms] [animation-fill-mode:forwards] space-y-4">
               {/* Account Role Selector */}
               <div className="space-y-1">
                 <label className="text-[11px] font-extrabold text-slate-800 uppercase tracking-wider ml-1">
@@ -244,7 +244,7 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
                     type="button"
                     onClick={() => setFormData({ ...formData, role: 'farmer' })}
                     className={`py-2 px-1 rounded-xl text-[11px] font-extrabold transition-all duration-200 ${formData.role === 'farmer'
-                        ? 'bg-emerald-600 text-white shadow-md'
+                        ? 'bg-emerald-600 text-white shadow-md scale-[1.02]'
                         : 'text-slate-700 hover:text-slate-950 font-bold'
                       }`}
                   >
@@ -254,7 +254,7 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
                     type="button"
                     onClick={() => setFormData({ ...formData, role: 'buyer' })}
                     className={`py-2 px-1 rounded-xl text-[11px] font-extrabold transition-all duration-200 ${formData.role === 'buyer'
-                        ? 'bg-emerald-600 text-white shadow-md'
+                        ? 'bg-emerald-600 text-white shadow-md scale-[1.02]'
                         : 'text-slate-700 hover:text-slate-950 font-bold'
                       }`}
                   >
@@ -264,7 +264,7 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
                     type="button"
                     onClick={() => setFormData({ ...formData, role: 'both' })}
                     className={`py-2 px-1 rounded-xl text-[11px] font-extrabold transition-all duration-200 ${formData.role === 'both'
-                        ? 'bg-emerald-600 text-white shadow-md'
+                        ? 'bg-emerald-600 text-white shadow-md scale-[1.02]'
                         : 'text-slate-700 hover:text-slate-950 font-bold'
                       }`}
                   >
@@ -285,7 +285,7 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
                     value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Ramesh Kumar"
-                    className="w-full bg-white/70 backdrop-blur-md border border-white/80 rounded-2xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-500 font-bold outline-none focus:ring-2 focus:ring-emerald-500 transition-all shadow-xs"
+                    className="w-full bg-white/70 backdrop-blur-md border border-white/80 rounded-2xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-500 font-bold outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white/90 transition-all shadow-xs"
                   />
                 </div>
               </div>
@@ -300,7 +300,7 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
                   value={formData.email}
                   onChange={e => setFormData({ ...formData, email: e.target.value })}
                   placeholder="farmer@example.com"
-                  className="w-full bg-white/70 backdrop-blur-md border border-white/80 rounded-2xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-500 font-bold outline-none focus:ring-2 focus:ring-emerald-500 transition-all shadow-xs"
+                  className="w-full bg-white/70 backdrop-blur-md border border-white/80 rounded-2xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-500 font-bold outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white/90 transition-all shadow-xs"
                 />
               </div>
 
@@ -314,7 +314,7 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
                   value={formData.password}
                   onChange={e => setFormData({ ...formData, password: e.target.value })}
                   placeholder="••••••••"
-                  className="w-full bg-white/70 backdrop-blur-md border border-white/80 rounded-2xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-500 font-bold outline-none focus:ring-2 focus:ring-emerald-500 transition-all shadow-xs"
+                  className="w-full bg-white/70 backdrop-blur-md border border-white/80 rounded-2xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-500 font-bold outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white/90 transition-all shadow-xs"
                 />
               </div>
 
@@ -322,7 +322,7 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full mt-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 active:scale-[0.98] transition-all duration-300 text-sm disabled:opacity-50"
+                className="w-full mt-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 hover:shadow-emerald-600/50 hover:scale-[1.01] active:scale-[0.98] transition-all duration-300 text-sm disabled:opacity-50"
               >
                 {loading ? (
                   <div className="flex items-center gap-2">
@@ -344,7 +344,7 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
             </form>
 
             {/* OR Separator */}
-            <div className="relative my-6">
+            <div className="animate-fade-in-up opacity-0 [animation-delay:550ms] [animation-fill-mode:forwards] relative my-6">
               <div className="absolute inset-0 flex items-center">
                 <span className="w-full border-t border-slate-900/15" />
               </div>
@@ -360,7 +360,7 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
               type="button"
               onClick={handleGuest}
               disabled={loading}
-              className="w-full bg-white/60 hover:bg-white/80 backdrop-blur-md border border-white/80 text-slate-900 font-bold py-3.5 rounded-2xl flex items-center justify-center gap-2 transition-all active:scale-[0.98] text-xs disabled:opacity-50 shadow-xs"
+              className="animate-fade-in-up opacity-0 [animation-delay:600ms] [animation-fill-mode:forwards] w-full bg-white/60 hover:bg-white/90 backdrop-blur-md border border-white/80 text-slate-900 font-bold py-3.5 rounded-2xl flex items-center justify-center gap-2 transition-all hover:scale-[1.01] active:scale-[0.98] text-xs disabled:opacity-50 shadow-xs"
             >
               <Landmark className="w-4 h-4 text-slate-800" />
               <span>Continue as Guest</span>
@@ -368,7 +368,7 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
 
             {/* Auto-Detected Location */}
             {autoLocation && (
-              <div className="mt-4 flex items-center justify-center gap-1.5 text-[11px] font-bold text-slate-900 bg-white/70 backdrop-blur-md border border-white/80 py-1.5 px-3 rounded-full w-max mx-auto shadow-xs">
+              <div className="animate-fade-in-up opacity-0 [animation-delay:650ms] [animation-fill-mode:forwards] mt-4 flex items-center justify-center gap-1.5 text-[11px] font-bold text-slate-900 bg-white/70 backdrop-blur-md border border-white/80 py-1.5 px-3 rounded-full w-max mx-auto shadow-xs">
                 <MapPin className="w-3 h-3 text-emerald-700" />
                 <span>Detected: {autoLocation}</span>
               </div>
