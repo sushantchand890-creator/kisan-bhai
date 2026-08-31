@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Cloud, 
@@ -9,16 +8,23 @@ import {
   ArrowRight, 
   Sparkles, 
   Loader2, 
-  FlaskConical, 
   Sprout, 
   Camera, 
-  Waves,
   Calendar,
   FileText,
   ShieldAlert,
   ChevronRight,
   Sun,
-  ShoppingBag
+  ShoppingBag,
+  Store,
+  Newspaper,
+  CloudRain,
+  MapPin,
+  Tag,
+  ArrowUpRight,
+  ShieldCheck,
+  Zap,
+  Phone
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { geminiService } from '../services/geminiService';
@@ -33,10 +39,11 @@ export const Dashboard: React.FC = () => {
   const [isLoadingAlerts, setIsLoadingAlerts] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
   const [realStats, setRealStats] = useState({
-    temp: '...',
-    humidity: '...',
+    temp: '28°C',
+    humidity: '65%',
     moisture: '42%',
-    growth: '+12%'
+    growth: '+12%',
+    condition: 'Partly Cloudy'
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -54,7 +61,8 @@ export const Dashboard: React.FC = () => {
         setRealStats(prev => ({
           ...prev,
           temp: `${weather.current.temp}°C`,
-          humidity: `${weather.current.humidity}%`
+          humidity: `${weather.current.humidity}%`,
+          condition: weather.current.condition || 'Partly Cloudy'
         }));
       }
     } catch (e: any) {
@@ -104,8 +112,90 @@ export const Dashboard: React.FC = () => {
     { label: t.growthIndex, value: realStats.growth, icon: Sprout, color: 'text-brand-600', bg: 'bg-brand-50 border-brand-200/60' },
   ];
 
+  // Featured AgriFarm Listings for Dashboard Showcase
+  const featuredAgriItems = [
+    {
+      title: 'Sharbati Premium Wheat (Grade A)',
+      price: '₹2,450 / qtl',
+      seller: 'Gurpreet Singh',
+      location: 'Ludhiana, Punjab',
+      image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=400',
+      tag: '🌱 Farm Direct'
+    },
+    {
+      title: 'Vine-Ripened Red Tomatoes',
+      price: '₹35 / kg',
+      seller: 'Ramesh Kumar',
+      location: 'Sangrur, Punjab',
+      image: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&q=80&w=400',
+      tag: '🌱 Farm Direct'
+    },
+    {
+      title: 'Certified PR-126 Paddy Seeds',
+      price: '₹1,800 / bag',
+      seller: 'Harpreet Kaur',
+      location: 'Patiala, Punjab',
+      image: 'https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&q=80&w=400',
+      tag: '🔄 Farmer P2P'
+    }
+  ];
+
+  // Daily Market Price Tickers
+  const mandiRates = [
+    { crop: 'Sharbati Wheat', rate: '₹2,450/qtl', change: '+2.4%', up: true },
+    { crop: 'Fresh Tomato', rate: '₹35/kg', change: '-1.2%', up: false },
+    { crop: 'PR-126 Paddy', rate: '₹2,200/qtl', change: '+0.8%', up: true },
+    { crop: 'Mustard Seeds', rate: '₹5,650/qtl', change: '+3.1%', up: true },
+    { crop: 'Yellow Maize', rate: '₹2,100/qtl', change: '0.0%', up: true }
+  ];
+
+  // Daily Ag News
+  const dailyNews = [
+    {
+      title: 'Cabinet Approves MSP Hikes for Rabi Crops Season 2026-27',
+      source: 'AgriNews India',
+      time: '3 hours ago',
+      category: 'Policy & Prices'
+    },
+    {
+      title: 'PM-KUSUM Solar Pump Subsidy Extended to 50,000 Additional Farmers',
+      source: 'Ministry of Agriculture',
+      time: '6 hours ago',
+      category: 'Subsidies'
+    },
+    {
+      title: 'IMD Predicts Timely Pre-Monsoon Showers in Northern Belt',
+      source: 'Weather Desk',
+      time: '12 hours ago',
+      category: 'Climate'
+    }
+  ];
+
   return (
     <div className="space-y-8 pb-10 font-sans">
+
+      {/* DAILY MANDI MARKET TICKER BANNER */}
+      <div className="bg-white/70 backdrop-blur-2xl px-4 py-3 rounded-2xl border border-white/80 shadow-md flex items-center justify-between gap-4 overflow-hidden">
+        <div className="flex items-center gap-2 text-xs font-extrabold text-brand-900 shrink-0 bg-brand-50 px-3 py-1.5 rounded-xl border border-brand-200/60">
+          <TrendingUp className="w-4 h-4 text-brand-600" />
+          <span>DAILY MANDI RATES</span>
+        </div>
+        
+        <div className="flex items-center gap-6 overflow-x-auto custom-scrollbar py-1 text-xs">
+          {mandiRates.map((item, idx) => (
+            <div key={idx} className="flex items-center gap-2 shrink-0 bg-white/60 px-3 py-1 rounded-xl border border-slate-200/60">
+              <span className="font-bold text-slate-800">{item.crop}:</span>
+              <span className="font-black text-slate-900">{item.rate}</span>
+              <span className={`text-[10px] font-extrabold px-1.5 py-0.5 rounded-md ${
+                item.up ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'
+              }`}>
+                {item.change}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* HEADER SECTION */}
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl">
         <div className="flex items-center gap-5">
@@ -157,10 +247,76 @@ export const Dashboard: React.FC = () => {
         ))}
       </div>
 
+      {/* AGRIFARM DIRECT MARKETPLACE SPOTLIGHT */}
+      <div className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl space-y-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 bg-emerald-600 rounded-2xl text-white shadow-md shadow-emerald-600/20">
+              <ShoppingBag className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="font-heading text-xl sm:text-2xl font-extrabold text-slate-900">AgriFarm Direct Market Spotlight</h2>
+              <p className="text-xs text-slate-500 font-semibold">Buy directly from farm gates or trade surplus with fellow farmers</p>
+            </div>
+          </div>
+          
+          <Link 
+            to="/agrifarm" 
+            className="hidden sm:flex items-center gap-1.5 text-xs font-extrabold text-brand-700 bg-brand-50 hover:bg-brand-100 px-4 py-2.5 rounded-xl border border-brand-200/60 transition-all active:scale-95"
+          >
+            <span>Explore All Listings</span>
+            <ChevronRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        {/* PRODUCE CARDS GRID */}
+        <div className="grid md:grid-cols-3 gap-5">
+          {featuredAgriItems.map((item, idx) => (
+            <div 
+              key={idx} 
+              className="bg-white/80 backdrop-blur-md rounded-2xl border border-white/90 shadow-md hover:shadow-xl transition-all overflow-hidden flex flex-col group"
+            >
+              <div className="relative h-40 overflow-hidden bg-slate-100">
+                <img 
+                  src={item.image} 
+                  alt={item.title} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <span className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-emerald-300 text-[10px] font-extrabold px-2.5 py-1 rounded-full border border-white/20">
+                  {item.tag}
+                </span>
+                <span className="absolute bottom-3 right-3 bg-emerald-600 text-white font-extrabold text-xs px-3 py-1 rounded-xl shadow-md">
+                  {item.price}
+                </span>
+              </div>
+
+              <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
+                <div>
+                  <h3 className="font-heading font-extrabold text-sm text-slate-900 leading-snug line-clamp-1">{item.title}</h3>
+                  <div className="flex items-center gap-2 text-xs text-slate-500 font-medium mt-1">
+                    <MapPin className="w-3.5 h-3.5 text-brand-600 shrink-0" />
+                    <span className="truncate">{item.location}</span>
+                  </div>
+                  <p className="text-[11px] text-slate-400 font-bold mt-0.5">Seller: {item.seller}</p>
+                </div>
+
+                <Link 
+                  to="/agrifarm" 
+                  className="w-full bg-slate-900 hover:bg-brand-700 text-white text-xs font-extrabold py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95"
+                >
+                  <span>Buy Direct</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* MAIN TWO-COLUMN DASHBOARD GRID */}
       <div className="grid lg:grid-cols-3 gap-8">
         
-        {/* LEFT COLUMN: HERO AI INSIGHTS & GROWTH */}
+        {/* LEFT COLUMN: HERO AI INSIGHTS & WEATHER WIDGET */}
         <div className="lg:col-span-2 space-y-8">
           
           {/* AI FARMER INSIGHTS CARD */}
@@ -179,7 +335,7 @@ export const Dashboard: React.FC = () => {
                   </h2>
                 </div>
                 <span className="text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 bg-white/15 rounded-full border border-white/20 text-brand-100">
-                  Live Stream
+                  Live Advisory
                 </span>
               </div>
 
@@ -234,6 +390,68 @@ export const Dashboard: React.FC = () => {
             <TrendingUp className="absolute -bottom-10 -right-10 w-64 h-64 text-white/5 pointer-events-none" />
           </div>
 
+          {/* REAL-TIME WEATHER FORECAST & IRRIGATION ADVISORY WIDGET */}
+          <div className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl space-y-6">
+            <div className="flex items-center justify-between border-b border-white/60 pb-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 bg-blue-500 rounded-2xl text-white shadow-md shadow-blue-500/20">
+                  <CloudRain className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-heading font-extrabold text-lg sm:text-xl text-slate-900">Weather & Irrigation Advisory</h3>
+                  <p className="text-xs text-slate-500 font-semibold">Live weather report for {user?.location || 'your area'}</p>
+                </div>
+              </div>
+              <Link to="/weather" className="text-brand-700 text-xs font-bold uppercase tracking-wider hover:text-brand-800 flex items-center gap-1">
+                <span>Full Forecast</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            <div className="grid sm:grid-cols-3 gap-4">
+              {/* Today */}
+              <div className="bg-gradient-to-br from-blue-50/80 to-indigo-50/60 p-4 rounded-2xl border border-blue-200/60 flex items-center gap-3">
+                <Sun className="w-8 h-8 text-amber-500 shrink-0" />
+                <div>
+                  <span className="text-[10px] font-extrabold text-blue-700 uppercase tracking-wider block">Today</span>
+                  <p className="font-heading text-lg font-black text-slate-900">{realStats.temp}</p>
+                  <p className="text-[11px] text-slate-600 font-semibold">{realStats.condition}</p>
+                </div>
+              </div>
+
+              {/* Tomorrow Forecast */}
+              <div className="bg-gradient-to-br from-emerald-50/80 to-teal-50/60 p-4 rounded-2xl border border-emerald-200/60 flex items-center gap-3">
+                <CloudRain className="w-8 h-8 text-teal-600 shrink-0" />
+                <div>
+                  <span className="text-[10px] font-extrabold text-emerald-700 uppercase tracking-wider block">Tomorrow</span>
+                  <p className="font-heading text-lg font-black text-slate-900">25°C • 70% Rain</p>
+                  <p className="text-[11px] text-emerald-800 font-bold">Rain Expected</p>
+                </div>
+              </div>
+
+              {/* Day 3 Forecast */}
+              <div className="bg-gradient-to-br from-amber-50/80 to-orange-50/60 p-4 rounded-2xl border border-amber-200/60 flex items-center gap-3">
+                <Cloud className="w-8 h-8 text-amber-600 shrink-0" />
+                <div>
+                  <span className="text-[10px] font-extrabold text-amber-700 uppercase tracking-wider block">Day 3</span>
+                  <p className="font-heading text-lg font-black text-slate-900">27°C • Clear</p>
+                  <p className="text-[11px] text-slate-600 font-semibold">Mild Breeze</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Smart Irrigation Advisory Strip */}
+            <div className="p-4 bg-teal-50/80 backdrop-blur-md rounded-2xl border border-teal-200/80 flex items-start gap-3">
+              <Zap className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
+              <div>
+                <span className="text-xs font-extrabold text-teal-900 block">Smart Irrigation Recommendation</span>
+                <p className="text-xs text-teal-800 font-medium leading-relaxed mt-0.5">
+                  Precipitation expected tomorrow afternoon. Postpone tonight's scheduled watering to prevent root rot and save energy.
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* CROP GROWTH PROGRESS CARD */}
           <div className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl">
             <div className="flex items-center justify-between mb-6">
@@ -269,9 +487,35 @@ export const Dashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: RISK MONITOR & QUICK ACTIONS */}
+        {/* RIGHT COLUMN: DAILY AG NEWS, RISK MONITOR & QUICK ACTIONS */}
         <div className="space-y-8">
           
+          {/* DAILY AGRICULTURAL NEWS FEED CARD */}
+          <div className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl space-y-5">
+            <div className="flex items-center justify-between border-b border-white/60 pb-3">
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-xl bg-indigo-50 text-indigo-600 shadow-xs">
+                  <Newspaper className="w-5 h-5" />
+                </div>
+                <h3 className="font-heading font-extrabold text-lg text-slate-900">Daily Agri-News & Briefs</h3>
+              </div>
+              <span className="text-[10px] font-extrabold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-full uppercase">Live</span>
+            </div>
+
+            <div className="space-y-3.5">
+              {dailyNews.map((news, idx) => (
+                <div key={idx} className="p-3.5 bg-white/60 hover:bg-white/90 backdrop-blur-md rounded-2xl border border-white/80 transition-all cursor-pointer shadow-xs">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-[10px] font-extrabold text-brand-700 uppercase tracking-wider">{news.category}</span>
+                    <span className="text-[10px] text-slate-400 font-medium">{news.time}</span>
+                  </div>
+                  <p className="text-xs text-slate-900 font-bold leading-snug hover:text-brand-700 transition-colors">{news.title}</p>
+                  <p className="text-[10px] text-slate-500 font-semibold mt-1">Source: {news.source}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* RISK MONITOR CARD */}
           <div className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl">
             <div className="flex items-center gap-2.5 mb-6">
@@ -367,4 +611,3 @@ export const Dashboard: React.FC = () => {
     </div>
   );
 };
-
