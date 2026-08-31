@@ -114,8 +114,12 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
         <div className="hidden lg:flex lg:col-span-7 flex-col justify-between h-full py-8 pr-12 relative">
           <div>
             {/* Top Pill Badge */}
-            <div className="inline-flex items-center gap-2 bg-emerald-950/40 border border-white/30 backdrop-blur-md px-4 py-2 rounded-full text-white text-xs font-bold mb-8 shadow-md">
-              <Wheat className="w-4 h-4 text-emerald-400" />
+            <div className="inline-flex items-center gap-2.5 bg-emerald-950/40 border border-white/30 backdrop-blur-md px-4 py-2 rounded-full text-white text-xs font-bold mb-8 shadow-md">
+              <img 
+                src="/wheat_stalks.png" 
+                alt="Kisan-Bhai Wheat Logo" 
+                className="w-7 h-7 object-contain filter drop-shadow-sm" 
+              />
               <span className="uppercase tracking-wider">RuralAssist AI Platform</span>
             </div>
 
@@ -185,7 +189,7 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
               <img 
                 src="/wheat_stalks.png" 
                 alt="Kisan-Bhai Wheat Logo" 
-                className="w-20 h-20 object-contain mb-3 filter drop-shadow-lg transition-transform duration-300 hover:scale-110" 
+                className="w-24 h-24 sm:w-28 sm:h-28 object-contain mb-3 filter drop-shadow-xl transition-transform duration-300 hover:scale-110" 
               />
               <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight transition-all duration-300">
                 {isLogin ? 'Welcome Back' : 'Create Account'}
