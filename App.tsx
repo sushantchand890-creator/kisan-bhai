@@ -9,9 +9,8 @@ import { ProfitSimulator } from './components/ProfitSimulator';
 import { Weather } from './components/Weather';
 import { Schemes } from './components/Schemes';
 import { Profile } from './components/Profile';
-import { FertilizerAdvisor } from './components/FertilizerAdvisor';
-import { IrrigationAdvisor } from './components/IrrigationAdvisor';
 import { GrowthTracker } from './components/GrowthTracker';
+import { AgriFarm } from './components/AgriFarm';
 import { Auth } from './components/Auth';
 import { FarmProfile } from './types';
 
@@ -63,9 +62,8 @@ const App: React.FC = () => {
               <Route path="profit" element={<ProfitSimulator />} />
               <Route path="weather" element={<Weather />} />
               <Route path="schemes" element={<Schemes />} />
+              <Route path="agrifarm" element={<AgriFarm />} />
               <Route path="profile" element={<Profile />} />
-              <Route path="fertilizer" element={<FertilizerAdvisor />} />
-              <Route path="irrigation" element={<IrrigationAdvisor />} />
               <Route path="growth" element={<GrowthTracker />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Route>
@@ -77,3 +75,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+

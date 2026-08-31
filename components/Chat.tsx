@@ -1,6 +1,28 @@
 
 import { GoogleGenAI, LiveServerMessage, Modality } from '@google/genai';
-import { Bot, Cloud, Image as ImageIcon, Landmark, Loader2, Mic, MicOff, MousePointer2, Send, Sparkles, Sprout, Square, Thermometer, User, Volume2, Waves, Wheat, X } from 'lucide-react';
+import { 
+  Bot, 
+  Cloud, 
+  Image as ImageIcon, 
+  Landmark, 
+  Loader2, 
+  Mic, 
+  MicOff, 
+  MousePointer2, 
+  Send, 
+  Sparkles, 
+  Sprout, 
+  Square, 
+  Thermometer, 
+  User, 
+  Volume2, 
+  VolumeX,
+  Waves, 
+  Wheat, 
+  X,
+  MessageCircle,
+  Volume1
+} from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { geminiService } from '../services/geminiService';
@@ -48,6 +70,7 @@ async function decodeAudioData(
 
 export const Chat: React.FC = () => {
   const { user } = useUser();
+  const location = useLocation();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -65,7 +88,13 @@ export const Chat: React.FC = () => {
   const nextStartTimeRef = useRef(0);
   const liveSourcesRef = useRef<Set<AudioBufferSourceNode>>(new Set());
   const inputAudioContextRef = useRef<AudioContext | null>(null);
-  const chatInputRef = useRef<HTMLInputElement>(null);
+
+  // Check if routed with initial state from Scan Crop Health
+  useEffect(() => {
+    if (location.state?.initialPrompt || location.state?.initialImage) {
+      handleSend(location.state.initialPrompt, location.state.initialImage);
+    }
+  }, [location.state]);
 
   useEffect(() => {
     if (!user) return;
@@ -190,7 +219,7 @@ export const Chat: React.FC = () => {
 
   const handleSend = async (overrideText?: string, overrideImage?: string) => {
     const messageText = overrideText || input;
-    if ((!messageText.trim() && !selectedImage) || isLoading) return;
+    if ((!messageText.trim() && !selectedImage && !overrideImage) || isLoading) return;
 
     const userMsg: ChatMessage = { role: 'user', content: messageText || "Analyze this.", image: (overrideImage || selectedImage) || undefined };
     setMessages(prev => [...prev, userMsg]);
@@ -203,7 +232,7 @@ export const Chat: React.FC = () => {
       const response = await geminiService.chat(messages, messageText, currentImage || undefined, user?.language);
       setMessages(prev => [...prev, { role: 'assistant', content: response }]);
     } catch (error) {
-      setMessages(prev => [...prev, { role: 'assistant', content: "Error." }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: "I encountered a minor issue. Please try asking again!" }]);
     } finally {
       setIsLoading(false);
     }
@@ -211,68 +240,130 @@ export const Chat: React.FC = () => {
 
   const t = getTranslation(user?.language || 'en');
   const suggestions = [
-    { text: t.sugCrop, icon: Sprout, color: 'text-green-600', bg: 'bg-green-50' },
-    { text: t.sugTomato, icon: Wheat, color: 'text-green-600', bg: 'bg-green-50' },
-    { text: t.sugWater, icon: Thermometer, color: 'text-blue-600', bg: 'bg-blue-50' },
-    { text: t.sugSchemes, icon: Landmark, color: 'text-indigo-600', bg: 'bg-indigo-50' },
+    { text: t.sugCrop, icon: Sprout, color: 'text-brand-600', bg: 'bg-brand-50 border-brand-200/60' },
+    { text: t.sugTomato, icon: Wheat, color: 'text-harvest-600', bg: 'bg-harvest-50 border-harvest-200/60' },
+    { text: t.sugWater, icon: Thermometer, color: 'text-blue-600', bg: 'bg-blue-50 border-blue-200/60' },
+    { text: t.sugSchemes, icon: Landmark, color: 'text-indigo-600', bg: 'bg-indigo-50 border-indigo-200/60' },
   ];
 
   return (
-    <div className="flex flex-col h-[calc(100vh-140px)] lg:h-[calc(100vh-160px)] bg-white rounded-[2rem] border border-gray-100 shadow-2xl overflow-hidden relative">
+    <div className="flex flex-col h-[calc(100vh-140px)] lg:h-[calc(100vh-160px)] bg-white/70 backdrop-blur-2xl rounded-3xl border border-white/80 shadow-2xl overflow-hidden relative font-sans">
+      
+      {/* LIVE VOICE MODE FULLSCREEN OVERLAY */}
       {isLiveMode && (
-        <div className="absolute inset-0 z-50 bg-green-900/95 flex flex-col items-center justify-center p-8 animate-in fade-in zoom-in duration-300">
-          <button onClick={stopLiveChat} className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10">
-            <X className="w-8 h-8" />
+        <div className="absolute inset-0 z-50 bg-gradient-to-b from-brand-950 via-slate-950 to-brand-900 flex flex-col items-center justify-center p-8 animate-in fade-in zoom-in duration-300">
+          <button 
+            onClick={stopLiveChat} 
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors p-3 rounded-full hover:bg-white/10"
+          >
+            <X className="w-6 h-6" />
           </button>
-          <div className="w-32 h-32 rounded-full bg-white/10 flex items-center justify-center mb-8 relative">
-            <div className="absolute inset-0 rounded-full border-4 border-white/20 animate-ping" />
-            <Bot className="w-16 h-16 text-white" />
+          
+          <div className="relative w-36 h-36 rounded-full bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center mb-8 shadow-glow-green">
+            <div className="absolute inset-0 rounded-full border-4 border-brand-400/40 animate-ping" />
+            <Bot className="w-16 h-16 text-white animate-pulse" />
           </div>
-          <h2 className="text-2xl font-black text-white mb-2">Talking to Kisan-Bhai</h2>
-          <p className="text-green-200 font-medium mb-12">I'm listening...</p>
-          <button onClick={stopLiveChat} className="bg-red-500 text-white px-10 py-4 rounded-full font-black shadow-2xl flex items-center gap-2 hover:bg-red-600 transition-all">
-            <Square className="w-5 h-5 fill-current" /> End Conversation
+
+          <h2 className="font-heading font-extrabold text-2xl text-white mb-2">Talking with Kisan-Bhai</h2>
+          <p className="text-brand-200 text-sm font-medium mb-10 text-center max-w-sm">
+            I am listening to your voice in real time. Speak naturally!
+          </p>
+
+          <div className="flex items-center gap-1.5 h-10 mb-10">
+            {[...Array(5)].map((_, idx) => (
+              <span key={idx} className="wave-bar w-2 bg-brand-400 rounded-full animate-wave-bar h-full" />
+            ))}
+          </div>
+
+          <button 
+            onClick={stopLiveChat} 
+            className="bg-rose-600 text-white px-8 py-3.5 rounded-2xl font-extrabold text-sm shadow-xl flex items-center gap-2 hover:bg-rose-700 transition-all active:scale-95"
+          >
+            <Square className="w-4 h-4 fill-current" /> End Voice Session
           </button>
         </div>
       )}
 
-      <div className="p-4 lg:p-6 border-b border-gray-100 flex items-center justify-between bg-white sticky top-0 z-10">
-        <div className="flex items-center gap-4">
+      {/* CHAT HEADER BAR */}
+      <div className="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between bg-white/90 backdrop-blur-md sticky top-0 z-10">
+        <div className="flex items-center gap-3.5">
           <div className="relative">
-            <div className={`w-12 h-12 lg:w-14 h-14 rounded-2xl bg-orange-100 flex items-center justify-center border-2 border-white shadow-lg ${isSpeaking ? 'animate-bounce' : ''}`}>
-              <Bot className="w-8 h-8 lg:w-10 h-10 text-orange-600" />
+            <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-500 flex items-center justify-center text-white shadow-md shadow-brand-600/20 ${isSpeaking ? 'animate-pulse' : ''}`}>
+              <Bot className="w-7 h-7" />
             </div>
-            <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-white" />
+            <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white" />
           </div>
           <div>
-            <h2 className="font-black text-lg lg:text-xl text-gray-900 leading-none">Kisan-Bhai</h2>
-            <p className="text-[10px] lg:text-xs text-green-600 font-bold tracking-tight mt-1 uppercase">
-              {isSpeaking ? 'Speaking...' : 'Digital Advisor'}
+            <div className="flex items-center gap-1.5">
+              <h2 className="font-heading font-extrabold text-base sm:text-lg text-slate-900 leading-none">Kisan-Bhai</h2>
+              <Sparkles className="w-3.5 h-3.5 text-harvest-500 fill-harvest-400" />
+            </div>
+            <p className="text-[10px] sm:text-xs text-brand-700 font-bold tracking-wider mt-1 uppercase flex items-center gap-1.5">
+              {isSpeaking ? (
+                <>
+                  <Volume1 className="w-3 h-3 text-brand-600 animate-pulse" />
+                  <span>Speaking Advisory...</span>
+                </>
+              ) : (
+                <span>AI Farmer Advisor</span>
+              )}
             </p>
           </div>
         </div>
-        <button onClick={startLiveChat} className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-xl font-black text-xs hover:bg-green-700 transition-all shadow-lg shadow-green-100">
-          <Waves className="w-4 h-4" /> Start Live Voice
+
+        <button 
+          onClick={startLiveChat} 
+          className="flex items-center gap-2 bg-gradient-to-r from-brand-600 to-emerald-600 hover:from-brand-500 hover:to-emerald-500 text-white px-4 py-2.5 rounded-xl font-extrabold text-xs transition-all shadow-md shadow-brand-600/20 active:scale-95"
+        >
+          <Waves className="w-4 h-4" /> 
+          <span className="hidden sm:inline">Start Live Voice</span>
+          <span className="sm:hidden">Live Voice</span>
         </button>
       </div>
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 lg:p-8 space-y-8 bg-white custom-scrollbar">
+      {/* MESSAGES TRAJECTORY */}
+      <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 bg-slate-50/50 custom-scrollbar">
         {messages.map((msg, i) => (
-          <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in duration-500`}>
-            <div className={`flex gap-3 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
-              <div className={`w-9 h-9 rounded-xl flex-shrink-0 flex items-center justify-center shadow-sm ${msg.role === 'user' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-green-600'}`}>
-                {msg.role === 'user' ? <User className="w-5 h-5" /> : <Bot className="w-5 h-5" />}
+          <div 
+            key={i} 
+            className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}
+          >
+            <div className={`flex gap-3 max-w-[90%] sm:max-w-[80%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+              <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl shrink-0 flex items-center justify-center shadow-xs ${
+                msg.role === 'user' ? 'bg-indigo-600 text-white' : 'bg-brand-600 text-white'
+              }`}>
+                {msg.role === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
               </div>
-              <div className={`group relative p-4 rounded-3xl ${msg.role === 'user' ? 'bg-indigo-600 text-white rounded-tr-none' : 'bg-gray-50 text-gray-800 rounded-tl-none border border-gray-100'}`}>
-                {msg.image && <img src={msg.image} alt="Scan" className="max-w-xs rounded-2xl mb-4 border-2 border-white shadow-md" />}
-                <p className="whitespace-pre-wrap leading-relaxed text-[15px] font-medium">{msg.content}</p>
+              
+              <div className={`group relative p-4 rounded-2xl ${
+                msg.role === 'user' 
+                  ? 'bg-indigo-600 text-white rounded-tr-none shadow-md' 
+                  : 'bg-white text-slate-800 rounded-tl-none border border-slate-200/80 shadow-sm'
+              }`}>
+                {msg.image && (
+                  <img 
+                    src={msg.image} 
+                    alt="Uploaded Crop" 
+                    className="max-w-xs rounded-xl mb-3 border border-slate-200 shadow-sm object-cover" 
+                  />
+                )}
+                <p className="whitespace-pre-wrap leading-relaxed text-xs sm:text-sm font-medium">{msg.content}</p>
+                
                 {msg.role === 'assistant' && (
-                  <div className="mt-3 flex items-center gap-3">
-                    <button onClick={() => speakText(msg.content)} className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-green-600 hover:text-green-700 p-1 rounded hover:bg-green-50">
-                      <Volume2 className="w-3.5 h-3.5" /> {isSpeaking ? t.stop : t.listen}
+                  <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center gap-3">
+                    <button 
+                      onClick={() => speakText(msg.content)} 
+                      className="flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider text-brand-700 hover:text-brand-800 px-2 py-1 rounded-md hover:bg-brand-50 transition-colors"
+                    >
+                      {isSpeaking ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+                      <span>{isSpeaking ? t.stop : t.listen}</span>
                     </button>
-                    <button onClick={speakSelection} className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-blue-600 hover:text-blue-700 border-l border-gray-200 pl-3 p-1 rounded hover:bg-blue-50">
-                      <MousePointer2 className="w-3.5 h-3.5" /> {t.readSelection}
+                    <button 
+                      onClick={speakSelection} 
+                      className="flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider text-indigo-600 hover:text-indigo-700 border-l border-slate-200 pl-3 px-2 py-1 rounded-md hover:bg-indigo-50 transition-colors"
+                    >
+                      <MousePointer2 className="w-3.5 h-3.5" />
+                      <span>{t.readSelection}</span>
                     </button>
                   </div>
                 )}
@@ -281,31 +372,39 @@ export const Chat: React.FC = () => {
           </div>
         ))}
 
+        {/* PROMPT SUGGESTIONS CHIPS */}
         {messages.length === 1 && !isLoading && (
-          <div className="space-y-6 pt-10 pb-10">
-            <h3 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] text-center">{t.tryAsking}</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+          <div className="space-y-4 pt-6 pb-6">
+            <p className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest text-center">
+              {t.tryAsking}
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl mx-auto">
               {suggestions.map((sug, i) => (
-                <button key={i} onClick={() => handleSend(sug.text)} className="flex items-center gap-4 p-5 bg-white border border-gray-100 rounded-[1.5rem] text-left hover:border-green-300 hover:shadow-xl transition-all group">
-                  <div className={`w-12 h-12 ${sug.bg} rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}>
-                    <sug.icon className={`w-5 h-5 ${sug.color}`} />
+                <button 
+                  key={i} 
+                  onClick={() => handleSend(sug.text)} 
+                  className="flex items-center gap-3.5 p-4 bg-white border border-slate-200/80 rounded-2xl text-left hover:border-brand-300 hover:shadow-md transition-all group"
+                >
+                  <div className={`w-10 h-10 ${sug.bg} border rounded-xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform`}>
+                    <sug.icon className={`w-4 h-4 ${sug.color}`} />
                   </div>
-                  <span className="text-sm font-bold text-gray-700 leading-snug">{sug.text}</span>
+                  <span className="text-xs font-bold text-slate-700 leading-snug">{sug.text}</span>
                 </button>
               ))}
             </div>
           </div>
         )}
 
+        {/* LOADING INDICATOR */}
         {isLoading && (
-          <div className="flex justify-start">
+          <div className="flex justify-start animate-in fade-in duration-200">
             <div className="flex gap-3 items-center">
-              <div className="w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center animate-pulse">
-                <Sparkles className="w-5 h-5 text-green-500" />
+              <div className="w-8 h-8 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center">
+                <Sparkles className="w-4 h-4 animate-spin" />
               </div>
-              <div className="bg-gray-50 border border-gray-100 p-4 rounded-2xl flex gap-1.5">
+              <div className="bg-white border border-slate-200/80 p-3.5 rounded-2xl flex gap-1.5 shadow-xs">
                 {[...Array(3)].map((_, i) => (
-                  <span key={i} className="w-2 h-2 bg-green-300 rounded-full animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
+                  <span key={i} className="w-2 h-2 bg-brand-400 rounded-full animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
                 ))}
               </div>
             </div>
@@ -313,35 +412,66 @@ export const Chat: React.FC = () => {
         )}
       </div>
 
-      <div className="p-4 lg:p-8 border-t border-gray-100 bg-white">
+      {/* CHAT INPUT AREA */}
+      <div className="p-4 sm:p-5 border-t border-slate-200/80 bg-white">
         {selectedImage && (
-          <div className="relative inline-block mb-4 animate-in zoom-in duration-300">
-            <img src={selectedImage} alt="Preview" className="h-20 w-20 object-cover rounded-2xl border-4 border-white shadow-xl" />
-            <button onClick={() => setSelectedImage(null)} className="absolute -top-3 -right-3 bg-red-500 text-white rounded-full p-1.5 shadow-lg">
-              <X className="w-4 h-4" />
+          <div className="relative inline-block mb-3 animate-in zoom-in duration-200">
+            <img src={selectedImage} alt="Crop Preview" className="h-16 w-16 object-cover rounded-xl border-2 border-brand-500 shadow-md" />
+            <button 
+              onClick={() => setSelectedImage(null)} 
+              className="absolute -top-2 -right-2 bg-rose-600 text-white rounded-full p-1 shadow-md hover:bg-rose-700 transition-colors"
+            >
+              <X className="w-3.5 h-3.5" />
             </button>
           </div>
         )}
-        <div className="flex items-center gap-3">
-          <input type="file" ref={fileInputRef} onChange={(e) => {
+
+        <div className="flex items-center gap-2.5">
+          <input 
+            type="file" 
+            ref={fileInputRef} 
+            onChange={(e) => {
               const file = e.target.files?.[0];
               if (file) {
                 const reader = new FileReader();
                 reader.onloadend = () => setSelectedImage(reader.result as string);
                 reader.readAsDataURL(file);
               }
-            }} accept="image/*" className="hidden" />
-          <button onClick={() => fileInputRef.current?.click()} className="p-4 text-gray-400 hover:text-green-600 bg-gray-50 border border-gray-100 rounded-2xl transition-all">
-            <ImageIcon className="w-6 h-6" />
+            }} 
+            accept="image/*" 
+            className="hidden" 
+          />
+          
+          <button 
+            type="button"
+            onClick={() => fileInputRef.current?.click()} 
+            className="p-3 text-slate-400 hover:text-brand-600 bg-slate-100/80 hover:bg-brand-50 rounded-xl transition-all border border-slate-200/60"
+            title="Upload Crop Photo"
+          >
+            <ImageIcon className="w-5 h-5" />
           </button>
+
           <div className="flex-1">
-            <input value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSend()} placeholder={t.askAnything} className="w-full bg-gray-50 border border-gray-100 rounded-2xl px-6 py-4 focus:ring-4 focus:ring-green-100 focus:border-green-600 outline-none transition-all font-medium text-gray-700" />
+            <input 
+              value={input} 
+              onChange={(e) => setInput(e.target.value)} 
+              onKeyDown={(e) => e.key === 'Enter' && handleSend()} 
+              placeholder={t.askAnything} 
+              className="w-full bg-slate-50/80 border border-slate-200/80 focus:border-brand-500 focus:bg-white focus:ring-2 focus:ring-brand-500/20 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-900 placeholder-slate-400 font-medium outline-none transition-all" 
+            />
           </div>
-          <button onClick={() => handleSend()} disabled={isLoading || (!input.trim() && !selectedImage)} className="p-4 bg-green-600 text-white rounded-2xl shadow-xl hover:bg-green-700 disabled:opacity-50 transition-all">
-            <Send className="w-6 h-6" />
+
+          <button 
+            type="button"
+            onClick={() => handleSend()} 
+            disabled={isLoading || (!input.trim() && !selectedImage)} 
+            className="p-3 bg-gradient-to-r from-brand-600 to-emerald-600 text-white rounded-xl shadow-md shadow-brand-600/20 hover:from-brand-500 hover:to-emerald-500 disabled:opacity-40 transition-all active:scale-95"
+          >
+            <Send className="w-5 h-5" />
           </button>
         </div>
       </div>
     </div>
   );
 };
+
