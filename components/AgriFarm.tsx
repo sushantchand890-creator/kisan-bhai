@@ -329,13 +329,13 @@ export const AgriFarm: React.FC = () => {
         </div>
       </div>
 
-      {/* Items Grid with Staggered Card Entrance Animations */}
+      {/* Items Grid with Smooth, Relaxed Staggered Card Entrance Animations */}
       <div className="animate-fade-in-up opacity-0 [animation-delay:300ms] [animation-fill-mode:forwards] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredItems.map((item, idx) => (
           <div
             key={item.id}
-            className="group bg-white rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-xl hover:scale-[1.02] hover:border-brand-400/60 transition-all duration-300 flex flex-col overflow-hidden animate-in fade-in zoom-in-95 fill-mode-forwards cursor-pointer"
-            style={{ animationDelay: `${(idx % 6) * 90}ms` }}
+            className="group bg-white rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-xl hover:scale-[1.02] hover:border-brand-400/60 transition-all duration-500 flex flex-col overflow-hidden animate-in fade-in zoom-in-95 fill-mode-forwards cursor-pointer ease-out"
+            style={{ animationDuration: '750ms', animationDelay: `${(idx % 6) * 150}ms` }}
           >
             {/* Produce Image & Badges */}
             <div className="relative h-48 w-full bg-slate-100 overflow-hidden">
