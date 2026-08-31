@@ -57,7 +57,7 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
   const t = getTranslation(lang);
 
   const navigation = [
-    { name: t.dashboard, path: '/', icon: Sprout },
+    { name: t.dashboard, path: '/', icon: Wheat },
     { name: t.aiAssistant, path: '/chat', icon: MessageCircle, badge: 'AI' },
     { name: t.agriFarm || 'AgriFarm Direct', path: '/agrifarm', icon: ShoppingBag, badge: 'Market' },
     { name: t.cropPlanner, path: '/planner', icon: Calendar },
@@ -466,9 +466,11 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
           <aside className="fixed right-0 top-0 bottom-0 w-80 bg-white shadow-2xl flex flex-col animate-in slide-in-from-right duration-300 z-50">
             <div className="p-6 border-b border-slate-100 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center text-white shadow-md">
-                  <Sprout className="w-5 h-5" />
-                </div>
+                <img 
+                  src="/wheat_stalks.png" 
+                  alt="Kisan-Bhai Wheat Logo" 
+                  className="w-10 h-10 object-contain filter drop-shadow-sm flex-shrink-0" 
+                />
                 <div>
                   <h2 className="font-heading font-extrabold text-lg text-slate-900">All Modules</h2>
                   <p className="text-[10px] font-bold text-brand-600 tracking-wider uppercase">RuralAssist Navigation</p>
