@@ -92,6 +92,11 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
     ready: false
   });
 
+  // Smooth scroll to top on section transition
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]);
+
   useEffect(() => {
     const updateLimelight = () => {
       const idx = activeNavIndex >= 0 ? activeNavIndex : 0;
@@ -414,9 +419,12 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
           </div>
         </header>
 
-        {/* PAGE CONTENT ROUTER OUTLET WITH SMOOTH ANIMATED TRANSITION */}
+        {/* PAGE CONTENT ROUTER OUTLET WITH ULTRA-SMOOTH SECTION TRANSITION */}
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full overflow-hidden">
-          <div key={location.pathname} className="animate-in fade-in slide-in-from-bottom-4 duration-300 fill-mode-forwards">
+          <div 
+            key={location.pathname} 
+            className="animate-in fade-in zoom-in-95 slide-in-from-bottom-3 duration-500 fill-mode-forwards ease-out"
+          >
             <Outlet />
           </div>
         </main>
