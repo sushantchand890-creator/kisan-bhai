@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
 import {
   Sprout,
@@ -84,9 +84,39 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
   const currentNav = navigation.find(item => isActive(item.path)) || { name: t.dashboard, icon: Sprout };
   const CurrentIcon = currentNav.icon;
 
-  const NavLinks = ({ collapsed, onClick }: { collapsed?: boolean; onClick?: () => void }) => (
+  const activeNavIndex = navigation.findIndex(item => isActive(item.path));
+  const navItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const [limelightStyle, setLimelightStyle] = useState<{ top: number; height: number; ready: boolean }>({
+    top: 0,
+    height: 48,
+    ready: false
+  });
+
+  useEffect(() => {
+    const updateLimelight = () => {
+      const idx = activeNavIndex >= 0 ? activeNavIndex : 0;
+      const activeEl = navItemRefs.current[idx];
+      if (activeEl) {
+        setLimelightStyle({
+          top: activeEl.offsetTop,
+          height: activeEl.offsetHeight,
+          ready: true
+        });
+      }
+    };
+
+    updateLimelight();
+    const timer = setTimeout(updateLimelight, 100);
+    window.addEventListener('resize', updateLimelight);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', updateLimelight);
+    };
+  }, [activeNavIndex, location.pathname, isSidebarCollapsed]);
+
+  const NavLinks = ({ collapsed, onClick, isSidebar }: { collapsed?: boolean; onClick?: () => void; isSidebar?: boolean }) => (
     <>
-      {navigation.map((item) => {
+      {navigation.map((item, index) => {
         const Icon = item.icon;
         const active = isActive(item.path);
         return (
@@ -94,6 +124,11 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
             key={item.path}
             to={item.path}
             onClick={onClick}
+            ref={el => {
+              if (isSidebar) {
+                navItemRefs.current[index] = el;
+              }
+            }}
             title={collapsed ? item.name : undefined}
             className={`group relative flex items-center gap-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 ${collapsed ? 'justify-center' : ''
               } ${active
@@ -122,7 +157,7 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
                 )}
 
                 {active && !item.badge && (
-                  <ChevronRight className="ml-auto w-4 h-4 text-white/70" />
+                  <ChevronRight className="ml-auto w-4 h-4 text-white/70 animate-pulse" />
                 )}
               </>
             )}
@@ -171,14 +206,28 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
           </div>
         </div>
 
-        {/* Navigation Links */}
-        <nav className="flex-1 px-3 space-y-1 overflow-y-auto custom-scrollbar">
+        {/* Navigation Links with Limelight Active Height Slide Effect */}
+        <nav className="flex-1 px-3 space-y-1 overflow-y-auto custom-scrollbar relative">
+          {/* Animated Limelight Height Slide Indicator Bar */}
+          <div 
+            className={`absolute left-0.5 w-1.5 bg-gradient-to-b from-brand-400 via-emerald-500 to-teal-400 rounded-r-full shadow-[0_0_15px_#16a34a] z-20 pointer-events-none transition-all duration-300 ease-in-out ${
+              limelightStyle.ready ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{ 
+              top: `${limelightStyle.top}px`, 
+              height: `${limelightStyle.height}px` 
+            }}
+          >
+            {/* Limelight Spotlight Beam (Polygon Clip-Path) */}
+            <div className="absolute left-0 top-0 w-64 h-full [clip-path:polygon(0_15%,100%_0,100%_100%,0_85%)] bg-gradient-to-r from-brand-500/30 via-emerald-500/10 to-transparent pointer-events-none" />
+          </div>
+
           {!isSidebarCollapsed && (
             <p className="px-3 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">
               Main Navigation
             </p>
           )}
-          <NavLinks collapsed={isSidebarCollapsed} />
+          <NavLinks collapsed={isSidebarCollapsed} isSidebar={true} />
         </nav>
 
         {/* User Card & Logout */}
