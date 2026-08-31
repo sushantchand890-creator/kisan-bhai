@@ -137,13 +137,13 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
 
   return (
     <div className="relative min-h-screen w-full flex flex-col lg:flex-row font-sans overflow-x-hidden text-slate-900 bg-slate-900">
-      {/* Background Farmland Landscape Image */}
+      {/* Background Farmland Landscape Image (More Transparent & Subtle) */}
       <div 
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat z-0 opacity-40 pointer-events-none"
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat z-0 opacity-20 pointer-events-none"
         style={{ backgroundImage: `url('/wheat_field.jpg')` }}
       />
       {/* Subtle Gradient Overlay */}
-      <div className="fixed inset-0 bg-gradient-to-br from-slate-100/90 via-slate-50/80 to-emerald-50/70 z-0 pointer-events-none backdrop-blur-[2px]" />
+      <div className="fixed inset-0 bg-gradient-to-br from-slate-100/80 via-slate-50/70 to-emerald-50/50 z-0 pointer-events-none backdrop-blur-[2px]" />
 
       {/* DESKTOP SIDEBAR (FIXED TO VIEWPORT ON SCROLL) */}
       <aside 
