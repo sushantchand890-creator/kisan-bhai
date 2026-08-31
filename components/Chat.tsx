@@ -247,7 +247,7 @@ export const Chat: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-col h-[calc(100vh-140px)] lg:h-[calc(100vh-160px)] bg-white/70 backdrop-blur-2xl rounded-3xl border border-white/80 shadow-2xl overflow-hidden relative font-sans">
+    <div className="flex flex-col h-[calc(100vh-140px)] lg:h-[calc(100vh-160px)] bg-white/35 backdrop-blur-xl rounded-3xl border border-white/60 shadow-2xl overflow-hidden relative font-sans">
       
       {/* LIVE VOICE MODE FULLSCREEN OVERLAY */}
       {isLiveMode && (
@@ -285,7 +285,7 @@ export const Chat: React.FC = () => {
       )}
 
       {/* CHAT HEADER BAR */}
-      <div className="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between bg-white/90 backdrop-blur-md sticky top-0 z-10">
+      <div className="p-4 sm:p-5 border-b border-white/50 flex items-center justify-between bg-white/40 backdrop-blur-xl sticky top-0 z-10">
         <div className="flex items-center gap-3.5">
           <div className="relative">
             <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-500 flex items-center justify-center text-white shadow-md shadow-brand-600/20 ${isSpeaking ? 'animate-pulse' : ''}`}>
@@ -321,8 +321,8 @@ export const Chat: React.FC = () => {
         </button>
       </div>
 
-      {/* MESSAGES TRAJECTORY */}
-      <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 bg-slate-50/50 custom-scrollbar">
+      {/* MESSAGES TRAJECTORY (SEMI-TRANSPARENT MIDDLE AREA) */}
+      <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 bg-transparent custom-scrollbar">
         {messages.map((msg, i) => (
           <div 
             key={i} 
@@ -338,7 +338,7 @@ export const Chat: React.FC = () => {
               <div className={`group relative p-4 rounded-2xl ${
                 msg.role === 'user' 
                   ? 'bg-indigo-600 text-white rounded-tr-none shadow-md' 
-                  : 'bg-white text-slate-800 rounded-tl-none border border-slate-200/80 shadow-sm'
+                  : 'bg-white/65 backdrop-blur-xl text-slate-900 rounded-tl-none border border-white/80 shadow-md'
               }`}>
                 {msg.image && (
                   <img 
@@ -350,17 +350,17 @@ export const Chat: React.FC = () => {
                 <p className="whitespace-pre-wrap leading-relaxed text-xs sm:text-sm font-medium">{msg.content}</p>
                 
                 {msg.role === 'assistant' && (
-                  <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center gap-3">
+                  <div className="mt-3 pt-2.5 border-t border-slate-200/60 flex items-center gap-3">
                     <button 
                       onClick={() => speakText(msg.content)} 
-                      className="flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider text-brand-700 hover:text-brand-800 px-2 py-1 rounded-md hover:bg-brand-50 transition-colors"
+                      className="flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider text-brand-700 hover:text-brand-800 px-2 py-1 rounded-md hover:bg-brand-50/80 transition-colors"
                     >
                       {isSpeaking ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
                       <span>{isSpeaking ? t.stop : t.listen}</span>
                     </button>
                     <button 
                       onClick={speakSelection} 
-                      className="flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider text-indigo-600 hover:text-indigo-700 border-l border-slate-200 pl-3 px-2 py-1 rounded-md hover:bg-indigo-50 transition-colors"
+                      className="flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider text-indigo-600 hover:text-indigo-700 border-l border-slate-200/60 pl-3 px-2 py-1 rounded-md hover:bg-indigo-50/80 transition-colors"
                     >
                       <MousePointer2 className="w-3.5 h-3.5" />
                       <span>{t.readSelection}</span>
@@ -372,10 +372,10 @@ export const Chat: React.FC = () => {
           </div>
         ))}
 
-        {/* PROMPT SUGGESTIONS CHIPS */}
+        {/* PROMPT SUGGESTIONS CHIPS (GLASSY) */}
         {messages.length === 1 && !isLoading && (
           <div className="space-y-4 pt-6 pb-6">
-            <p className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest text-center">
+            <p className="text-[10px] font-extrabold text-slate-500 uppercase tracking-widest text-center">
               {t.tryAsking}
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl mx-auto">
@@ -383,12 +383,12 @@ export const Chat: React.FC = () => {
                 <button 
                   key={i} 
                   onClick={() => handleSend(sug.text)} 
-                  className="flex items-center gap-3.5 p-4 bg-white border border-slate-200/80 rounded-2xl text-left hover:border-brand-300 hover:shadow-md transition-all group"
+                  className="flex items-center gap-3.5 p-4 bg-white/50 backdrop-blur-xl border border-white/80 rounded-2xl text-left hover:bg-white/80 hover:shadow-lg transition-all group"
                 >
                   <div className={`w-10 h-10 ${sug.bg} border rounded-xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform`}>
                     <sug.icon className={`w-4 h-4 ${sug.color}`} />
                   </div>
-                  <span className="text-xs font-bold text-slate-700 leading-snug">{sug.text}</span>
+                  <span className="text-xs font-bold text-slate-800 leading-snug">{sug.text}</span>
                 </button>
               ))}
             </div>
@@ -402,7 +402,7 @@ export const Chat: React.FC = () => {
               <div className="w-8 h-8 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center">
                 <Sparkles className="w-4 h-4 animate-spin" />
               </div>
-              <div className="bg-white border border-slate-200/80 p-3.5 rounded-2xl flex gap-1.5 shadow-xs">
+              <div className="bg-white/60 backdrop-blur-md border border-white/80 p-3.5 rounded-2xl flex gap-1.5 shadow-xs">
                 {[...Array(3)].map((_, i) => (
                   <span key={i} className="w-2 h-2 bg-brand-400 rounded-full animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
                 ))}
@@ -413,7 +413,7 @@ export const Chat: React.FC = () => {
       </div>
 
       {/* CHAT INPUT AREA */}
-      <div className="p-4 sm:p-5 border-t border-slate-200/80 bg-white">
+      <div className="p-4 sm:p-5 border-t border-white/50 bg-white/40 backdrop-blur-xl">
         {selectedImage && (
           <div className="relative inline-block mb-3 animate-in zoom-in duration-200">
             <img src={selectedImage} alt="Crop Preview" className="h-16 w-16 object-cover rounded-xl border-2 border-brand-500 shadow-md" />
@@ -445,7 +445,7 @@ export const Chat: React.FC = () => {
           <button 
             type="button"
             onClick={() => fileInputRef.current?.click()} 
-            className="p-3 text-slate-400 hover:text-brand-600 bg-slate-100/80 hover:bg-brand-50 rounded-xl transition-all border border-slate-200/60"
+            className="p-3 text-slate-500 hover:text-brand-600 bg-white/60 hover:bg-white backdrop-blur-md rounded-xl transition-all border border-white/80"
             title="Upload Crop Photo"
           >
             <ImageIcon className="w-5 h-5" />
@@ -457,7 +457,7 @@ export const Chat: React.FC = () => {
               onChange={(e) => setInput(e.target.value)} 
               onKeyDown={(e) => e.key === 'Enter' && handleSend()} 
               placeholder={t.askAnything} 
-              className="w-full bg-slate-50/80 border border-slate-200/80 focus:border-brand-500 focus:bg-white focus:ring-2 focus:ring-brand-500/20 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-900 placeholder-slate-400 font-medium outline-none transition-all" 
+              className="w-full bg-white/60 backdrop-blur-md border border-white/80 focus:border-brand-500 focus:bg-white/90 focus:ring-2 focus:ring-brand-500/20 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-900 placeholder-slate-500 font-medium outline-none transition-all" 
             />
           </div>
 

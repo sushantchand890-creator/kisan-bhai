@@ -28,7 +28,7 @@ export const CropPlanner: React.FC = () => {
 
   return (
     <div className="space-y-8 pb-10 font-sans">
-      <header className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <header className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5 mb-1">
             <div className="p-2 rounded-xl bg-brand-50 text-brand-700 shadow-xs">
@@ -40,7 +40,7 @@ export const CropPlanner: React.FC = () => {
         </div>
       </header>
 
-      <div className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl space-y-6">
+      <div className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl space-y-6">
         <h2 className="font-heading text-lg font-extrabold text-slate-900 border-b border-white/60 pb-4">
           Regional Parameters
         </h2>
@@ -54,7 +54,7 @@ export const CropPlanner: React.FC = () => {
               value={formData.location}
               onChange={(e) => setFormData({...formData, location: e.target.value})}
               placeholder="e.g. Punjab, India"
-              className="w-full bg-slate-50/80 focus:bg-white border border-slate-200/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl px-4 py-3 text-sm text-slate-900 font-bold outline-none transition-all"
+              className="w-full bg-white/60 backdrop-blur-md focus:bg-white border border-white/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl px-4 py-3 text-sm text-slate-900 font-bold outline-none transition-all"
             />
           </div>
           <div className="space-y-1.5">
@@ -64,7 +64,7 @@ export const CropPlanner: React.FC = () => {
             <select 
               value={formData.season}
               onChange={(e) => setFormData({...formData, season: e.target.value})}
-              className="w-full bg-slate-50/80 focus:bg-white border border-slate-200/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl px-4 py-3 text-sm text-slate-900 font-bold outline-none transition-all cursor-pointer"
+              className="w-full bg-white/60 backdrop-blur-md focus:bg-white border border-white/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl px-4 py-3 text-sm text-slate-900 font-bold outline-none transition-all cursor-pointer"
             >
               <option>Kharif (June-Oct)</option>
               <option>Rabi (Oct-March)</option>
@@ -78,7 +78,7 @@ export const CropPlanner: React.FC = () => {
             <select 
               value={formData.soil}
               onChange={(e) => setFormData({...formData, soil: e.target.value})}
-              className="w-full bg-slate-50/80 focus:bg-white border border-slate-200/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl px-4 py-3 text-sm text-slate-900 font-bold outline-none transition-all cursor-pointer"
+              className="w-full bg-white/60 backdrop-blur-md focus:bg-white border border-white/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl px-4 py-3 text-sm text-slate-900 font-bold outline-none transition-all cursor-pointer"
             >
               <option>Alluvial</option>
               <option>Black (Regur)</option>
@@ -119,10 +119,10 @@ export const CropPlanner: React.FC = () => {
             {recommendations.map((crop, i) => (
               <div 
                 key={i} 
-                className="group bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
+                className="group bg-white/50 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/70 shadow-md hover:shadow-xl transition-all flex flex-col justify-between"
               >
-                <div className="h-32 bg-gradient-to-br from-brand-50 via-emerald-50 to-teal-50 p-6 flex items-center justify-center border-b border-slate-100">
-                  <div className="bg-white p-4 rounded-full shadow-sm group-hover:scale-110 transition-transform text-brand-600">
+                <div className="h-32 bg-gradient-to-br from-brand-50/80 via-emerald-50/60 to-teal-50/60 p-6 flex items-center justify-center border-b border-white/60">
+                  <div className="bg-white/80 backdrop-blur-md p-4 rounded-full shadow-sm group-hover:scale-110 transition-transform text-brand-600">
                     <Sprout className="w-10 h-10" />
                   </div>
                 </div>

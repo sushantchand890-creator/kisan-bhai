@@ -33,7 +33,7 @@ export const Schemes: React.FC = () => {
   return (
     <div className="space-y-8 animate-in fade-in duration-500 pb-10 font-sans">
       {/* HEADER BAR */}
-      <header className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <header className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5 mb-1">
             <div className="p-2 rounded-xl bg-amber-50 text-amber-600 shadow-xs">
@@ -50,14 +50,14 @@ export const Schemes: React.FC = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search schemes by keyword..."
-            className="w-full bg-slate-50/80 focus:bg-white border border-slate-200/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl pl-11 pr-4 py-3 text-xs sm:text-sm text-slate-900 placeholder-slate-400 font-medium outline-none transition-all"
+            className="w-full bg-white/60 backdrop-blur-md focus:bg-white border border-white/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl pl-11 pr-4 py-3 text-xs sm:text-sm text-slate-900 placeholder-slate-400 font-medium outline-none transition-all"
           />
         </div>
       </header>
 
       {/* SCHEME CARDS GRID */}
       {loading ? (
-        <div className="flex flex-col items-center justify-center py-20 text-slate-400 bg-white rounded-3xl border border-slate-200/80">
+        <div className="flex flex-col items-center justify-center py-20 text-slate-400 bg-white/45 backdrop-blur-xl rounded-3xl border border-white/70 shadow-xl">
           <Loader2 className="w-10 h-10 animate-spin mb-3 text-brand-600" />
           <p className="font-heading text-base font-extrabold text-slate-800">Searching Active Agricultural Schemes...</p>
           <p className="text-xs font-medium text-slate-400 mt-1">Fetching live government records for {user?.location || 'India'}</p>
@@ -67,7 +67,7 @@ export const Schemes: React.FC = () => {
           {filteredSchemes.map((scheme, i) => (
             <div 
               key={i} 
-              className="bg-white rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-md transition-all overflow-hidden flex flex-col justify-between group"
+              className="bg-white/45 backdrop-blur-xl rounded-3xl border border-white/70 shadow-md hover:shadow-xl transition-all overflow-hidden flex flex-col justify-between group"
             >
               <div className="p-6 sm:p-8 flex-1">
                 <div className="flex justify-between items-start mb-4">
@@ -86,7 +86,7 @@ export const Schemes: React.FC = () => {
                 <h3 className="font-heading text-lg sm:text-xl font-extrabold text-slate-900 mb-2">{scheme.name}</h3>
                 <p className="text-slate-600 text-xs sm:text-sm font-medium mb-6 line-clamp-2 leading-relaxed">{scheme.description}</p>
                 
-                <div className="space-y-3.5 border-t border-slate-100 pt-4">
+                <div className="space-y-3.5 border-t border-white/60 pt-4">
                   <div>
                     <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block mb-1 flex items-center gap-1">
                       <Users className="w-3 h-3 text-brand-600" /> Eligibility
@@ -102,7 +102,7 @@ export const Schemes: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-4 bg-slate-50/80 border-t border-slate-100 flex gap-3">
+              <div className="p-4 bg-white/60 backdrop-blur-md border-t border-white/70 flex gap-3">
                 <button 
                   type="button"
                   onClick={() => setSelectedScheme(scheme)}

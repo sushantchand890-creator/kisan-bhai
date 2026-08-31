@@ -100,7 +100,7 @@ export const Weather: React.FC = () => {
   return (
     <div className="space-y-8 animate-in fade-in duration-500 pb-10 font-sans">
       {/* HEADER BAR */}
-      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl">
+      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl">
         <div>
           <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Weather Intelligence</h1>
           <p className="text-slate-600 text-xs sm:text-sm font-semibold mt-1">Hyper-local weather insights & advisories for <span className="font-extrabold text-brand-700">{user?.location || 'your location'}</span>.</p>
@@ -139,7 +139,7 @@ export const Weather: React.FC = () => {
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {severityAlerts.map((alert: any, i: number) => (
-                      <div key={i} className={`${style.bg} border ${style.border} p-6 rounded-3xl shadow-xs relative overflow-hidden group hover:shadow-md transition-all`}>
+                      <div key={i} className={`${style.bg} backdrop-blur-md border ${style.border} p-6 rounded-3xl shadow-sm relative overflow-hidden group hover:shadow-md transition-all`}>
                         <div className="flex justify-between items-start mb-4">
                           <div className={`p-3 ${style.accent} rounded-2xl text-white shadow-sm`}>
                             <Icon className="w-5 h-5" />
@@ -171,7 +171,7 @@ export const Weather: React.FC = () => {
       )}
 
       {loading ? (
-        <div className="flex flex-col items-center justify-center py-20 text-slate-400 bg-white rounded-3xl shadow-xs border border-slate-200/80">
+        <div className="flex flex-col items-center justify-center py-20 text-slate-400 bg-white/45 backdrop-blur-xl rounded-3xl shadow-xl border border-white/70">
           <Loader2 className="w-10 h-10 animate-spin mb-4 text-brand-600" />
           <p className="font-heading text-lg font-bold text-slate-800">Fetching Real-Time Weather...</p>
           <p className="text-xs font-medium text-slate-400 mt-1">Connecting to agricultural weather intelligence system</p>
@@ -217,11 +217,11 @@ export const Weather: React.FC = () => {
           </div>
 
           {/* 5-Day Forecast */}
-          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-xs">
+          <div className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl">
             <h3 className="font-heading font-extrabold text-lg sm:text-xl text-slate-900 mb-6">5-Day Forecast</h3>
             <div className="space-y-4">
               {forecastData.map((f, i) => (
-                <div key={i} className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-brand-50/50 hover:border-brand-200 transition-all">
+                <div key={i} className="flex items-center justify-between p-3 rounded-2xl bg-white/60 border border-white/80 hover:bg-white/90 transition-all">
                   <span className="w-14 font-extrabold text-slate-500 text-xs uppercase">{f.day}</span>
                   <div className="flex-1 flex justify-center">
                     {React.createElement(getWeatherIcon(f.condition || ''), { 
@@ -238,14 +238,14 @@ export const Weather: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="bg-white p-10 rounded-3xl text-center border border-dashed border-slate-200">
+        <div className="bg-white/45 backdrop-blur-xl p-10 rounded-3xl text-center border border-dashed border-slate-300 shadow-xl">
            <p className="text-slate-500 font-bold text-sm">No weather data found for this location. Please update your profile location.</p>
         </div>
       )}
 
       {/* AI Advisory Section */}
       {!loading && advice.length > 0 && (
-        <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden">
+        <div className="bg-white/45 backdrop-blur-xl rounded-3xl border border-white/70 shadow-xl overflow-hidden">
           <div className="bg-gradient-to-r from-brand-900 to-emerald-900 p-6 flex items-center justify-between text-white">
             <div className="flex items-center gap-3">
               <div className="p-2.5 bg-white/10 backdrop-blur-md rounded-xl border border-white/20">
@@ -260,7 +260,7 @@ export const Weather: React.FC = () => {
           <div className="p-6 sm:p-8">
             <div className="grid md:grid-cols-3 gap-5">
               {advice.map((tip, i) => (
-                <div key={i} className="p-5 rounded-2xl bg-slate-50 border border-slate-200/70 hover:border-brand-300 transition-all shadow-xs">
+                <div key={i} className="p-5 rounded-2xl bg-white/60 border border-white/80 hover:bg-white/90 transition-all shadow-xs">
                   <div className="w-8 h-8 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center font-extrabold text-xs mb-3">
                     {i + 1}
                   </div>

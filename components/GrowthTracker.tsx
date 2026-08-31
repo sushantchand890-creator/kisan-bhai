@@ -48,7 +48,7 @@ export const GrowthTracker: React.FC = () => {
   return (
     <div className="space-y-8 pb-10 font-sans">
       {/* HEADER BAR */}
-      <header className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <header className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5 mb-1">
             <div className="p-2 rounded-xl bg-brand-50 text-brand-700 shadow-xs">
@@ -63,7 +63,7 @@ export const GrowthTracker: React.FC = () => {
           <select 
             value={cropType}
             onChange={(e) => setCropType(e.target.value)}
-            className="bg-slate-50 border border-slate-200/80 rounded-xl px-4 py-2.5 outline-none focus:border-brand-500 text-xs font-bold text-slate-800 cursor-pointer"
+            className="bg-white/60 backdrop-blur-md border border-white/80 rounded-xl px-4 py-2.5 outline-none focus:border-brand-500 text-xs font-bold text-slate-800 cursor-pointer"
           >
             <option>Wheat</option>
             <option>Rice / Paddy</option>
@@ -88,7 +88,7 @@ export const GrowthTracker: React.FC = () => {
 
       {/* AI ANALYSIS IN PROGRESS LOADING CARD */}
       {isAnalyzing && (
-        <div className="bg-gradient-to-r from-brand-50 via-emerald-50 to-teal-50 border border-brand-200/80 p-8 rounded-3xl text-center flex flex-col items-center animate-pulse">
+        <div className="bg-white/45 backdrop-blur-xl border border-white/70 p-8 rounded-3xl text-center flex flex-col items-center animate-pulse shadow-xl">
           <Loader2 className="w-10 h-10 text-brand-600 animate-spin mb-3" />
           <h3 className="font-heading text-lg font-extrabold text-brand-900">AI Growth & Vision Analysis in Progress</h3>
           <p className="text-xs font-medium text-brand-700 mt-1">Identifying plant stage, leaf health, and disease symptoms...</p>
@@ -97,8 +97,8 @@ export const GrowthTracker: React.FC = () => {
 
       {/* RECORD LIST OR EMPTY STATE */}
       {records.length === 0 && !isAnalyzing ? (
-        <div className="bg-white border border-dashed border-slate-200 p-16 rounded-3xl text-center">
-          <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-3 text-slate-300">
+        <div className="bg-white/45 backdrop-blur-xl border border-dashed border-slate-300 p-16 rounded-3xl text-center shadow-xl">
+          <div className="w-14 h-14 bg-white/60 rounded-2xl flex items-center justify-center mx-auto mb-3 text-slate-400">
             <Upload className="w-7 h-7" />
           </div>
           <h3 className="font-heading text-base font-extrabold text-slate-600">No Growth Records Logged</h3>
@@ -109,7 +109,7 @@ export const GrowthTracker: React.FC = () => {
           {records.map((record) => (
             <div 
               key={record.id} 
-              className="bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden flex flex-col md:flex-row hover:shadow-md transition-all duration-200"
+              className="bg-white/45 backdrop-blur-xl rounded-3xl border border-white/70 shadow-md hover:shadow-xl overflow-hidden flex flex-col md:flex-row transition-all duration-200"
             >
               <div className="md:w-72 h-56 md:h-auto overflow-hidden relative shrink-0">
                 <img src={record.image} className="w-full h-full object-cover" alt="Growth Record" />
@@ -135,12 +135,12 @@ export const GrowthTracker: React.FC = () => {
                     <span>{record.cropType} Health Analysis</span>
                   </h3>
                   
-                  <p className="text-slate-700 text-xs sm:text-sm font-medium leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100 mb-4">
+                  <p className="text-slate-700 text-xs sm:text-sm font-medium leading-relaxed bg-white/60 p-4 rounded-2xl border border-white/80 mb-4">
                     {record.analysis}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                <div className="pt-4 border-t border-white/60 flex items-center justify-between">
                   <div className="flex items-center gap-2 text-xs text-brand-700 font-extrabold">
                     <TrendingUp className="w-4 h-4" /> 
                     <span>Growth Ledger Verified</span>

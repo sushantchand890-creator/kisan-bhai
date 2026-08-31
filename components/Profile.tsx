@@ -60,7 +60,7 @@ export const Profile: React.FC = () => {
 
   return (
     <div className="space-y-8 max-w-3xl mx-auto font-sans pb-10">
-      <header className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <header className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5 mb-1">
             <div className="p-2 rounded-xl bg-brand-50 text-brand-700 shadow-xs">
@@ -79,7 +79,7 @@ export const Profile: React.FC = () => {
         )}
       </header>
 
-      <div className="bg-white/70 backdrop-blur-2xl p-6 sm:p-10 rounded-3xl border border-white/80 shadow-xl space-y-8">
+      <div className="bg-white/45 backdrop-blur-xl p-6 sm:p-10 rounded-3xl border border-white/70 shadow-xl space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-1.5">
             <label className="text-[11px] font-extrabold text-slate-700 uppercase tracking-wider ml-1">Farmer Name</label>
@@ -88,7 +88,7 @@ export const Profile: React.FC = () => {
               <input 
                 value={profile.name}
                 onChange={(e) => setProfile({...profile, name: e.target.value})}
-                className="w-full bg-slate-50/80 focus:bg-white border border-slate-200/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl pl-12 pr-4 py-3.5 text-sm text-slate-900 font-bold outline-none transition-all"
+                className="w-full bg-white/60 backdrop-blur-md focus:bg-white border border-white/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl pl-12 pr-4 py-3.5 text-sm text-slate-900 font-bold outline-none transition-all"
               />
             </div>
           </div>
@@ -100,7 +100,7 @@ export const Profile: React.FC = () => {
               <select 
                 value={profile.language}
                 onChange={(e) => setProfile({...profile, language: e.target.value as any})}
-                className="w-full bg-slate-50/80 focus:bg-white border border-slate-200/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl pl-12 pr-4 py-3.5 text-sm text-slate-900 font-bold outline-none transition-all cursor-pointer"
+                className="w-full bg-white/60 backdrop-blur-md focus:bg-white border border-white/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl pl-12 pr-4 py-3.5 text-sm text-slate-900 font-bold outline-none transition-all cursor-pointer"
               >
                 <option value="en">English (Global)</option>
                 <option value="hi">Hindi (हिन्दी)</option>
@@ -118,7 +118,7 @@ export const Profile: React.FC = () => {
                 <input 
                   value={profile.location}
                   onChange={(e) => setProfile({...profile, location: e.target.value})}
-                  className="w-full bg-slate-50/80 focus:bg-white border border-slate-200/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl pl-12 pr-4 py-3.5 text-sm text-slate-900 font-bold outline-none transition-all"
+                  className="w-full bg-white/60 backdrop-blur-md focus:bg-white border border-white/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl pl-12 pr-4 py-3.5 text-sm text-slate-900 font-bold outline-none transition-all"
                 />
               </div>
               <button
@@ -141,7 +141,7 @@ export const Profile: React.FC = () => {
                 value={profile.size}
                 onChange={(e) => setProfile({...profile, size: e.target.value})}
                 placeholder="e.g. 5 Acres"
-                className="w-full bg-slate-50/80 focus:bg-white border border-slate-200/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl pl-12 pr-4 py-3.5 text-sm text-slate-900 font-bold outline-none transition-all"
+                className="w-full bg-white/60 backdrop-blur-md focus:bg-white border border-white/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl pl-12 pr-4 py-3.5 text-sm text-slate-900 font-bold outline-none transition-all"
               />
             </div>
           </div>
