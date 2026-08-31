@@ -279,12 +279,17 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
             }`}>
             {isSidebarCollapsed ? (
               <>
-                <div
-                  title={user?.name || 'Farmer'}
-                  className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600 to-emerald-700 flex items-center justify-center text-white font-bold text-sm shadow-sm"
+                <Link
+                  to="/profile"
+                  title="Farm Profile"
+                  className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all shadow-xs ${
+                    isActive('/profile')
+                      ? 'bg-gradient-to-tr from-brand-600 via-emerald-600 to-teal-600 text-white shadow-md shadow-brand-600/30'
+                      : 'bg-white/80 text-slate-700 border border-slate-200 hover:bg-brand-50 hover:text-brand-700'
+                  }`}
                 >
-                  {user?.name ? user.name.charAt(0).toUpperCase() : 'G'}
-                </div>
+                  <UserCircle className="w-5 h-5" />
+                </Link>
                 <button
                   type="button"
                   onClick={onLogout}
@@ -296,18 +301,21 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
               </>
             ) : (
               <>
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600 to-emerald-700 flex items-center justify-center text-white font-bold text-sm shadow-sm flex-shrink-0">
-                    {user?.name ? user.name.charAt(0).toUpperCase() : 'G'}
+                <Link 
+                  to="/profile" 
+                  className="flex items-center gap-3 mb-3 p-1 rounded-xl hover:bg-white/80 transition-all group"
+                >
+                  <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-600 to-emerald-700 flex items-center justify-center text-white shadow-sm flex-shrink-0">
+                    <UserCircle className="w-5 h-5 text-white" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="text-xs font-bold text-slate-900 truncate">{user?.name || t.guest}</p>
+                    <p className="text-xs font-bold text-slate-900 truncate group-hover:text-brand-700 transition-colors">{user?.name || t.guest}</p>
                     <div className="flex items-center gap-1 text-[11px] text-slate-500">
                       <MapPin className="w-3 h-3 text-brand-600 flex-shrink-0" />
                       <span className="truncate">{user?.location || 'India'}</span>
                     </div>
                   </div>
-                </div>
+                </Link>
 
                 <button
                   type="button"
