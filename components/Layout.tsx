@@ -149,8 +149,7 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
       >
         {/* Brand Header */}
         <div className="p-4 pb-3">
-          <div className={`flex items-center gap-3 p-3 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-sm ${isSidebarCollapsed ? 'justify-center p-2.5' : ''
-            }`}>
+          <div className={`flex items-center gap-3 px-2 py-1 ${isSidebarCollapsed ? 'justify-center' : ''}`}>
             <img 
               src="/wheat_stalks.png" 
               alt="Kisan-Bhai Wheat Logo" 
