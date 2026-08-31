@@ -132,13 +132,13 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
             title={collapsed ? item.name : undefined}
             className={`group relative flex items-center gap-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 ${collapsed ? 'justify-center' : ''
               } ${active
-                ? 'bg-gradient-to-r from-brand-600 to-brand-700 text-white font-bold shadow-lg shadow-brand-600/25 scale-[1.01]'
-                : 'text-slate-600 hover:bg-brand-50/80 hover:text-brand-800 font-semibold'
+                ? 'bg-brand-50/70 text-brand-900 font-extrabold shadow-xs'
+                : 'text-slate-600 hover:bg-brand-50/50 hover:text-brand-800 font-semibold'
               }`}
           >
             <div className={`p-2 rounded-xl transition-colors ${active
-                ? 'bg-white/20 text-white'
-                : 'bg-slate-100 text-slate-500 group-hover:bg-brand-100 group-hover:text-brand-700'
+                ? 'bg-gradient-to-tr from-brand-600 to-emerald-600 text-white shadow-md shadow-brand-600/30'
+                : 'bg-slate-100/80 text-slate-500 group-hover:bg-brand-100 group-hover:text-brand-700'
               }`}>
               <Icon className="w-4 h-4" />
             </div>
@@ -149,7 +149,7 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
 
                 {item.badge && (
                   <span className={`ml-auto text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider ${active
-                      ? 'bg-white text-brand-700'
+                      ? 'bg-brand-600 text-white shadow-sm'
                       : 'bg-gradient-to-r from-harvest-400 to-amber-500 text-slate-900 shadow-sm'
                     }`}>
                     {item.badge}
@@ -157,7 +157,7 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
                 )}
 
                 {active && !item.badge && (
-                  <ChevronRight className="ml-auto w-4 h-4 text-white/70 animate-pulse" />
+                  <ChevronRight className="ml-auto w-4 h-4 text-brand-700 animate-pulse" />
                 )}
               </>
             )}
