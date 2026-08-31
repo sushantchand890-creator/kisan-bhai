@@ -185,7 +185,7 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
               <img 
                 src="/wheat_stalks.png" 
                 alt="Kisan-Bhai Wheat Logo" 
-                className="w-14 h-14 object-contain mb-3 filter drop-shadow-md transition-transform duration-300 hover:scale-105" 
+                className="w-20 h-20 object-contain mb-3 filter drop-shadow-lg transition-transform duration-300 hover:scale-110" 
               />
               <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight transition-all duration-300">
                 {isLogin ? 'Welcome Back' : 'Create Account'}

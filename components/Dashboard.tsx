@@ -202,7 +202,7 @@ export const Dashboard: React.FC = () => {
           <img 
             src="/wheat_stalks.png" 
             alt="Kisan-Bhai Wheat Logo" 
-            className="w-16 h-16 object-contain filter drop-shadow-md shrink-0" 
+            className="w-20 h-20 sm:w-24 sm:h-24 object-contain filter drop-shadow-lg shrink-0 transition-transform duration-300 hover:scale-105" 
           />
           <div>
             <div className="flex items-center gap-2">

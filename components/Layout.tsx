@@ -153,7 +153,7 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
             <img 
               src="/wheat_stalks.png" 
               alt="Kisan-Bhai Wheat Logo" 
-              className="w-10 h-10 object-contain filter drop-shadow-md flex-shrink-0" 
+              className="w-14 h-14 object-contain filter drop-shadow-md flex-shrink-0 transition-transform duration-200 hover:scale-105" 
             />
             {!isSidebarCollapsed && (
               <div className="min-w-0 flex-1">
@@ -255,7 +255,7 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
               <img 
                 src="/wheat_stalks.png" 
                 alt="Kisan-Bhai Wheat Logo" 
-                className="w-9 h-9 object-contain filter drop-shadow-sm flex-shrink-0" 
+                className="w-12 h-12 object-contain filter drop-shadow-sm flex-shrink-0" 
               />
               <div>
                 <h1 className="font-heading font-extrabold text-base text-slate-900 leading-none">Kisan-Bhai</h1>
