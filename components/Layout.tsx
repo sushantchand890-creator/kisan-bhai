@@ -148,12 +148,14 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
           }`}
       >
         {/* Brand Header */}
-        <div className="p-4 pb-3">
-          <div className={`flex items-center gap-3 px-2 py-1 ${isSidebarCollapsed ? 'justify-center' : ''}`}>
+        <div className={`p-4 pb-3 ${isSidebarCollapsed ? 'px-2' : ''}`}>
+          <div className={`flex items-center gap-3 ${isSidebarCollapsed ? 'justify-center p-0' : 'px-2 py-1'}`}>
             <img 
               src="/wheat_stalks.png" 
               alt="Kisan-Bhai Wheat Logo" 
-              className="w-16 h-16 object-contain filter drop-shadow-md flex-shrink-0 transition-transform duration-200 hover:scale-110" 
+              className={`object-contain filter drop-shadow-md flex-shrink-0 transition-transform duration-200 hover:scale-110 ${
+                isSidebarCollapsed ? 'w-14 h-14 scale-125' : 'w-12 h-12'
+              }`} 
             />
             {!isSidebarCollapsed && (
               <div className="min-w-0 flex-1">
