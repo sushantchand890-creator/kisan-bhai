@@ -136,18 +136,18 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
   );
 
   return (
-    <div className="relative min-h-screen w-full flex flex-col lg:flex-row font-sans overflow-x-hidden text-slate-900 bg-slate-100">
-      {/* Background Farmland Landscape Image (Clearly Visible) */}
+    <div className="relative min-h-screen w-full flex flex-col lg:flex-row font-sans overflow-x-hidden text-slate-900 bg-slate-900">
+      {/* Background Farmland Landscape Image (Vibrant & Visible Through Cards) */}
       <div 
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat z-0 opacity-35 pointer-events-none"
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat z-0 opacity-50 pointer-events-none"
         style={{ backgroundImage: `url('/wheat_field.jpg')` }}
       />
-      {/* Soft Light Overlay */}
-      <div className="fixed inset-0 bg-gradient-to-br from-slate-100/50 via-white/40 to-emerald-50/40 z-0 pointer-events-none backdrop-blur-[1px]" />
+      {/* Soft Light Translucent Overlay */}
+      <div className="fixed inset-0 bg-gradient-to-br from-slate-100/20 via-white/15 to-emerald-50/15 z-0 pointer-events-none backdrop-blur-[1px]" />
 
       {/* DESKTOP SIDEBAR (FIXED TO VIEWPORT ON SCROLL) */}
       <aside 
-        className={`hidden lg:flex flex-col bg-white/70 backdrop-blur-2xl border-r border-white/60 fixed top-0 left-0 h-screen z-40 shadow-xl transition-all duration-300 ${
+        className={`hidden lg:flex flex-col bg-white/45 backdrop-blur-xl border-r border-white/60 fixed top-0 left-0 h-screen z-40 shadow-xl transition-all duration-300 ${
           isSidebarCollapsed ? 'w-20' : 'w-72'
         }`}
       >
@@ -238,7 +238,7 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
         isSidebarCollapsed ? 'lg:pl-20' : 'lg:pl-72'
       }`}>
         {/* STICKY TOP NAVIGATION BAR */}
-        <header className="sticky top-0 z-30 bg-white/70 backdrop-blur-2xl border-b border-white/60 px-4 py-3 lg:px-6 flex items-center justify-between shadow-xs">
+        <header className="sticky top-0 z-30 bg-white/45 backdrop-blur-xl border-b border-white/60 px-4 py-3 lg:px-6 flex items-center justify-between shadow-xs">
           
           {/* Left Controls: Sidebar Toggle & Active Page Badge */}
           <div className="flex items-center gap-3">

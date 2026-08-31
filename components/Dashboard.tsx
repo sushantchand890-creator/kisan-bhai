@@ -175,7 +175,7 @@ export const Dashboard: React.FC = () => {
     <div className="space-y-8 pb-10 font-sans">
 
       {/* DAILY MANDI MARKET TICKER BANNER */}
-      <div className="bg-white/70 backdrop-blur-2xl px-4 py-3 rounded-2xl border border-white/80 shadow-md flex items-center justify-between gap-4 overflow-hidden">
+      <div className="bg-white/45 backdrop-blur-xl px-4 py-3 rounded-2xl border border-white/70 shadow-md flex items-center justify-between gap-4 overflow-hidden">
         <div className="flex items-center gap-2 text-xs font-extrabold text-brand-900 shrink-0 bg-brand-50 px-3 py-1.5 rounded-xl border border-brand-200/60">
           <TrendingUp className="w-4 h-4 text-brand-600" />
           <span>DAILY MANDI RATES</span>
@@ -197,7 +197,7 @@ export const Dashboard: React.FC = () => {
       </div>
 
       {/* HEADER SECTION */}
-      <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl">
+      <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl">
         <div className="flex items-center gap-5">
            <div className="w-16 h-16 bg-gradient-to-tr from-brand-600 to-emerald-500 rounded-2xl flex items-center justify-center border border-white/40 shadow-md shadow-brand-600/20 text-white shrink-0">
               <Sprout className="w-9 h-9" />
@@ -234,7 +234,7 @@ export const Dashboard: React.FC = () => {
         {stats.map((stat, i) => (
           <div 
             key={i} 
-            className="bg-white/70 backdrop-blur-2xl p-5 sm:p-6 rounded-3xl border border-white/80 shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group"
+            className="bg-white/45 backdrop-blur-xl p-5 sm:p-6 rounded-3xl border border-white/70 shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group"
           >
             <div className="flex items-center justify-between mb-3">
               <span className="text-[11px] text-slate-500 font-extrabold uppercase tracking-wider">{stat.label}</span>
@@ -248,7 +248,7 @@ export const Dashboard: React.FC = () => {
       </div>
 
       {/* AGRIFARM DIRECT MARKETPLACE SPOTLIGHT */}
-      <div className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl space-y-6">
+      <div className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="p-2.5 bg-emerald-600 rounded-2xl text-white shadow-md shadow-emerald-600/20">
@@ -391,7 +391,7 @@ export const Dashboard: React.FC = () => {
           </div>
 
           {/* REAL-TIME WEATHER FORECAST & IRRIGATION ADVISORY WIDGET */}
-          <div className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl space-y-6">
+          <div className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl space-y-6">
             <div className="flex items-center justify-between border-b border-white/60 pb-4">
               <div className="flex items-center gap-3">
                 <div className="p-2.5 bg-blue-500 rounded-2xl text-white shadow-md shadow-blue-500/20">
@@ -453,7 +453,7 @@ export const Dashboard: React.FC = () => {
           </div>
 
           {/* CROP GROWTH PROGRESS CARD */}
-          <div className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl">
+          <div className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-2.5">
                 <div className="p-2 rounded-xl bg-brand-50 text-brand-700 shadow-xs">
@@ -491,7 +491,7 @@ export const Dashboard: React.FC = () => {
         <div className="space-y-8">
           
           {/* DAILY AGRICULTURAL NEWS FEED CARD */}
-          <div className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl space-y-5">
+          <div className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl space-y-5">
             <div className="flex items-center justify-between border-b border-white/60 pb-3">
               <div className="flex items-center gap-2.5">
                 <div className="p-2 rounded-xl bg-indigo-50 text-indigo-600 shadow-xs">
@@ -517,7 +517,7 @@ export const Dashboard: React.FC = () => {
           </div>
 
           {/* RISK MONITOR CARD */}
-          <div className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl">
+          <div className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl">
             <div className="flex items-center gap-2.5 mb-6">
               <div className="p-2 rounded-xl bg-rose-50 text-rose-600 shadow-xs">
                 <ShieldAlert className="w-5 h-5" />
@@ -543,7 +543,7 @@ export const Dashboard: React.FC = () => {
           </div>
 
           {/* QUICK ACTIONS TILES */}
-          <div className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl">
+          <div className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl">
             <h3 className="font-heading font-extrabold text-lg text-slate-900 mb-6">{t.quickActions}</h3>
             
             <div className="grid grid-cols-2 gap-3.5">
