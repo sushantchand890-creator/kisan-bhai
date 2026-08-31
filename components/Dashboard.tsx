@@ -176,7 +176,7 @@ export const Dashboard: React.FC = () => {
     <div className="space-y-8 pb-10 font-sans">
 
       {/* DAILY MANDI MARKET TICKER BANNER */}
-      <div className="bg-white/45 backdrop-blur-xl px-4 py-3 rounded-2xl border border-white/70 shadow-md flex items-center justify-between gap-4 overflow-hidden">
+      <div className="animate-fade-in-up opacity-0 [animation-delay:100ms] [animation-fill-mode:forwards] bg-white/45 backdrop-blur-xl px-4 py-3 rounded-2xl border border-white/70 shadow-md flex items-center justify-between gap-4 overflow-hidden">
         <div className="flex items-center gap-2 text-xs font-extrabold text-brand-900 shrink-0 bg-brand-50 px-3 py-1.5 rounded-xl border border-brand-200/60">
           <TrendingUp className="w-4 h-4 text-brand-600" />
           <span>DAILY MANDI RATES</span>
@@ -184,7 +184,7 @@ export const Dashboard: React.FC = () => {
 
         <div className="flex items-center gap-6 overflow-x-auto custom-scrollbar py-1 text-xs">
           {mandiRates.map((item, idx) => (
-            <div key={idx} className="flex items-center gap-2 shrink-0 bg-white/60 px-3 py-1 rounded-xl border border-slate-200/60">
+            <div key={idx} className="flex items-center gap-2 shrink-0 bg-white/60 px-3 py-1 rounded-xl border border-slate-200/60 hover:scale-105 transition-transform cursor-pointer">
               <span className="font-bold text-slate-800">{item.crop}:</span>
               <span className="font-black text-slate-900">{item.rate}</span>
               <span className={`text-[10px] font-extrabold px-1.5 py-0.5 rounded-md ${item.up ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'
@@ -197,12 +197,12 @@ export const Dashboard: React.FC = () => {
       </div>
 
       {/* HEADER SECTION */}
-      <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl">
+      <header className="animate-fade-in-up opacity-0 [animation-delay:200ms] [animation-fill-mode:forwards] flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl">
         <div className="flex items-center gap-5">
           <img 
             src="/wheat_stalks.png" 
             alt="Kisan-Bhai Wheat Logo" 
-            className="w-20 h-20 sm:w-24 sm:h-24 object-contain filter drop-shadow-lg shrink-0 transition-transform duration-300 hover:scale-105" 
+            className="w-20 h-20 sm:w-24 sm:h-24 object-contain filter drop-shadow-lg shrink-0 transition-transform duration-300 animate-float cursor-pointer hover:rotate-3" 
           />
           <div>
             <div className="flex items-center gap-2">
@@ -223,7 +223,7 @@ export const Dashboard: React.FC = () => {
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={isScanning}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 text-xs font-extrabold text-white bg-gradient-to-r from-brand-600 via-emerald-600 to-brand-700 px-6 py-3.5 rounded-2xl shadow-lg shadow-brand-600/25 hover:from-brand-500 hover:to-emerald-500 transition-all active:scale-95 disabled:opacity-50"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 text-xs font-extrabold text-white bg-gradient-to-r from-brand-600 via-emerald-600 to-brand-700 px-6 py-3.5 rounded-2xl shadow-lg shadow-brand-600/25 hover:from-brand-500 hover:to-emerald-500 hover:scale-[1.02] transition-all active:scale-95 disabled:opacity-50"
           >
             {isScanning ? <Loader2 className="w-4 h-4 animate-spin" /> : <Camera className="w-4 h-4" />}
             <span>{t.scanCropHealth}</span>
@@ -232,7 +232,7 @@ export const Dashboard: React.FC = () => {
       </header>
 
       {/* STATS METRIC CARDS (Frosted Glass) */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      <div className="animate-fade-in-up opacity-0 [animation-delay:300ms] [animation-fill-mode:forwards] grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {stats.map((stat, i) => (
           <div
             key={i}

@@ -414,9 +414,11 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
           </div>
         </header>
 
-        {/* PAGE CONTENT ROUTER OUTLET */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
-          <Outlet />
+        {/* PAGE CONTENT ROUTER OUTLET WITH SMOOTH ANIMATED TRANSITION */}
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full overflow-hidden">
+          <div key={location.pathname} className="animate-in fade-in slide-in-from-bottom-4 duration-300 fill-mode-forwards">
+            <Outlet />
+          </div>
         </main>
       </div>
 
