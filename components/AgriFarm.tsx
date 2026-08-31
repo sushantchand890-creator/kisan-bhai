@@ -329,19 +329,20 @@ export const AgriFarm: React.FC = () => {
         </div>
       </div>
 
-      {/* Items Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredItems.map((item) => (
+      {/* Items Grid with Staggered Card Entrance Animations */}
+      <div className="animate-fade-in-up opacity-0 [animation-delay:300ms] [animation-fill-mode:forwards] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredItems.map((item, idx) => (
           <div
             key={item.id}
-            className="group bg-white rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-xl hover:border-brand-300 transition-all duration-300 flex flex-col overflow-hidden"
+            className="group bg-white rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-xl hover:scale-[1.02] hover:border-brand-400/60 transition-all duration-300 flex flex-col overflow-hidden animate-in fade-in zoom-in-95 fill-mode-forwards cursor-pointer"
+            style={{ animationDelay: `${(idx % 6) * 90}ms` }}
           >
             {/* Produce Image & Badges */}
             <div className="relative h-48 w-full bg-slate-100 overflow-hidden">
               <img
                 src={item.imageUrl}
                 alt={item.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-black/20" />
 
