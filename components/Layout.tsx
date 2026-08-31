@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
 import { 
   Sprout, 
+  Wheat,
   MessageCircle, 
   Calendar, 
   Cloud, 
@@ -156,8 +157,8 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
           <div className={`flex items-center gap-3 p-3 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-sm ${
             isSidebarCollapsed ? 'justify-center p-2.5' : ''
           }`}>
-            <div className="w-10 h-10 bg-gradient-to-tr from-brand-700 to-emerald-500 rounded-xl flex items-center justify-center shadow-md shadow-brand-600/30 text-white flex-shrink-0">
-              <Sprout className="w-5 h-5 animate-pulse-subtle" />
+            <div className="w-10 h-10 bg-gradient-to-tr from-brand-700 via-emerald-600 to-amber-600 rounded-xl flex items-center justify-center shadow-md shadow-brand-600/30 text-amber-300 flex-shrink-0">
+              <Wheat className="w-5 h-5 animate-pulse-subtle text-amber-300" />
             </div>
             {!isSidebarCollapsed && (
               <div className="min-w-0 flex-1">
@@ -258,8 +259,8 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
 
             {/* Mobile Brand Logo */}
             <div className="flex items-center gap-2.5 lg:hidden">
-              <div className="w-9 h-9 bg-gradient-to-tr from-brand-600 to-brand-500 rounded-xl flex items-center justify-center text-white shadow-sm">
-                <Sprout className="w-5 h-5" />
+              <div className="w-9 h-9 bg-gradient-to-tr from-brand-700 via-emerald-600 to-amber-600 rounded-xl flex items-center justify-center text-amber-300 shadow-sm">
+                <Wheat className="w-5 h-5 text-amber-300" />
               </div>
               <div>
                 <h1 className="font-heading font-extrabold text-base text-slate-900 leading-none">Kisan-Bhai</h1>

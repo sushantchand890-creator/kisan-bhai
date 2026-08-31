@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sprout, LogIn, UserPlus, Loader2, Landmark, MapPin, Sparkles, ShieldCheck, Sun, Speech, ArrowRight } from 'lucide-react';
+import { Sprout, Wheat, LogIn, UserPlus, Loader2, Landmark, MapPin, Sparkles, ShieldCheck, Sun, Speech, ArrowRight } from 'lucide-react';
 import { FarmProfile } from '../types';
 import { geminiService } from '../services/geminiService';
 
@@ -115,7 +115,7 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
           <div>
             {/* Top Pill Badge */}
             <div className="inline-flex items-center gap-2 bg-emerald-950/40 border border-white/30 backdrop-blur-md px-4 py-2 rounded-full text-white text-xs font-bold mb-8 shadow-md">
-              <Sprout className="w-4 h-4 text-emerald-400" />
+              <Wheat className="w-4 h-4 text-emerald-400" />
               <span className="uppercase tracking-wider">RuralAssist AI Platform</span>
             </div>
             
@@ -183,7 +183,7 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
             {/* Logo Icon & Header */}
             <div className="flex flex-col items-center mb-6 text-center">
               <div className="w-14 h-14 bg-emerald-500 rounded-2xl flex items-center justify-center mb-3 shadow-lg shadow-emerald-500/30 text-white transition-transform duration-300 hover:scale-105">
-                <Sprout className="w-8 h-8" />
+                <Wheat className="w-8 h-8" />
               </div>
               <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight transition-all duration-300">
                 {isLogin ? 'Welcome Back' : 'Create Account'}

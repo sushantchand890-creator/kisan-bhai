@@ -9,6 +9,7 @@ import {
   Sparkles, 
   Loader2, 
   Sprout, 
+  Wheat,
   Camera, 
   Calendar,
   FileText,
@@ -199,8 +200,8 @@ export const Dashboard: React.FC = () => {
       {/* HEADER SECTION */}
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl">
         <div className="flex items-center gap-5">
-           <div className="w-16 h-16 bg-gradient-to-tr from-brand-600 to-emerald-500 rounded-2xl flex items-center justify-center border border-white/40 shadow-md shadow-brand-600/20 text-white shrink-0">
-              <Sprout className="w-9 h-9" />
+           <div className="w-16 h-16 bg-gradient-to-tr from-brand-700 via-emerald-600 to-amber-600 rounded-2xl flex items-center justify-center border border-white/40 shadow-md shadow-brand-600/20 text-amber-300 shrink-0">
+              <Wheat className="w-9 h-9 text-amber-300" />
            </div>
            <div>
              <div className="flex items-center gap-2">
