@@ -338,7 +338,7 @@ export const Chat: React.FC = () => {
               <div className={`group relative p-4 rounded-2xl ${
                 msg.role === 'user' 
                   ? 'bg-indigo-600 text-white rounded-tr-none shadow-md' 
-                  : 'bg-white/65 backdrop-blur-xl text-slate-900 rounded-tl-none border border-white/80 shadow-md'
+                  : 'bg-white/25 backdrop-blur-md text-slate-900 rounded-tl-none border border-white/50 shadow-sm'
               }`}>
                 {msg.image && (
                   <img 
@@ -350,17 +350,17 @@ export const Chat: React.FC = () => {
                 <p className="whitespace-pre-wrap leading-relaxed text-xs sm:text-sm font-medium">{msg.content}</p>
                 
                 {msg.role === 'assistant' && (
-                  <div className="mt-3 pt-2.5 border-t border-slate-200/60 flex items-center gap-3">
+                  <div className="mt-3 pt-2.5 border-t border-white/40 flex items-center gap-3">
                     <button 
                       onClick={() => speakText(msg.content)} 
-                      className="flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider text-brand-700 hover:text-brand-800 px-2 py-1 rounded-md hover:bg-brand-50/80 transition-colors"
+                      className="flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider text-brand-700 hover:text-brand-800 px-2 py-1 rounded-md hover:bg-white/40 transition-colors"
                     >
                       {isSpeaking ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
                       <span>{isSpeaking ? t.stop : t.listen}</span>
                     </button>
                     <button 
                       onClick={speakSelection} 
-                      className="flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider text-indigo-600 hover:text-indigo-700 border-l border-slate-200/60 pl-3 px-2 py-1 rounded-md hover:bg-indigo-50/80 transition-colors"
+                      className="flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider text-indigo-600 hover:text-indigo-700 border-l border-white/40 pl-3 px-2 py-1 rounded-md hover:bg-white/40 transition-colors"
                     >
                       <MousePointer2 className="w-3.5 h-3.5" />
                       <span>{t.readSelection}</span>
@@ -372,7 +372,7 @@ export const Chat: React.FC = () => {
           </div>
         ))}
 
-        {/* PROMPT SUGGESTIONS CHIPS (GLASSY) */}
+        {/* PROMPT SUGGESTIONS CHIPS (ULTRA-TRANSPARENT GLASS) */}
         {messages.length === 1 && !isLoading && (
           <div className="space-y-4 pt-6 pb-6">
             <p className="text-[10px] font-extrabold text-slate-500 uppercase tracking-widest text-center">
@@ -383,12 +383,12 @@ export const Chat: React.FC = () => {
                 <button 
                   key={i} 
                   onClick={() => handleSend(sug.text)} 
-                  className="flex items-center gap-3.5 p-4 bg-white/50 backdrop-blur-xl border border-white/80 rounded-2xl text-left hover:bg-white/80 hover:shadow-lg transition-all group"
+                  className="flex items-center gap-3.5 p-4 bg-white/20 backdrop-blur-md border border-white/50 rounded-2xl text-left hover:bg-white/40 hover:shadow-md transition-all group"
                 >
-                  <div className={`w-10 h-10 ${sug.bg} border rounded-xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform`}>
+                  <div className="w-10 h-10 bg-white/40 border border-white/60 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                     <sug.icon className={`w-4 h-4 ${sug.color}`} />
                   </div>
-                  <span className="text-xs font-bold text-slate-800 leading-snug">{sug.text}</span>
+                  <span className="text-xs font-bold text-slate-900 leading-snug">{sug.text}</span>
                 </button>
               ))}
             </div>
