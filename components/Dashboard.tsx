@@ -321,35 +321,41 @@ export const Dashboard: React.FC = () => {
         {/* LEFT COLUMN: HERO AI INSIGHTS & WEATHER WIDGET */}
         <div className="lg:col-span-2 space-y-8">
 
-          {/* AI FARMER INSIGHTS CARD */}
-          <div className="bg-gradient-to-br from-brand-900 via-brand-800 to-teal-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden border border-brand-700/50">
-            {/* Ambient Background Glow */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none" />
+          {/* AI FARMER INSIGHTS CARD (REDESIGNED ULTRA-PREMIUM GLASS) */}
+          <div className="bg-gradient-to-br from-emerald-950/80 via-slate-900/90 to-teal-950/85 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 text-white shadow-2xl relative overflow-hidden border border-white/20 hover:border-emerald-400/40 transition-all duration-300">
+            {/* Ambient Radial Background Glows */}
+            <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none animate-pulse-subtle" />
+            <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-teal-400/15 rounded-full blur-3xl pointer-events-none" />
 
             <div className="relative z-10">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-xl bg-white/10 border border-white/20 text-harvest-300">
-                    <Sparkles className="w-5 h-5 fill-harvest-300" />
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 text-harvest-300 shadow-md shadow-emerald-500/10">
+                    <Sparkles className="w-6 h-6 fill-harvest-300" />
                   </div>
-                  <h2 className="font-heading text-xl sm:text-2xl font-extrabold text-white">
-                    {t.aiFarmerInsights}
-                  </h2>
+                  <div>
+                    <h2 className="font-heading text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+                      {t.aiFarmerInsights}
+                    </h2>
+                    <p className="text-[11px] text-emerald-300/80 font-bold uppercase tracking-wider">Real-time Gemini Vision & Field Diagnostics</p>
+                  </div>
                 </div>
-                <span className="text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 bg-white/15 rounded-full border border-white/20 text-brand-100">
-                  Live Advisory
-                </span>
+
+                <div className="flex items-center gap-2 text-[10px] font-extrabold uppercase tracking-widest px-3.5 py-1.5 bg-emerald-500/20 border border-emerald-400/40 rounded-full text-emerald-300 shadow-xs backdrop-blur-md">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  <span>Live Advisory</span>
+                </div>
               </div>
 
               {isLoadingAlerts ? (
                 <div className="flex items-center gap-3 py-8">
-                  <Loader2 className="w-5 h-5 animate-spin text-brand-300" />
-                  <span className="font-semibold text-brand-100 text-sm">{t.observingSkies}</span>
+                  <Loader2 className="w-5 h-5 animate-spin text-emerald-400" />
+                  <span className="font-semibold text-emerald-100 text-sm">{t.observingSkies}</span>
                 </div>
               ) : aiAlerts.length > 0 ? (
                 <div className="space-y-4 mt-6">
                   {aiAlerts.map((alert, idx) => (
-                    <div key={idx} className="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/15 transition-all hover:bg-white/15">
+                    <div key={idx} className="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/20 hover:border-emerald-400/50 hover:bg-white/15 transition-all shadow-md">
                       <div className="flex justify-between items-start mb-2">
                         <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${alert.urgency === 'High'
                             ? 'bg-rose-500/20 text-rose-200 border-rose-400/30'
@@ -364,26 +370,43 @@ export const Dashboard: React.FC = () => {
                   ))}
                 </div>
               ) : (
-                <div className="mt-6 py-8 px-6 rounded-2xl bg-white/5 border border-white/10 text-center">
-                  <p className="text-brand-100 text-sm font-semibold">{t.fieldsPeaceful}</p>
+                <div className="mt-6 p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left shadow-lg hover:border-emerald-400/40 transition-all">
+                  <img 
+                    src="/wheat_stalks.png" 
+                    alt="Wheat Logo" 
+                    className="w-14 h-14 object-contain filter drop-shadow-md shrink-0 animate-float" 
+                  />
+                  <div>
+                    <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
+                      <span className="text-emerald-400 font-extrabold text-xs uppercase tracking-wider flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5 text-emerald-400" /> Field Condition Clear
+                      </span>
+                    </div>
+                    <p className="text-white font-heading font-extrabold text-base sm:text-lg">
+                      {t.fieldsPeaceful}
+                    </p>
+                    <p className="text-emerald-200/80 text-xs font-semibold mt-0.5">
+                      AI crop diagnostics & satellite weather monitoring report zero active threats for <span className="text-white font-bold">{user?.location || 'your farm'}</span>.
+                    </p>
+                  </div>
                 </div>
               )}
 
               {/* ACTION BUTTONS */}
-              <div className="flex flex-wrap items-center gap-3 mt-8">
+              <div className="flex flex-wrap items-center gap-3.5 mt-8">
                 <Link
                   to="/chat"
-                  className="inline-flex items-center gap-2 bg-white hover:bg-brand-50 text-brand-900 px-6 py-3.5 rounded-2xl font-extrabold text-xs sm:text-sm shadow-md transition-all active:scale-95"
+                  className="inline-flex items-center gap-2.5 bg-gradient-to-r from-emerald-400 via-brand-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-black px-6 py-3.5 rounded-2xl shadow-lg shadow-emerald-500/30 hover:scale-105 active:scale-95 transition-all text-xs sm:text-sm"
                 >
                   <span>{t.talkToKisanBhai}</span>
-                  <ArrowRight className="w-4 h-4 text-brand-700" />
+                  <ArrowRight className="w-4 h-4 text-slate-950" />
                 </Link>
                 <Link
                   to="/planner"
-                  className="inline-flex items-center gap-2 bg-emerald-600/80 hover:bg-emerald-600 text-white px-6 py-3.5 rounded-2xl font-extrabold text-xs sm:text-sm border border-emerald-400/40 shadow-md transition-all active:scale-95"
+                  className="inline-flex items-center gap-2.5 bg-white/15 hover:bg-white/25 border border-white/30 text-white font-extrabold px-6 py-3.5 rounded-2xl backdrop-blur-md hover:scale-105 active:scale-95 transition-all text-xs sm:text-sm"
                 >
                   <span>{t.cropPlanner}</span>
-                  <Calendar className="w-4 h-4" />
+                  <Calendar className="w-4 h-4 text-emerald-300" />
                 </Link>
               </div>
             </div>
