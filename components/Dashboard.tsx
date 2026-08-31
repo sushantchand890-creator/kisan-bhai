@@ -548,22 +548,6 @@ export const Dashboard: React.FC = () => {
             
             <div className="grid grid-cols-2 gap-3.5">
               <Link 
-                to="/agrifarm" 
-                className="col-span-2 p-4 bg-gradient-to-r from-emerald-600 via-brand-700 to-teal-800 text-white rounded-2xl flex items-center justify-between hover:shadow-lg transition-all group shadow-md"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-white/20 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <ShoppingBag className="w-5 h-5 text-harvest-300" />
-                  </div>
-                  <div>
-                    <span className="text-xs font-extrabold block text-white">AgriFarm Direct Market</span>
-                    <span className="text-[10px] text-white/80 font-medium">Buy or sell produce directly from farm gate</span>
-                  </div>
-                </div>
-                <ChevronRight className="w-4 h-4 text-white/80" />
-              </Link>
-
-              <Link 
                 to="/planner" 
                 className="p-4 bg-white/60 hover:bg-white backdrop-blur-md rounded-2xl text-center transition-all border border-white/80 group shadow-xs hover:shadow-md"
               >
