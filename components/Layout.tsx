@@ -136,14 +136,14 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
   );
 
   return (
-    <div className="relative min-h-screen w-full flex flex-col lg:flex-row font-sans overflow-x-hidden text-slate-900 bg-slate-50">
-      {/* Background Farmland Landscape Image (Ultra Faint 6% Opacity) */}
+    <div className="relative min-h-screen w-full flex flex-col lg:flex-row font-sans overflow-x-hidden text-slate-900 bg-slate-100">
+      {/* Background Farmland Landscape Image (Clearly Visible) */}
       <div 
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat z-0 opacity-[0.06] pointer-events-none"
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat z-0 opacity-35 pointer-events-none"
         style={{ backgroundImage: `url('/wheat_field.jpg')` }}
       />
-      {/* Bright Soft Overlay */}
-      <div className="fixed inset-0 bg-gradient-to-br from-white/95 via-slate-50/90 to-emerald-50/60 z-0 pointer-events-none" />
+      {/* Soft Light Overlay */}
+      <div className="fixed inset-0 bg-gradient-to-br from-slate-100/50 via-white/40 to-emerald-50/40 z-0 pointer-events-none backdrop-blur-[1px]" />
 
       {/* DESKTOP SIDEBAR (FIXED TO VIEWPORT ON SCROLL) */}
       <aside 
