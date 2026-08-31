@@ -191,12 +191,14 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
                 alt="Kisan-Bhai Wheat Logo" 
                 className="w-24 h-24 sm:w-28 sm:h-28 object-contain mb-3 filter drop-shadow-xl animate-float cursor-pointer hover:rotate-6 transition-transform duration-500" 
               />
-              <h2 className="animate-fade-in-up opacity-0 [animation-delay:300ms] [animation-fill-mode:forwards] font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight transition-all duration-300">
-                {isLogin ? 'Welcome Back' : 'Create Account'}
-              </h2>
-              <p className="animate-fade-in-up opacity-0 [animation-delay:350ms] [animation-fill-mode:forwards] text-slate-700 text-xs sm:text-sm font-semibold mt-1 transition-all duration-300">
-                {isLogin ? 'Sign in to manage your farm & crops' : 'Join Kisan-Bhai to empower your farm'}
-              </p>
+              <div key={isLogin ? 'header-login' : 'header-signup'} className="animate-in fade-in slide-in-from-top-2 duration-300 flex flex-col items-center">
+                <h2 className="animate-fade-in-up opacity-0 [animation-delay:300ms] [animation-fill-mode:forwards] font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight transition-all duration-300">
+                  {isLogin ? 'Welcome Back' : 'Create Account'}
+                </h2>
+                <p className="animate-fade-in-up opacity-0 [animation-delay:350ms] [animation-fill-mode:forwards] text-slate-700 text-xs sm:text-sm font-semibold mt-1 transition-all duration-300">
+                  {isLogin ? 'Sign in to manage your farm & crops' : 'Join Kisan-Bhai to empower your farm'}
+                </p>
+              </div>
             </div>
 
             {/* Login / Sign Up Pill Tabs with Smooth Animated Background Slider */}
@@ -234,17 +236,27 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
 
             {/* Auth Form with Smooth Field Collapsing */}
             <form onSubmit={handleSubmit} className="animate-fade-in-up opacity-0 [animation-delay:450ms] [animation-fill-mode:forwards] space-y-4">
-              {/* Account Role Selector */}
+              {/* Account Role Selector with Smooth Animated Background Slider */}
               <div className="space-y-1">
                 <label className="text-[11px] font-extrabold text-slate-800 uppercase tracking-wider ml-1">
                   Account Type
                 </label>
-                <div className="grid grid-cols-3 gap-1.5 p-1 bg-white/50 backdrop-blur-md border border-white/80 rounded-2xl shadow-xs">
+                <div className="relative grid grid-cols-3 gap-1.5 p-1 bg-white/50 backdrop-blur-md border border-white/80 rounded-2xl shadow-xs overflow-hidden">
+                  {/* Smooth Horizontal Sliding Role Indicator */}
+                  <div
+                    className={`absolute top-1 bottom-1 w-[calc(33.333%-4px)] bg-emerald-600 rounded-xl shadow-md transition-all duration-300 ease-out z-0 ${formData.role === 'farmer'
+                        ? 'left-1'
+                        : formData.role === 'buyer'
+                          ? 'left-[calc(33.333%+2px)]'
+                          : 'left-[calc(66.666%+1px)]'
+                      }`}
+                  />
+
                   <button
                     type="button"
                     onClick={() => setFormData({ ...formData, role: 'farmer' })}
-                    className={`py-2 px-1 rounded-xl text-[11px] font-extrabold transition-all duration-200 ${formData.role === 'farmer'
-                        ? 'bg-emerald-600 text-white shadow-md scale-[1.02]'
+                    className={`relative z-10 py-2 px-1 rounded-xl text-[11px] font-extrabold transition-colors duration-200 ${formData.role === 'farmer'
+                        ? 'text-white'
                         : 'text-slate-700 hover:text-slate-950 font-bold'
                       }`}
                   >
@@ -253,8 +265,8 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
                   <button
                     type="button"
                     onClick={() => setFormData({ ...formData, role: 'buyer' })}
-                    className={`py-2 px-1 rounded-xl text-[11px] font-extrabold transition-all duration-200 ${formData.role === 'buyer'
-                        ? 'bg-emerald-600 text-white shadow-md scale-[1.02]'
+                    className={`relative z-10 py-2 px-1 rounded-xl text-[11px] font-extrabold transition-colors duration-200 ${formData.role === 'buyer'
+                        ? 'text-white'
                         : 'text-slate-700 hover:text-slate-950 font-bold'
                       }`}
                   >
@@ -263,8 +275,8 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
                   <button
                     type="button"
                     onClick={() => setFormData({ ...formData, role: 'both' })}
-                    className={`py-2 px-1 rounded-xl text-[11px] font-extrabold transition-all duration-200 ${formData.role === 'both'
-                        ? 'bg-emerald-600 text-white shadow-md scale-[1.02]'
+                    className={`relative z-10 py-2 px-1 rounded-xl text-[11px] font-extrabold transition-colors duration-200 ${formData.role === 'both'
+                        ? 'text-white'
                         : 'text-slate-700 hover:text-slate-950 font-bold'
                       }`}
                   >
