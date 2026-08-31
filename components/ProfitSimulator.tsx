@@ -59,7 +59,7 @@ export const ProfitSimulator: React.FC = () => {
 
   return (
     <div className="space-y-8 pb-10 font-sans">
-      <header className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <header className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5 mb-1">
             <div className="p-2 rounded-xl bg-brand-50 text-brand-700 shadow-xs">
@@ -73,7 +73,7 @@ export const ProfitSimulator: React.FC = () => {
 
       <div className="grid lg:grid-cols-2 gap-8">
         {/* INPUTS CARD */}
-        <div className="bg-white/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl border border-white/80 shadow-xl space-y-6">
+        <div className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl space-y-6">
           <div className="flex items-center justify-between mb-2 text-brand-800 bg-brand-50/80 border border-brand-200/60 p-3.5 rounded-2xl font-extrabold text-xs">
             <div className="flex items-center gap-2">
               <Calculator className="w-4 h-4 text-brand-600" /> 
@@ -91,7 +91,7 @@ export const ProfitSimulator: React.FC = () => {
                 max="500"
                 value={inputs.landSize}
                 onChange={(e) => setInputs({...inputs, landSize: Number(e.target.value)})}
-                className="w-full bg-slate-50/80 focus:bg-white border border-slate-200/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl px-4 py-3 text-sm text-slate-900 font-bold outline-none transition-all"
+                className="w-full bg-white/60 backdrop-blur-md focus:bg-white border border-white/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl px-4 py-3 text-sm text-slate-900 font-bold outline-none transition-all"
               />
             </div>
             <div className="space-y-1.5">
@@ -99,7 +99,7 @@ export const ProfitSimulator: React.FC = () => {
               <select 
                 value={inputs.cropType}
                 onChange={(e) => setInputs({...inputs, cropType: e.target.value})}
-                className="w-full bg-slate-50/80 focus:bg-white border border-slate-200/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl px-4 py-3 text-sm text-slate-900 font-bold outline-none transition-all cursor-pointer"
+                className="w-full bg-white/60 backdrop-blur-md focus:bg-white border border-white/80 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 rounded-xl px-4 py-3 text-sm text-slate-900 font-bold outline-none transition-all cursor-pointer"
               >
                 <option>Wheat</option>
                 <option>Rice / Paddy</option>
@@ -111,7 +111,7 @@ export const ProfitSimulator: React.FC = () => {
             </div>
           </div>
           
-          <div className="pt-4 border-t border-slate-100 relative">
+          <div className="pt-4 border-t border-white/60 relative">
             {loading && (
               <div className="absolute inset-0 bg-white/75 backdrop-blur-[2px] z-10 flex items-center justify-center rounded-2xl">
                 <div className="bg-white border border-brand-200 px-4 py-2 rounded-full shadow-md flex items-center gap-2 text-xs font-extrabold text-brand-700 animate-pulse">
@@ -121,7 +121,7 @@ export const ProfitSimulator: React.FC = () => {
               </div>
             )}
             
-            <div className="flex items-center gap-2 mb-4 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">
+            <div className="flex items-center gap-2 mb-4 text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5 text-amber-500 fill-amber-400" /> AI Regional Market Estimates (Per Acre)
             </div>
 
@@ -132,7 +132,7 @@ export const ProfitSimulator: React.FC = () => {
                   type="number"
                   value={inputs.seedsCost}
                   readOnly
-                  className="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl px-3.5 py-2.5 text-xs text-slate-700 font-bold outline-none cursor-not-allowed"
+                  className="w-full bg-white/50 border border-white/60 rounded-xl px-3.5 py-2.5 text-xs text-slate-700 font-bold outline-none cursor-not-allowed"
                 />
               </div>
               <div className="space-y-1">
@@ -141,7 +141,7 @@ export const ProfitSimulator: React.FC = () => {
                   type="number"
                   value={inputs.laborCost}
                   readOnly
-                  className="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl px-3.5 py-2.5 text-xs text-slate-700 font-bold outline-none cursor-not-allowed"
+                  className="w-full bg-white/50 border border-white/60 rounded-xl px-3.5 py-2.5 text-xs text-slate-700 font-bold outline-none cursor-not-allowed"
                 />
               </div>
               <div className="space-y-1">
@@ -150,7 +150,7 @@ export const ProfitSimulator: React.FC = () => {
                   type="number"
                   value={inputs.expectedYield}
                   readOnly
-                  className="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl px-3.5 py-2.5 text-xs text-slate-700 font-bold outline-none cursor-not-allowed"
+                  className="w-full bg-white/50 border border-white/60 rounded-xl px-3.5 py-2.5 text-xs text-slate-700 font-bold outline-none cursor-not-allowed"
                 />
               </div>
               <div className="space-y-1">
@@ -159,7 +159,7 @@ export const ProfitSimulator: React.FC = () => {
                   type="number"
                   value={inputs.marketPrice}
                   readOnly
-                  className="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl px-3.5 py-2.5 text-xs text-slate-700 font-bold outline-none cursor-not-allowed"
+                  className="w-full bg-white/50 border border-white/60 rounded-xl px-3.5 py-2.5 text-xs text-slate-700 font-bold outline-none cursor-not-allowed"
                 />
               </div>
             </div>
@@ -168,7 +168,7 @@ export const ProfitSimulator: React.FC = () => {
 
         {/* RESULTS & CHARTS COLUMN */}
         <div className="space-y-6">
-          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-xs">
+          <div className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl">
             <h3 className="font-heading font-extrabold text-base sm:text-lg text-slate-900 mb-4 flex items-center gap-2">
               <PieChart className="w-5 h-5 text-indigo-600" /> Cost Distribution
             </h3>
@@ -190,7 +190,7 @@ export const ProfitSimulator: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-xs">
+            <div className="bg-white/45 backdrop-blur-xl p-5 rounded-3xl border border-white/70 shadow-md">
               <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block mb-1">Total Investment</span>
               <p className="font-heading text-xl sm:text-2xl font-extrabold text-slate-900">₹{totalCost.toLocaleString()}</p>
             </div>
@@ -209,7 +209,7 @@ export const ProfitSimulator: React.FC = () => {
         </div>
       </div>
       
-      <div className="bg-blue-50/80 border border-blue-200/60 p-5 rounded-3xl flex items-start gap-3.5">
+      <div className="bg-blue-50/70 backdrop-blur-md border border-blue-200/60 p-5 rounded-3xl flex items-start gap-3.5">
         <Info className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
         <p className="text-xs text-blue-950 font-semibold leading-relaxed">
           <strong>Market Disclaimer:</strong> These financial estimates are calculated using real-time mandi prices and average cost metrics. Weather variations, pest risks, and local market fluctuations may influence actual yields.
