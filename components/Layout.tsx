@@ -278,27 +278,14 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
           <div className={`bg-white/60 backdrop-blur-md rounded-2xl border border-white/80 shadow-sm ${isSidebarCollapsed ? 'p-2 flex flex-col items-center gap-2' : 'p-3.5'
             }`}>
             {isSidebarCollapsed ? (
-              <>
-                <Link
-                  to="/profile"
-                  title="Farm Profile"
-                  className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all shadow-xs ${
-                    isActive('/profile')
-                      ? 'bg-gradient-to-tr from-brand-600 via-emerald-600 to-teal-600 text-white shadow-md shadow-brand-600/30'
-                      : 'bg-white/80 text-slate-700 border border-slate-200 hover:bg-brand-50 hover:text-brand-700'
-                  }`}
-                >
-                  <UserCircle className="w-5 h-5" />
-                </Link>
-                <button
-                  type="button"
-                  onClick={onLogout}
-                  title="Log Out"
-                  className="w-10 h-10 bg-white/80 text-slate-700 rounded-xl border border-slate-200 flex items-center justify-center hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 transition-all shadow-sm active:scale-95"
-                >
-                  <LogOut className="w-4 h-4" />
-                </button>
-              </>
+              <button
+                type="button"
+                onClick={onLogout}
+                title="Log Out"
+                className="w-10 h-10 bg-white/80 text-slate-700 rounded-xl border border-slate-200 flex items-center justify-center hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 transition-all shadow-sm active:scale-95"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
             ) : (
               <>
                 <Link 
