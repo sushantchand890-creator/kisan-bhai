@@ -130,17 +130,17 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
               }
             }}
             title={collapsed ? item.name : undefined}
-            className={`group relative flex items-center gap-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 ${collapsed ? 'justify-center' : ''
+            className={`group relative flex items-center gap-3.5 px-3 py-2.5 transition-all duration-200 ${collapsed ? 'justify-center' : ''
               } ${active
-                ? 'bg-brand-50/70 text-brand-900 font-extrabold shadow-xs'
-                : 'text-slate-600 hover:bg-brand-50/50 hover:text-brand-800 font-semibold'
+                ? 'text-brand-900 font-extrabold'
+                : 'text-slate-600 hover:text-brand-800 font-semibold'
               }`}
           >
-            <div className={`p-2 rounded-xl transition-colors ${active
-                ? 'bg-gradient-to-tr from-brand-600 to-emerald-600 text-white shadow-md shadow-brand-600/30'
-                : 'bg-slate-100/80 text-slate-500 group-hover:bg-brand-100 group-hover:text-brand-700'
+            <div className={`p-2.5 rounded-2xl transition-all duration-200 ${active
+                ? 'bg-gradient-to-tr from-brand-600 via-emerald-600 to-teal-600 text-white shadow-md shadow-brand-600/30 scale-105'
+                : 'text-slate-500 group-hover:text-brand-700 group-hover:scale-105'
               }`}>
-              <Icon className="w-4 h-4" />
+              <Icon className="w-5 h-5" />
             </div>
 
             {!collapsed && (
