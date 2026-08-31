@@ -222,18 +222,18 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
       >
         {/* Brand Header */}
         <div className={`p-4 pb-3 ${isSidebarCollapsed ? 'px-2' : ''}`}>
-          <div className={`flex items-center gap-3 ${isSidebarCollapsed ? 'justify-center p-0' : 'px-2 py-1'}`}>
+          <Link to="/" className={`flex items-center gap-3 group cursor-pointer ${isSidebarCollapsed ? 'justify-center p-0' : 'px-2 py-1'}`}>
             <img 
               src="/wheat_stalks.png" 
               alt="Kisan-Bhai Wheat Logo" 
-              className={`object-contain filter drop-shadow-md flex-shrink-0 transition-transform duration-200 hover:scale-110 ${
+              className={`object-contain filter drop-shadow-md flex-shrink-0 transition-transform duration-200 group-hover:scale-110 ${
                 isSidebarCollapsed ? 'w-14 h-14 scale-125' : 'w-12 h-12'
               }`} 
             />
             {!isSidebarCollapsed && (
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-1.5">
-                  <h1 className="font-heading font-extrabold text-base text-slate-900 leading-none truncate">Kisan-Bhai</h1>
+                  <h1 className="font-heading font-extrabold text-base text-slate-900 leading-none truncate group-hover:text-brand-700 transition-colors">Kisan-Bhai</h1>
                   <Sparkles className="w-3.5 h-3.5 text-harvest-500 fill-harvest-400 flex-shrink-0" />
                 </div>
                 <p className="text-[10px] font-extrabold text-brand-700 tracking-wider mt-1 uppercase truncate">
@@ -241,7 +241,7 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
                 </p>
               </div>
             )}
-          </div>
+          </Link>
         </div>
 
         {/* Navigation Links with Limelight Active Height Slide Effect */}
@@ -340,17 +340,17 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
             </button>
 
             {/* Mobile Brand Logo */}
-            <div className="flex items-center gap-2.5 lg:hidden">
+            <Link to="/" className="flex items-center gap-2.5 lg:hidden cursor-pointer group">
               <img 
                 src="/wheat_stalks.png" 
                 alt="Kisan-Bhai Wheat Logo" 
-                className="w-12 h-12 object-contain filter drop-shadow-sm flex-shrink-0" 
+                className="w-12 h-12 object-contain filter drop-shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform" 
               />
               <div>
-                <h1 className="font-heading font-extrabold text-base text-slate-900 leading-none">Kisan-Bhai</h1>
+                <h1 className="font-heading font-extrabold text-base text-slate-900 leading-none group-hover:text-brand-700 transition-colors">Kisan-Bhai</h1>
                 <p className="text-[9px] font-bold text-brand-600 tracking-wider uppercase mt-0.5">RuralAssist AI</p>
               </div>
-            </div>
+            </Link>
 
             {/* Active Route Breadcrumb Badge */}
             <div className="hidden sm:flex items-center gap-2 bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/80 text-slate-800 text-xs font-bold shadow-xs">
