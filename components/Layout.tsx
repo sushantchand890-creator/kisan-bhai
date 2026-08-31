@@ -145,9 +145,9 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
       {/* Subtle Gradient Overlay */}
       <div className="fixed inset-0 bg-gradient-to-br from-slate-100/90 via-slate-50/80 to-emerald-50/70 z-0 pointer-events-none backdrop-blur-[2px]" />
 
-      {/* DESKTOP SIDEBAR (WITH HIDE/UNHIDE COLLAPSE MODE) */}
+      {/* DESKTOP SIDEBAR (FIXED TO VIEWPORT ON SCROLL) */}
       <aside 
-        className={`hidden lg:flex flex-col bg-white/70 backdrop-blur-2xl border-r border-white/60 sticky top-0 h-screen z-40 shadow-xl transition-all duration-300 ${
+        className={`hidden lg:flex flex-col bg-white/70 backdrop-blur-2xl border-r border-white/60 fixed top-0 left-0 h-screen z-40 shadow-xl transition-all duration-300 ${
           isSidebarCollapsed ? 'w-20' : 'w-72'
         }`}
       >
@@ -234,7 +234,9 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
       </aside>
 
       {/* MAIN CONTAINER */}
-      <div className="flex-1 flex flex-col min-w-0 pb-20 lg:pb-0 relative z-10">
+      <div className={`flex-1 flex flex-col min-w-0 pb-20 lg:pb-0 relative z-10 transition-all duration-300 ${
+        isSidebarCollapsed ? 'lg:pl-20' : 'lg:pl-72'
+      }`}>
         {/* STICKY TOP NAVIGATION BAR */}
         <header className="sticky top-0 z-30 bg-white/70 backdrop-blur-2xl border-b border-white/60 px-4 py-3 lg:px-6 flex items-center justify-between shadow-xs">
           

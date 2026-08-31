@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { 
-  ShoppingBag, 
-  Plus, 
-  Search, 
-  MapPin, 
-  Phone, 
-  MessageSquare, 
-  CheckCircle2, 
-  Truck, 
-  Shield, 
-  Sparkles, 
-  Store, 
+import {
+  ShoppingBag,
+  Plus,
+  Search,
+  MapPin,
+  Phone,
+  MessageSquare,
+  CheckCircle2,
+  Truck,
+  Shield,
+  Sparkles,
+  Store,
   X,
   Wheat,
   Tag
@@ -135,7 +135,7 @@ export const AgriFarm: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedTradeType, setSelectedTradeType] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  
+
   // Modals state
   const [selectedItemForBuy, setSelectedItemForBuy] = useState<AgriItem | null>(null);
   const [isSellModalOpen, setIsSellModalOpen] = useState(false);
@@ -169,8 +169,8 @@ export const AgriFarm: React.FC = () => {
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
     const matchesTradeType = selectedTradeType === 'all' || item.tradeType === selectedTradeType;
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          item.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          item.sellerName.toLowerCase().includes(searchQuery.toLowerCase());
+      item.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.sellerName.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesTradeType && matchesSearch;
   });
 
@@ -226,7 +226,7 @@ export const AgriFarm: React.FC = () => {
       {/* Top Banner Hero */}
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-brand-800 via-emerald-800 to-teal-900 p-6 sm:p-10 text-white shadow-xl">
         <div className="absolute top-0 right-0 -mt-10 -mr-10 w-80 h-80 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
-        
+
         <div className="relative z-10 max-w-3xl space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 border border-white/25 backdrop-blur-md text-emerald-300 text-xs font-extrabold uppercase tracking-wider">
             <Store className="w-3.5 h-3.5" />
@@ -272,7 +272,7 @@ export const AgriFarm: React.FC = () => {
               className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-11 pr-4 py-3 text-xs sm:text-sm font-semibold text-slate-900 placeholder-slate-400 outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
             />
             {searchQuery && (
-              <button 
+              <button
                 onClick={() => setSearchQuery('')}
                 className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 rounded-full"
               >
@@ -285,25 +285,22 @@ export const AgriFarm: React.FC = () => {
           <div className="flex items-center p-1 bg-slate-100 rounded-2xl w-full sm:w-auto">
             <button
               onClick={() => setSelectedTradeType('all')}
-              className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-extrabold transition-all ${
-                selectedTradeType === 'all' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900'
-              }`}
+              className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-extrabold transition-all ${selectedTradeType === 'all' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+                }`}
             >
               All Trades
             </button>
             <button
               onClick={() => setSelectedTradeType('farm_direct')}
-              className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-extrabold transition-all ${
-                selectedTradeType === 'farm_direct' ? 'bg-white text-emerald-800 shadow-sm' : 'text-slate-600 hover:text-slate-900'
-              }`}
+              className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-extrabold transition-all ${selectedTradeType === 'farm_direct' ? 'bg-white text-emerald-800 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+                }`}
             >
               🌱 Farm Direct
             </button>
             <button
               onClick={() => setSelectedTradeType('p2p')}
-              className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-extrabold transition-all ${
-                selectedTradeType === 'p2p' ? 'bg-white text-brand-800 shadow-sm' : 'text-slate-600 hover:text-slate-900'
-              }`}
+              className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-extrabold transition-all ${selectedTradeType === 'p2p' ? 'bg-white text-brand-800 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+                }`}
             >
               🔄 Farmer P2P
             </button>
@@ -319,11 +316,10 @@ export const AgriFarm: React.FC = () => {
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-extrabold flex-shrink-0 transition-all ${
-                  isSelected
+                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-extrabold flex-shrink-0 transition-all ${isSelected
                     ? 'bg-brand-600 text-white shadow-md shadow-brand-600/20 scale-[1.02]'
                     : 'bg-slate-50 border border-slate-200/80 text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-                }`}
+                  }`}
               >
                 <Icon className="w-3.5 h-3.5" />
                 <span>{cat.name}</span>
@@ -336,14 +332,14 @@ export const AgriFarm: React.FC = () => {
       {/* Items Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredItems.map((item) => (
-          <div 
+          <div
             key={item.id}
             className="group bg-white rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-xl hover:border-brand-300 transition-all duration-300 flex flex-col overflow-hidden"
           >
             {/* Produce Image & Badges */}
             <div className="relative h-48 w-full bg-slate-100 overflow-hidden">
-              <img 
-                src={item.imageUrl} 
+              <img
+                src={item.imageUrl}
                 alt={item.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -351,9 +347,8 @@ export const AgriFarm: React.FC = () => {
 
               {/* Trade Type Tag */}
               <div className="absolute top-3 left-3">
-                <span className={`px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider backdrop-blur-md shadow-sm text-white ${
-                  item.tradeType === 'farm_direct' ? 'bg-emerald-600/90 border border-emerald-400/40' : 'bg-brand-600/90 border border-brand-400/40'
-                }`}>
+                <span className={`px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider backdrop-blur-md shadow-sm text-white ${item.tradeType === 'farm_direct' ? 'bg-emerald-600/90 border border-emerald-400/40' : 'bg-brand-600/90 border border-brand-400/40'
+                  }`}>
                   {item.tradeType === 'farm_direct' ? '🌱 Farm Gate Direct' : '🔄 Farmer P2P'}
                 </span>
               </div>
@@ -448,7 +443,7 @@ export const AgriFarm: React.FC = () => {
                 <h3 className="font-heading font-extrabold text-xl">Sell Your Farm Produce</h3>
                 <p className="text-xs text-white/80 font-medium">Post crops, surplus seeds or machinery to direct buyers</p>
               </div>
-              <button 
+              <button
                 onClick={() => setIsSellModalOpen(false)}
                 className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors"
               >
@@ -591,7 +586,7 @@ export const AgriFarm: React.FC = () => {
                 <h3 className="font-heading font-extrabold text-lg">Direct Farm Purchase</h3>
                 <p className="text-xs text-white/80 font-medium">Order directly from {selectedItemForBuy.sellerName}</p>
               </div>
-              <button 
+              <button
                 onClick={() => setSelectedItemForBuy(null)}
                 className="p-1.5 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors"
               >
@@ -613,10 +608,10 @@ export const AgriFarm: React.FC = () => {
               ) : (
                 <>
                   <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-2xl border border-slate-100">
-                    <img 
-                      src={selectedItemForBuy.imageUrl} 
+                    <img
+                      src={selectedItemForBuy.imageUrl}
                       alt={selectedItemForBuy.title}
-                      className="w-16 h-16 rounded-xl object-cover" 
+                      className="w-16 h-16 rounded-xl object-cover"
                     />
                     <div>
                       <h4 className="font-extrabold text-slate-900 text-sm">{selectedItemForBuy.title}</h4>
@@ -629,14 +624,14 @@ export const AgriFarm: React.FC = () => {
                   <div className="space-y-1">
                     <label className="text-xs font-bold text-slate-700 uppercase">Quantity ({selectedItemForBuy.unit}s)</label>
                     <div className="flex items-center gap-3">
-                      <button 
+                      <button
                         onClick={() => setOrderQuantity(Math.max(1, orderQuantity - 1))}
                         className="w-10 h-10 rounded-xl bg-slate-100 font-extrabold text-slate-800 text-lg hover:bg-slate-200 transition-colors"
                       >
                         -
                       </button>
                       <span className="font-heading text-xl font-extrabold text-slate-900 w-12 text-center">{orderQuantity}</span>
-                      <button 
+                      <button
                         onClick={() => setOrderQuantity(orderQuantity + 1)}
                         className="w-10 h-10 rounded-xl bg-slate-100 font-extrabold text-slate-800 text-lg hover:bg-slate-200 transition-colors"
                       >
