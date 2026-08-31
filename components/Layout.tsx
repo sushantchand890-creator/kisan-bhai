@@ -145,103 +145,76 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
       {/* Soft Light Translucent Overlay */}
       <div className="fixed inset-0 bg-gradient-to-br from-slate-100/20 via-white/15 to-emerald-50/15 z-0 pointer-events-none backdrop-blur-[1px]" />
 
-      {/* DESKTOP SIDEBAR (FIXED TO VIEWPORT ON SCROLL) */}
+      {/* DESKTOP SIDEBAR (FIXED TO VIEWPORT ON SCROLL, COMPLETELY HIDES WHEN COLLAPSED) */}
       <aside 
         className={`hidden lg:flex flex-col bg-white/45 backdrop-blur-xl border-r border-white/60 fixed top-0 left-0 h-screen z-40 shadow-xl transition-all duration-300 ${
-          isSidebarCollapsed ? 'w-20' : 'w-72'
+          isSidebarCollapsed 
+            ? 'w-0 opacity-0 -translate-x-full pointer-events-none overflow-hidden border-none' 
+            : 'w-72 opacity-100 translate-x-0'
         }`}
       >
         {/* Brand Header */}
         <div className="p-4 pb-3">
-          <div className={`flex items-center gap-3 p-3 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-sm ${
-            isSidebarCollapsed ? 'justify-center p-2.5' : ''
-          }`}>
+          <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-sm">
             <div className="w-10 h-10 bg-gradient-to-tr from-brand-700 to-emerald-500 rounded-xl flex items-center justify-center shadow-md shadow-brand-600/30 text-white flex-shrink-0">
               <Sprout className="w-5 h-5 animate-pulse-subtle" />
             </div>
-            {!isSidebarCollapsed && (
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-1.5">
-                  <h1 className="font-heading font-extrabold text-base text-slate-900 leading-none truncate">Kisan-Bhai</h1>
-                  <Sparkles className="w-3.5 h-3.5 text-harvest-500 fill-harvest-400 flex-shrink-0" />
-                </div>
-                <p className="text-[10px] font-extrabold text-brand-700 tracking-wider mt-1 uppercase truncate">
-                  {t.smartFarming}
-                </p>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-1.5">
+                <h1 className="font-heading font-extrabold text-base text-slate-900 leading-none truncate">Kisan-Bhai</h1>
+                <Sparkles className="w-3.5 h-3.5 text-harvest-500 fill-harvest-400 flex-shrink-0" />
               </div>
-            )}
+              <p className="text-[10px] font-extrabold text-brand-700 tracking-wider mt-1 uppercase truncate">
+                {t.smartFarming}
+              </p>
+            </div>
           </div>
         </div>
 
         {/* Navigation Links */}
         <nav className="flex-1 px-3 space-y-1 overflow-y-auto custom-scrollbar">
-          {!isSidebarCollapsed && (
-            <p className="px-3 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">
-              Main Navigation
-            </p>
-          )}
-          <NavLinks collapsed={isSidebarCollapsed} />
+          <p className="px-3 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">
+            Main Navigation
+          </p>
+          <NavLinks collapsed={false} />
         </nav>
 
         {/* User Card & Logout */}
         <div className="p-3 mt-auto border-t border-white/50">
-          <div className={`bg-white/60 backdrop-blur-md rounded-2xl border border-white/80 shadow-sm ${
-            isSidebarCollapsed ? 'p-2 flex flex-col items-center gap-2' : 'p-3.5'
-          }`}>
-            {isSidebarCollapsed ? (
-              <>
-                <div 
-                  title={user?.name || 'Farmer'} 
-                  className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600 to-emerald-700 flex items-center justify-center text-white font-bold text-sm shadow-sm"
-                >
-                  {user?.name ? user.name.charAt(0).toUpperCase() : 'G'}
+          <div className="bg-white/60 backdrop-blur-md rounded-2xl border border-white/80 shadow-sm p-3.5">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600 to-emerald-700 flex items-center justify-center text-white font-bold text-sm shadow-sm flex-shrink-0">
+                {user?.name ? user.name.charAt(0).toUpperCase() : 'G'}
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs font-bold text-slate-900 truncate">{user?.name || t.guest}</p>
+                <div className="flex items-center gap-1 text-[11px] text-slate-500">
+                  <MapPin className="w-3 h-3 text-brand-600 flex-shrink-0" />
+                  <span className="truncate">{user?.location || 'India'}</span>
                 </div>
-                <button 
-                  type="button"
-                  onClick={onLogout}
-                  title="Log Out"
-                  className="w-10 h-10 bg-white/80 text-slate-700 rounded-xl border border-slate-200 flex items-center justify-center hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 transition-all shadow-sm active:scale-95"
-                >
-                  <LogOut className="w-4 h-4" />
-                </button>
-              </>
-            ) : (
-              <>
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600 to-emerald-700 flex items-center justify-center text-white font-bold text-sm shadow-sm flex-shrink-0">
-                    {user?.name ? user.name.charAt(0).toUpperCase() : 'G'}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-xs font-bold text-slate-900 truncate">{user?.name || t.guest}</p>
-                    <div className="flex items-center gap-1 text-[11px] text-slate-500">
-                      <MapPin className="w-3 h-3 text-brand-600 flex-shrink-0" />
-                      <span className="truncate">{user?.location || 'India'}</span>
-                    </div>
-                  </div>
-                </div>
+              </div>
+            </div>
 
-                <button 
-                  type="button"
-                  onClick={onLogout}
-                  className="w-full bg-white/80 text-slate-700 text-xs font-bold py-2.5 rounded-xl border border-slate-200/80 flex items-center justify-center gap-2 hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 transition-all shadow-sm active:scale-95"
-                >
-                  <LogOut className="w-3.5 h-3.5" /> Log Out
-                </button>
-              </>
-            )}
+            <button 
+              type="button"
+              onClick={onLogout}
+              className="w-full bg-white/80 text-slate-700 text-xs font-bold py-2.5 rounded-xl border border-slate-200/80 flex items-center justify-center gap-2 hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 transition-all shadow-sm active:scale-95"
+            >
+              <LogOut className="w-3.5 h-3.5" /> Log Out
+            </button>
           </div>
         </div>
       </aside>
 
       {/* MAIN CONTAINER */}
       <div className={`flex-1 flex flex-col min-w-0 pb-20 lg:pb-0 relative z-10 transition-all duration-300 ${
-        isSidebarCollapsed ? 'lg:pl-20' : 'lg:pl-72'
+        isSidebarCollapsed ? 'lg:pl-0' : 'lg:pl-72'
       }`}>
         {/* STICKY TOP NAVIGATION BAR */}
-        <header className="sticky top-0 z-30 bg-white/45 backdrop-blur-xl border-b border-white/60 px-4 py-3 lg:px-6 flex items-center justify-between shadow-xs">
+        <header className="sticky top-0 z-30 bg-white/45 backdrop-blur-xl border-b border-white/60 px-3 py-2.5 sm:px-4 lg:px-6 flex items-center justify-between gap-3 shadow-xs">
           
-          {/* Left Controls: Sidebar Toggle & Active Page Badge */}
-          <div className="flex items-center gap-3">
+          {/* Left Controls: Sidebar Hide/Unhide Toggle & Mobile Logo */}
+          <div className="flex items-center gap-2.5 shrink-0">
             {/* Desktop Sidebar Hide/Unhide Toggle Button */}
             <button 
               type="button"
@@ -250,63 +223,55 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
               title={isSidebarCollapsed ? "Unhide Sidebar" : "Hide Sidebar"}
             >
               {isSidebarCollapsed ? (
-                <PanelLeftOpen className="w-5 h-5 text-brand-700" />
+                <PanelLeftOpen className="w-5 h-5 text-brand-700 animate-pulse" />
               ) : (
                 <PanelLeftClose className="w-5 h-5 text-slate-600" />
               )}
+              <span className="text-xs font-extrabold text-slate-800 hidden sm:inline">
+                {isSidebarCollapsed ? "Unhide Sidebar" : "Hide Sidebar"}
+              </span>
             </button>
 
             {/* Mobile Brand Logo */}
-            <div className="flex items-center gap-2.5 lg:hidden">
-              <div className="w-9 h-9 bg-gradient-to-tr from-brand-600 to-brand-500 rounded-xl flex items-center justify-center text-white shadow-sm">
-                <Sprout className="w-5 h-5" />
+            <div className="flex items-center gap-2 lg:hidden">
+              <div className="w-8 h-8 bg-gradient-to-tr from-brand-600 to-brand-500 rounded-xl flex items-center justify-center text-white shadow-sm">
+                <Sprout className="w-4 h-4" />
               </div>
-              <div>
-                <h1 className="font-heading font-extrabold text-base text-slate-900 leading-none">Kisan-Bhai</h1>
-                <p className="text-[9px] font-bold text-brand-600 tracking-wider uppercase mt-0.5">RuralAssist AI</p>
-              </div>
-            </div>
-
-            {/* Active Route Breadcrumb Badge */}
-            <div className="hidden sm:flex items-center gap-2 bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/80 text-slate-800 text-xs font-bold shadow-xs">
-              <CurrentIcon className="w-3.5 h-3.5 text-brand-600" />
-              <span>{currentNav.name}</span>
+              <span className="font-heading font-extrabold text-sm text-slate-900">Kisan-Bhai</span>
             </div>
           </div>
 
-          {/* Center/Right Action Tools: Quick Features & Language Toggle */}
-          <div className="flex items-center gap-2 sm:gap-2.5">
-            {/* Quick Feature 1: Scan Crop */}
-            <Link
-              to="/chat"
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-brand-600 via-emerald-600 to-teal-600 text-white text-xs font-extrabold shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-95 transition-all"
-              title="Scan Crop Disease & Ask AI"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-harvest-300" />
-              <span>Scan Crop</span>
-            </Link>
+          {/* ALL FEATURE LINKS IN TOP NAVBAR (Scrollable Pill Bar) */}
+          <div className="flex items-center gap-1.5 overflow-x-auto custom-scrollbar py-0.5 max-w-full">
+            {navigation.map((item) => {
+              const Icon = item.icon;
+              const active = isActive(item.path);
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold whitespace-nowrap transition-all duration-200 shrink-0 ${
+                    active
+                      ? 'bg-gradient-to-r from-brand-600 to-emerald-600 text-white shadow-sm scale-[1.02]'
+                      : 'bg-white/70 hover:bg-white text-slate-700 border border-white/80 shadow-xs'
+                  }`}
+                >
+                  <Icon className={`w-3.5 h-3.5 ${active ? 'text-white' : 'text-brand-600'}`} />
+                  <span>{item.name}</span>
+                  {item.badge && (
+                    <span className={`text-[9px] font-extrabold px-1.5 py-0.2 rounded-md uppercase ${
+                      active ? 'bg-white/20 text-white' : 'bg-harvest-100 text-harvest-800'
+                    }`}>
+                      {item.badge}
+                    </span>
+                  )}
+                </Link>
+              );
+            })}
+          </div>
 
-            {/* Quick Feature 2: Government Schemes */}
-            <Link
-              to="/schemes"
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/80 hover:bg-white backdrop-blur-md text-slate-800 border border-white/90 text-xs font-extrabold transition-all active:scale-95 shadow-xs"
-              title="View Government Schemes & Subsidies"
-            >
-              <FileText className="w-3.5 h-3.5 text-harvest-600" />
-              <span className="hidden xs:inline">Government Schemes</span>
-              <span className="xs:hidden">Schemes</span>
-            </Link>
-
-            {/* Quick Feature 3: Crop Planner */}
-            <Link
-              to="/planner"
-              className="hidden md:flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/80 hover:bg-white backdrop-blur-md text-slate-800 border border-white/90 text-xs font-extrabold transition-all active:scale-95 shadow-xs"
-              title="Smart Crop Season Planner"
-            >
-              <Calendar className="w-3.5 h-3.5 text-brand-600" />
-              <span>Crop Planner</span>
-            </Link>
-
+          {/* Right Controls: Language & Mobile Menu */}
+          <div className="flex items-center gap-2 shrink-0">
             {/* Multi-lingual Selector */}
             <LanguageToggle currentLang={lang} onLanguageChange={handleLanguageChange} />
 
@@ -314,7 +279,7 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
             <button 
               type="button"
               onClick={() => setIsMobileMenuOpen(true)} 
-              className="lg:hidden p-2.5 bg-white/80 hover:bg-white rounded-xl text-slate-700 transition-colors border border-white/80 shadow-xs"
+              className="lg:hidden p-2 bg-white/80 hover:bg-white rounded-xl text-slate-700 transition-colors border border-white/80 shadow-xs"
               aria-label="Open Navigation Menu"
             >
               <Menu className="w-5 h-5" />
