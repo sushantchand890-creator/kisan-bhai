@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Cloud, 
-  Droplets, 
-  Thermometer, 
-  TrendingUp, 
-  AlertCircle, 
-  ArrowRight, 
-  Sparkles, 
-  Loader2, 
-  Sprout, 
+import {
+  Cloud,
+  Droplets,
+  Thermometer,
+  TrendingUp,
+  AlertCircle,
+  ArrowRight,
+  Sparkles,
+  Loader2,
+  Sprout,
   Wheat,
-  Camera, 
+  Camera,
   Calendar,
   FileText,
   ShieldAlert,
@@ -181,15 +181,14 @@ export const Dashboard: React.FC = () => {
           <TrendingUp className="w-4 h-4 text-brand-600" />
           <span>DAILY MANDI RATES</span>
         </div>
-        
+
         <div className="flex items-center gap-6 overflow-x-auto custom-scrollbar py-1 text-xs">
           {mandiRates.map((item, idx) => (
             <div key={idx} className="flex items-center gap-2 shrink-0 bg-white/60 px-3 py-1 rounded-xl border border-slate-200/60">
               <span className="font-bold text-slate-800">{item.crop}:</span>
               <span className="font-black text-slate-900">{item.rate}</span>
-              <span className={`text-[10px] font-extrabold px-1.5 py-0.5 rounded-md ${
-                item.up ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'
-              }`}>
+              <span className={`text-[10px] font-extrabold px-1.5 py-0.5 rounded-md ${item.up ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'
+                }`}>
                 {item.change}
               </span>
             </div>
@@ -200,29 +199,27 @@ export const Dashboard: React.FC = () => {
       {/* HEADER SECTION */}
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl">
         <div className="flex items-center gap-5">
-           <div className="w-16 h-16 bg-gradient-to-tr from-brand-700 via-emerald-600 to-teal-700 rounded-2xl flex items-center justify-center p-2 border border-white/60 shadow-lg shadow-brand-700/25 shrink-0">
-              <img 
-                src="/wheat_stalks.png" 
-                alt="Kisan-Bhai Wheat Logo" 
-                className="w-full h-full object-contain filter drop-shadow-md" 
-              />
-           </div>
-           <div>
-             <div className="flex items-center gap-2">
-               <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                 {t.welcome}, {user?.name || 'Farmer'}!
-               </h1>
-               <span className="text-xl">🌾</span>
-             </div>
-             <p className="text-slate-600 text-xs sm:text-sm font-semibold mt-1">
-               {t.kisanBhaiAnalyzing} in <span className="font-extrabold text-brand-700">{user?.location || 'your area'}</span>.
-             </p>
-           </div>
+          <img 
+            src="/wheat_stalks.png" 
+            alt="Kisan-Bhai Wheat Logo" 
+            className="w-16 h-16 object-contain filter drop-shadow-md shrink-0" 
+          />
+          <div>
+            <div className="flex items-center gap-2">
+              <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                {t.welcome}, {user?.name || 'Farmer'}!
+              </h1>
+              <span className="text-xl">🌾</span>
+            </div>
+            <p className="text-slate-600 text-xs sm:text-sm font-semibold mt-1">
+              {t.kisanBhaiAnalyzing} in <span className="font-extrabold text-brand-700">{user?.location || 'your area'}</span>.
+            </p>
+          </div>
         </div>
 
         <div className="flex items-center gap-3">
           <input type="file" ref={fileInputRef} onChange={handleScan} accept="image/*" className="hidden" />
-          <button 
+          <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={isScanning}
@@ -237,8 +234,8 @@ export const Dashboard: React.FC = () => {
       {/* STATS METRIC CARDS (Frosted Glass) */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {stats.map((stat, i) => (
-          <div 
-            key={i} 
+          <div
+            key={i}
             className="bg-white/45 backdrop-blur-xl p-5 sm:p-6 rounded-3xl border border-white/70 shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group"
           >
             <div className="flex items-center justify-between mb-3">
@@ -264,9 +261,9 @@ export const Dashboard: React.FC = () => {
               <p className="text-xs text-slate-500 font-semibold">Buy directly from farm gates or trade surplus with fellow farmers</p>
             </div>
           </div>
-          
-          <Link 
-            to="/agrifarm" 
+
+          <Link
+            to="/agrifarm"
             className="hidden sm:flex items-center gap-1.5 text-xs font-extrabold text-brand-700 bg-brand-50 hover:bg-brand-100 px-4 py-2.5 rounded-xl border border-brand-200/60 transition-all active:scale-95"
           >
             <span>Explore All Listings</span>
@@ -277,14 +274,14 @@ export const Dashboard: React.FC = () => {
         {/* PRODUCE CARDS GRID */}
         <div className="grid md:grid-cols-3 gap-5">
           {featuredAgriItems.map((item, idx) => (
-            <div 
-              key={idx} 
+            <div
+              key={idx}
               className="bg-white/80 backdrop-blur-md rounded-2xl border border-white/90 shadow-md hover:shadow-xl transition-all overflow-hidden flex flex-col group"
             >
               <div className="relative h-40 overflow-hidden bg-slate-100">
-                <img 
-                  src={item.image} 
-                  alt={item.title} 
+                <img
+                  src={item.image}
+                  alt={item.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <span className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-emerald-300 text-[10px] font-extrabold px-2.5 py-1 rounded-full border border-white/20">
@@ -305,8 +302,8 @@ export const Dashboard: React.FC = () => {
                   <p className="text-[11px] text-slate-400 font-bold mt-0.5">Seller: {item.seller}</p>
                 </div>
 
-                <Link 
-                  to="/agrifarm" 
+                <Link
+                  to="/agrifarm"
                   className="w-full bg-slate-900 hover:bg-brand-700 text-white text-xs font-extrabold py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95"
                 >
                   <span>Buy Direct</span>
@@ -320,15 +317,15 @@ export const Dashboard: React.FC = () => {
 
       {/* MAIN TWO-COLUMN DASHBOARD GRID */}
       <div className="grid lg:grid-cols-3 gap-8">
-        
+
         {/* LEFT COLUMN: HERO AI INSIGHTS & WEATHER WIDGET */}
         <div className="lg:col-span-2 space-y-8">
-          
+
           {/* AI FARMER INSIGHTS CARD */}
           <div className="bg-gradient-to-br from-brand-900 via-brand-800 to-teal-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden border border-brand-700/50">
             {/* Ambient Background Glow */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none" />
-            
+
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2.5">
@@ -354,11 +351,10 @@ export const Dashboard: React.FC = () => {
                   {aiAlerts.map((alert, idx) => (
                     <div key={idx} className="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/15 transition-all hover:bg-white/15">
                       <div className="flex justify-between items-start mb-2">
-                        <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
-                          alert.urgency === 'High' 
-                            ? 'bg-rose-500/20 text-rose-200 border-rose-400/30' 
+                        <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${alert.urgency === 'High'
+                            ? 'bg-rose-500/20 text-rose-200 border-rose-400/30'
                             : 'bg-harvest-500/20 text-harvest-200 border-harvest-400/30'
-                        }`}>
+                          }`}>
                           {alert.type} • {alert.urgency}
                         </span>
                       </div>
@@ -375,15 +371,15 @@ export const Dashboard: React.FC = () => {
 
               {/* ACTION BUTTONS */}
               <div className="flex flex-wrap items-center gap-3 mt-8">
-                <Link 
-                  to="/chat" 
+                <Link
+                  to="/chat"
                   className="inline-flex items-center gap-2 bg-white hover:bg-brand-50 text-brand-900 px-6 py-3.5 rounded-2xl font-extrabold text-xs sm:text-sm shadow-md transition-all active:scale-95"
                 >
                   <span>{t.talkToKisanBhai}</span>
                   <ArrowRight className="w-4 h-4 text-brand-700" />
                 </Link>
-                <Link 
-                  to="/planner" 
+                <Link
+                  to="/planner"
                   className="inline-flex items-center gap-2 bg-emerald-600/80 hover:bg-emerald-600 text-white px-6 py-3.5 rounded-2xl font-extrabold text-xs sm:text-sm border border-emerald-400/40 shadow-md transition-all active:scale-95"
                 >
                   <span>{t.cropPlanner}</span>
@@ -391,7 +387,7 @@ export const Dashboard: React.FC = () => {
                 </Link>
               </div>
             </div>
-            
+
             <TrendingUp className="absolute -bottom-10 -right-10 w-64 h-64 text-white/5 pointer-events-none" />
           </div>
 
@@ -494,7 +490,7 @@ export const Dashboard: React.FC = () => {
 
         {/* RIGHT COLUMN: DAILY AG NEWS, RISK MONITOR & QUICK ACTIONS */}
         <div className="space-y-8">
-          
+
           {/* DAILY AGRICULTURAL NEWS FEED CARD */}
           <div className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl space-y-5">
             <div className="flex items-center justify-between border-b border-white/60 pb-3">
@@ -550,10 +546,10 @@ export const Dashboard: React.FC = () => {
           {/* QUICK ACTIONS TILES */}
           <div className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl">
             <h3 className="font-heading font-extrabold text-lg text-slate-900 mb-6">{t.quickActions}</h3>
-            
+
             <div className="grid grid-cols-2 gap-3.5">
-              <Link 
-                to="/planner" 
+              <Link
+                to="/planner"
                 className="p-4 bg-white/60 hover:bg-white backdrop-blur-md rounded-2xl text-center transition-all border border-white/80 group shadow-xs hover:shadow-md"
               >
                 <div className="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
@@ -562,8 +558,8 @@ export const Dashboard: React.FC = () => {
                 <span className="text-xs font-bold text-slate-800 block tracking-tight">{t.cropPlanner}</span>
               </Link>
 
-              <Link 
-                to="/profit" 
+              <Link
+                to="/profit"
                 className="p-4 bg-white/60 hover:bg-white backdrop-blur-md rounded-2xl text-center transition-all border border-white/80 group shadow-xs hover:shadow-md"
               >
                 <div className="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
@@ -572,8 +568,8 @@ export const Dashboard: React.FC = () => {
                 <span className="text-xs font-bold text-slate-800 block tracking-tight">{t.financials}</span>
               </Link>
 
-              <Link 
-                to="/growth" 
+              <Link
+                to="/growth"
                 className="p-4 bg-white/60 hover:bg-white backdrop-blur-md rounded-2xl text-center transition-all border border-white/80 group shadow-xs hover:shadow-md"
               >
                 <div className="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
@@ -582,8 +578,8 @@ export const Dashboard: React.FC = () => {
                 <span className="text-xs font-bold text-slate-800 block tracking-tight">{t.growthTracker}</span>
               </Link>
 
-              <Link 
-                to="/schemes" 
+              <Link
+                to="/schemes"
                 className="p-4 bg-white/60 hover:bg-white backdrop-blur-md rounded-2xl text-center transition-all border border-white/80 group shadow-xs hover:shadow-md"
               >
                 <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">

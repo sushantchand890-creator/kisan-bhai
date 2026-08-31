@@ -1,20 +1,20 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
-import { 
-  Sprout, 
+import {
+  Sprout,
   Wheat,
-  MessageCircle, 
-  Calendar, 
-  Cloud, 
-  FileText, 
-  Menu, 
-  X, 
-  BarChart3, 
-  TrendingUp, 
-  UserCircle, 
-  LogOut, 
-  ChevronRight, 
+  MessageCircle,
+  Calendar,
+  Cloud,
+  FileText,
+  Menu,
+  X,
+  BarChart3,
+  TrendingUp,
+  UserCircle,
+  LogOut,
+  ChevronRight,
   Sparkles,
   MapPin,
   Home,
@@ -95,19 +95,16 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
             to={item.path}
             onClick={onClick}
             title={collapsed ? item.name : undefined}
-            className={`group relative flex items-center gap-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 ${
-              collapsed ? 'justify-center' : ''
-            } ${
-              active
+            className={`group relative flex items-center gap-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 ${collapsed ? 'justify-center' : ''
+              } ${active
                 ? 'bg-gradient-to-r from-brand-600 to-brand-700 text-white font-bold shadow-lg shadow-brand-600/25 scale-[1.01]'
                 : 'text-slate-600 hover:bg-brand-50/80 hover:text-brand-800 font-semibold'
-            }`}
+              }`}
           >
-            <div className={`p-2 rounded-xl transition-colors ${
-              active 
-                ? 'bg-white/20 text-white' 
+            <div className={`p-2 rounded-xl transition-colors ${active
+                ? 'bg-white/20 text-white'
                 : 'bg-slate-100 text-slate-500 group-hover:bg-brand-100 group-hover:text-brand-700'
-            }`}>
+              }`}>
               <Icon className="w-4 h-4" />
             </div>
 
@@ -116,11 +113,10 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
                 <span className="text-xs tracking-wide truncate">{item.name}</span>
 
                 {item.badge && (
-                  <span className={`ml-auto text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider ${
-                    active 
-                      ? 'bg-white text-brand-700' 
+                  <span className={`ml-auto text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider ${active
+                      ? 'bg-white text-brand-700'
                       : 'bg-gradient-to-r from-harvest-400 to-amber-500 text-slate-900 shadow-sm'
-                  }`}>
+                    }`}>
                     {item.badge}
                   </span>
                 )}
@@ -139,7 +135,7 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
   return (
     <div className="relative min-h-screen w-full flex flex-col lg:flex-row font-sans overflow-x-hidden text-slate-900 bg-slate-900">
       {/* Background Farmland Landscape Image (Vibrant & Visible Through Cards) */}
-      <div 
+      <div
         className="fixed inset-0 bg-cover bg-center bg-no-repeat z-0 opacity-50 pointer-events-none"
         style={{ backgroundImage: `url('/wheat_field.jpg')` }}
       />
@@ -147,23 +143,19 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
       <div className="fixed inset-0 bg-gradient-to-br from-slate-100/20 via-white/15 to-emerald-50/15 z-0 pointer-events-none backdrop-blur-[1px]" />
 
       {/* DESKTOP SIDEBAR (FIXED TO VIEWPORT ON SCROLL) */}
-      <aside 
-        className={`hidden lg:flex flex-col bg-white/45 backdrop-blur-xl border-r border-white/60 fixed top-0 left-0 h-screen z-40 shadow-xl transition-all duration-300 ${
-          isSidebarCollapsed ? 'w-20' : 'w-72'
-        }`}
+      <aside
+        className={`hidden lg:flex flex-col bg-white/45 backdrop-blur-xl border-r border-white/60 fixed top-0 left-0 h-screen z-40 shadow-xl transition-all duration-300 ${isSidebarCollapsed ? 'w-20' : 'w-72'
+          }`}
       >
         {/* Brand Header */}
         <div className="p-4 pb-3">
-          <div className={`flex items-center gap-3 p-3 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-sm ${
-            isSidebarCollapsed ? 'justify-center p-2.5' : ''
-          }`}>
-            <div className="w-10 h-10 bg-gradient-to-tr from-brand-700 via-emerald-600 to-teal-700 rounded-xl flex items-center justify-center p-1.5 shadow-md shadow-brand-700/25 border border-white/60 shrink-0">
-              <img 
-                src="/wheat_stalks.png" 
-                alt="Kisan-Bhai Wheat Logo" 
-                className="w-full h-full object-contain filter drop-shadow-sm" 
-              />
-            </div>
+          <div className={`flex items-center gap-3 p-3 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-sm ${isSidebarCollapsed ? 'justify-center p-2.5' : ''
+            }`}>
+            <img 
+              src="/wheat_stalks.png" 
+              alt="Kisan-Bhai Wheat Logo" 
+              className="w-10 h-10 object-contain filter drop-shadow-md flex-shrink-0" 
+            />
             {!isSidebarCollapsed && (
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-1.5">
@@ -190,18 +182,17 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
 
         {/* User Card & Logout */}
         <div className="p-3 mt-auto border-t border-white/50">
-          <div className={`bg-white/60 backdrop-blur-md rounded-2xl border border-white/80 shadow-sm ${
-            isSidebarCollapsed ? 'p-2 flex flex-col items-center gap-2' : 'p-3.5'
-          }`}>
+          <div className={`bg-white/60 backdrop-blur-md rounded-2xl border border-white/80 shadow-sm ${isSidebarCollapsed ? 'p-2 flex flex-col items-center gap-2' : 'p-3.5'
+            }`}>
             {isSidebarCollapsed ? (
               <>
-                <div 
-                  title={user?.name || 'Farmer'} 
+                <div
+                  title={user?.name || 'Farmer'}
                   className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600 to-emerald-700 flex items-center justify-center text-white font-bold text-sm shadow-sm"
                 >
                   {user?.name ? user.name.charAt(0).toUpperCase() : 'G'}
                 </div>
-                <button 
+                <button
                   type="button"
                   onClick={onLogout}
                   title="Log Out"
@@ -225,7 +216,7 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
                   </div>
                 </div>
 
-                <button 
+                <button
                   type="button"
                   onClick={onLogout}
                   className="w-full bg-white/80 text-slate-700 text-xs font-bold py-2.5 rounded-xl border border-slate-200/80 flex items-center justify-center gap-2 hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 transition-all shadow-sm active:scale-95"
@@ -239,16 +230,15 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
       </aside>
 
       {/* MAIN CONTAINER */}
-      <div className={`flex-1 flex flex-col min-w-0 pb-20 lg:pb-0 relative z-10 transition-all duration-300 ${
-        isSidebarCollapsed ? 'lg:pl-20' : 'lg:pl-72'
-      }`}>
+      <div className={`flex-1 flex flex-col min-w-0 pb-20 lg:pb-0 relative z-10 transition-all duration-300 ${isSidebarCollapsed ? 'lg:pl-20' : 'lg:pl-72'
+        }`}>
         {/* STICKY TOP NAVIGATION BAR */}
         <header className="sticky top-0 z-30 bg-white/45 backdrop-blur-xl border-b border-white/60 px-4 py-3 lg:px-6 flex items-center justify-between shadow-xs">
-          
+
           {/* Left Controls: Sidebar Toggle & Active Page Badge */}
           <div className="flex items-center gap-3">
             {/* Desktop Sidebar Hide/Unhide Toggle Button */}
-            <button 
+            <button
               type="button"
               onClick={toggleSidebar}
               className="hidden lg:flex p-2 bg-white/80 hover:bg-white text-slate-700 rounded-xl transition-all shadow-xs items-center gap-1.5 active:scale-95 border border-white/80"
@@ -263,13 +253,11 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
 
             {/* Mobile Brand Logo */}
             <div className="flex items-center gap-2.5 lg:hidden">
-              <div className="w-9 h-9 bg-gradient-to-tr from-brand-700 via-emerald-600 to-teal-700 rounded-xl flex items-center justify-center p-1 shadow-sm border border-white/60 shrink-0">
-                <img 
-                  src="/wheat_stalks.png" 
-                  alt="Kisan-Bhai Wheat Logo" 
-                  className="w-full h-full object-contain filter drop-shadow-sm" 
-                />
-              </div>
+              <img 
+                src="/wheat_stalks.png" 
+                alt="Kisan-Bhai Wheat Logo" 
+                className="w-9 h-9 object-contain filter drop-shadow-sm flex-shrink-0" 
+              />
               <div>
                 <h1 className="font-heading font-extrabold text-base text-slate-900 leading-none">Kisan-Bhai</h1>
                 <p className="text-[9px] font-bold text-brand-600 tracking-wider uppercase mt-0.5">RuralAssist AI</p>
@@ -329,9 +317,9 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
             <LanguageToggle currentLang={lang} onLanguageChange={handleLanguageChange} />
 
             {/* Mobile Menu Button */}
-            <button 
+            <button
               type="button"
-              onClick={() => setIsMobileMenuOpen(true)} 
+              onClick={() => setIsMobileMenuOpen(true)}
               className="lg:hidden p-2.5 bg-white/80 hover:bg-white rounded-xl text-slate-700 transition-colors border border-white/80 shadow-xs"
               aria-label="Open Navigation Menu"
             >
@@ -359,9 +347,8 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
                 to={item.path}
                 className="relative -top-4 flex flex-col items-center group"
               >
-                <div className={`w-13 h-13 rounded-2xl bg-gradient-to-tr from-brand-600 via-emerald-600 to-teal-500 text-white flex items-center justify-center shadow-lg shadow-brand-600/30 transition-transform active:scale-90 ${
-                  active ? 'ring-4 ring-brand-200 scale-105' : ''
-                }`}>
+                <div className={`w-13 h-13 rounded-2xl bg-gradient-to-tr from-brand-600 via-emerald-600 to-teal-500 text-white flex items-center justify-center shadow-lg shadow-brand-600/30 transition-transform active:scale-90 ${active ? 'ring-4 ring-brand-200 scale-105' : ''
+                  }`}>
                   <MessageCircle className="w-6 h-6" />
                 </div>
                 <span className="text-[10px] font-extrabold text-brand-700 mt-1">Kisan-AI</span>
@@ -373,9 +360,8 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
             <Link
               key={item.path}
               to={item.path}
-              className={`flex flex-col items-center py-1 px-3 rounded-xl transition-all ${
-                active ? 'text-brand-600 font-bold' : 'text-slate-500 font-medium hover:text-slate-800'
-              }`}
+              className={`flex flex-col items-center py-1 px-3 rounded-xl transition-all ${active ? 'text-brand-600 font-bold' : 'text-slate-500 font-medium hover:text-slate-800'
+                }`}
             >
               <Icon className={`w-5 h-5 ${active ? 'text-brand-600 scale-110' : 'text-slate-400'}`} />
               <span className="text-[10px] mt-1 tracking-tight">{item.name}</span>
@@ -387,9 +373,9 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
       {/* MOBILE FULL NAVIGATION OVERLAY DRAWER */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div 
-            className="fixed inset-0 bg-slate-950/40 backdrop-blur-sm transition-opacity" 
-            onClick={() => setIsMobileMenuOpen(false)} 
+          <div
+            className="fixed inset-0 bg-slate-950/40 backdrop-blur-sm transition-opacity"
+            onClick={() => setIsMobileMenuOpen(false)}
           />
           <aside className="fixed right-0 top-0 bottom-0 w-80 bg-white shadow-2xl flex flex-col animate-in slide-in-from-right duration-300 z-50">
             <div className="p-6 border-b border-slate-100 flex items-center justify-between">
@@ -402,9 +388,9 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
                   <p className="text-[10px] font-bold text-brand-600 tracking-wider uppercase">RuralAssist Navigation</p>
                 </div>
               </div>
-              <button 
+              <button
                 type="button"
-                onClick={() => setIsMobileMenuOpen(false)} 
+                onClick={() => setIsMobileMenuOpen(false)}
                 className="p-2 bg-slate-100 hover:bg-slate-200 rounded-full text-slate-600 transition-colors"
               >
                 <X className="w-5 h-5" />
@@ -416,12 +402,12 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
             </nav>
 
             <div className="p-5 border-t border-slate-100 bg-slate-50/50">
-              <button 
+              <button
                 type="button"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   onLogout();
-                }} 
+                }}
                 className="w-full bg-rose-50 text-rose-600 font-bold py-3.5 rounded-2xl border border-rose-200/80 flex items-center justify-center gap-2 hover:bg-rose-100 transition-all shadow-xs"
               >
                 <LogOut className="w-4 h-4" /> Log Out

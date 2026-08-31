@@ -99,17 +99,17 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden font-sans">
       {/* Bright, Crisp Wheat Field Landscape Background Image (No dark overlay) */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
         style={{ backgroundImage: `url('/wheat_field.jpg')` }}
       />
-      
+
       {/* Very light contrast gradient for text clarity without dimming sky */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-black/15 z-0 pointer-events-none" />
 
       {/* Main Grid Container */}
       <div className="relative z-10 w-full min-h-screen grid grid-cols-1 lg:grid-cols-12 max-w-[1600px] mx-auto p-4 sm:p-8 lg:p-12 items-center">
-        
+
         {/* Left Side Hero Content */}
         <div className="hidden lg:flex lg:col-span-7 flex-col justify-between h-full py-8 pr-12 relative">
           <div>
@@ -118,7 +118,7 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
               <Wheat className="w-4 h-4 text-emerald-400" />
               <span className="uppercase tracking-wider">RuralAssist AI Platform</span>
             </div>
-            
+
             {/* Bright Hero Heading matching reference */}
             <h1 className="font-heading text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight drop-shadow-md">
               Kisan-Bhai <br />
@@ -179,16 +179,14 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
         {/* Right Side Glass Card Container (Light, translucent frosted glass matching screenshot) */}
         <div className="col-span-1 lg:col-span-5 flex items-center justify-center">
           <div className="w-full max-w-md bg-white/40 backdrop-blur-2xl border border-white/60 shadow-2xl rounded-3xl p-6 sm:p-10 transition-all text-slate-900">
-            
+
             {/* Logo Icon & Header */}
             <div className="flex flex-col items-center mb-6 text-center">
-              <div className="w-16 h-16 bg-gradient-to-tr from-brand-700 via-emerald-600 to-teal-700 rounded-3xl flex items-center justify-center p-2.5 mb-3 shadow-xl shadow-brand-700/30 border border-white/70 transition-transform duration-300 hover:scale-105">
-                <img 
-                  src="/wheat_stalks.png" 
-                  alt="Kisan-Bhai Wheat Logo" 
-                  className="w-full h-full object-contain filter drop-shadow-md" 
-                />
-              </div>
+              <img 
+                src="/wheat_stalks.png" 
+                alt="Kisan-Bhai Wheat Logo" 
+                className="w-14 h-14 object-contain mb-3 filter drop-shadow-md transition-transform duration-300 hover:scale-105" 
+              />
               <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight transition-all duration-300">
                 {isLogin ? 'Welcome Back' : 'Create Account'}
               </h2>
@@ -200,33 +198,30 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
             {/* Login / Sign Up Pill Tabs with Smooth Animated Background Slider */}
             <div className="relative flex p-1 bg-black/10 backdrop-blur-md border border-white/40 rounded-2xl mb-6 overflow-hidden">
               {/* Sliding Pill Indicator */}
-              <div 
-                className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-xl shadow-md transition-all duration-300 ease-out ${
-                  isLogin ? 'left-1' : 'left-[calc(50%+2px)]'
-                }`}
+              <div
+                className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-xl shadow-md transition-all duration-300 ease-out ${isLogin ? 'left-1' : 'left-[calc(50%+2px)]'
+                  }`}
               />
-              
-              <button 
+
+              <button
                 type="button"
                 onClick={() => setIsLogin(true)}
-                className={`relative z-10 flex-1 py-2.5 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition-colors duration-300 ${
-                  isLogin 
-                    ? 'text-slate-900' 
+                className={`relative z-10 flex-1 py-2.5 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition-colors duration-300 ${isLogin
+                    ? 'text-slate-900'
                     : 'text-slate-700 hover:text-slate-950 font-bold'
-                }`}
+                  }`}
               >
                 <LogIn className="w-3.5 h-3.5 text-emerald-700" />
                 <span>Log In</span>
               </button>
-              
-              <button 
+
+              <button
                 type="button"
                 onClick={() => setIsLogin(false)}
-                className={`relative z-10 flex-1 py-2.5 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition-colors duration-300 ${
-                  !isLogin 
-                    ? 'text-slate-900' 
+                className={`relative z-10 flex-1 py-2.5 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5 transition-colors duration-300 ${!isLogin
+                    ? 'text-slate-900'
                     : 'text-slate-700 hover:text-slate-950 font-bold'
-                }`}
+                  }`}
               >
                 <UserPlus className="w-3.5 h-3.5 text-emerald-700" />
                 <span>Sign Up</span>
@@ -244,33 +239,30 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
                   <button
                     type="button"
                     onClick={() => setFormData({ ...formData, role: 'farmer' })}
-                    className={`py-2 px-1 rounded-xl text-[11px] font-extrabold transition-all duration-200 ${
-                      formData.role === 'farmer' 
-                        ? 'bg-emerald-600 text-white shadow-md' 
+                    className={`py-2 px-1 rounded-xl text-[11px] font-extrabold transition-all duration-200 ${formData.role === 'farmer'
+                        ? 'bg-emerald-600 text-white shadow-md'
                         : 'text-slate-700 hover:text-slate-950 font-bold'
-                    }`}
+                      }`}
                   >
                     🌾 Sell Produce
                   </button>
                   <button
                     type="button"
                     onClick={() => setFormData({ ...formData, role: 'buyer' })}
-                    className={`py-2 px-1 rounded-xl text-[11px] font-extrabold transition-all duration-200 ${
-                      formData.role === 'buyer' 
-                        ? 'bg-emerald-600 text-white shadow-md' 
+                    className={`py-2 px-1 rounded-xl text-[11px] font-extrabold transition-all duration-200 ${formData.role === 'buyer'
+                        ? 'bg-emerald-600 text-white shadow-md'
                         : 'text-slate-700 hover:text-slate-950 font-bold'
-                    }`}
+                      }`}
                   >
                     🛒 Direct Buy
                   </button>
                   <button
                     type="button"
                     onClick={() => setFormData({ ...formData, role: 'both' })}
-                    className={`py-2 px-1 rounded-xl text-[11px] font-extrabold transition-all duration-200 ${
-                      formData.role === 'both' 
-                        ? 'bg-emerald-600 text-white shadow-md' 
+                    className={`py-2 px-1 rounded-xl text-[11px] font-extrabold transition-all duration-200 ${formData.role === 'both'
+                        ? 'bg-emerald-600 text-white shadow-md'
                         : 'text-slate-700 hover:text-slate-950 font-bold'
-                    }`}
+                      }`}
                   >
                     🔄 Both
                   </button>
@@ -278,17 +270,16 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
               </div>
 
               {/* Animated Height Expansion Container for Full Name */}
-              <div className={`grid transition-all duration-300 ease-in-out ${
-                !isLogin ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0 pointer-events-none'
-              }`}>
+              <div className={`grid transition-all duration-300 ease-in-out ${!isLogin ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0 pointer-events-none'
+                }`}>
                 <div className="overflow-hidden space-y-1">
                   <label className="text-[11px] font-extrabold text-slate-800 uppercase tracking-wider ml-1">
                     Full Name
                   </label>
-                  <input 
+                  <input
                     required={!isLogin}
                     value={formData.name}
-                    onChange={e => setFormData({...formData, name: e.target.value})}
+                    onChange={e => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Ramesh Kumar"
                     className="w-full bg-white/70 backdrop-blur-md border border-white/80 rounded-2xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-500 font-bold outline-none focus:ring-2 focus:ring-emerald-500 transition-all shadow-xs"
                   />
@@ -299,11 +290,11 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
                 <label className="text-[11px] font-extrabold text-slate-800 uppercase tracking-wider ml-1">
                   Email Address
                 </label>
-                <input 
+                <input
                   required
                   type="email"
                   value={formData.email}
-                  onChange={e => setFormData({...formData, email: e.target.value})}
+                  onChange={e => setFormData({ ...formData, email: e.target.value })}
                   placeholder="farmer@example.com"
                   className="w-full bg-white/70 backdrop-blur-md border border-white/80 rounded-2xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-500 font-bold outline-none focus:ring-2 focus:ring-emerald-500 transition-all shadow-xs"
                 />
@@ -313,18 +304,18 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
                 <label className="text-[11px] font-extrabold text-slate-800 uppercase tracking-wider ml-1">
                   Password
                 </label>
-                <input 
+                <input
                   required
                   type="password"
                   value={formData.password}
-                  onChange={e => setFormData({...formData, password: e.target.value})}
+                  onChange={e => setFormData({ ...formData, password: e.target.value })}
                   placeholder="••••••••"
                   className="w-full bg-white/70 backdrop-blur-md border border-white/80 rounded-2xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-500 font-bold outline-none focus:ring-2 focus:ring-emerald-500 transition-all shadow-xs"
                 />
               </div>
 
               {/* Green Primary CTA Button */}
-              <button 
+              <button
                 type="submit"
                 disabled={loading}
                 className="w-full mt-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 active:scale-[0.98] transition-all duration-300 text-sm disabled:opacity-50"
@@ -361,7 +352,7 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
             </div>
 
             {/* Guest Secondary CTA Button */}
-            <button 
+            <button
               type="button"
               onClick={handleGuest}
               disabled={loading}
