@@ -361,18 +361,21 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
 
           {/* Center/Right Action Tools: Quick Features & Language Toggle */}
           <div className="flex items-center gap-2 sm:gap-2.5">
-            {/* Top Navigation Sliding Active Pill Container (WITHOUT light/spotlight beam) */}
+            {/* Top Navigation Sliding Active Limelight Light Bar & Spotlight Beam Container */}
             <div className="relative flex items-center gap-1.5 p-1 bg-white/40 backdrop-blur-md rounded-2xl border border-white/60 shadow-xs overflow-hidden">
-              {/* Smooth Horizontal Slider Pill */}
+              {/* Smooth Horizontal Limelight Slider Light Bar with Glowing Shadow */}
               <div 
-                className={`absolute top-1 bottom-1 bg-gradient-to-r from-brand-600 via-emerald-600 to-teal-600 rounded-xl shadow-md transition-all duration-300 ease-out z-10 ${
+                className={`absolute top-0 h-1 bg-gradient-to-r from-brand-400 via-emerald-500 to-teal-400 rounded-b-full shadow-[0_4px_15px_#16a34a] transition-all duration-300 ease-out z-20 pointer-events-none ${
                   topNavSliderStyle.ready ? 'opacity-100' : 'opacity-0'
                 }`}
                 style={{
                   left: `${topNavSliderStyle.left}px`,
                   width: `${topNavSliderStyle.width}px`
                 }}
-              />
+              >
+                {/* Limelight Spotlight Cone Light Beam Effect (Polygon Clip-Path) */}
+                <div className="absolute left-[-20%] top-[4px] w-[140%] h-12 [clip-path:polygon(20%_0,80%_0,100%_100%,0_100%)] bg-gradient-to-b from-brand-500/40 via-emerald-500/15 to-transparent pointer-events-none" />
+              </div>
 
               {topNavItems.map((item, idx) => {
                 const Icon = item.icon;
@@ -382,14 +385,14 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
                     key={item.path}
                     to={item.path}
                     ref={el => { topNavRefs.current[idx] = el; }}
-                    className={`relative z-20 items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs transition-colors duration-200 ${item.hiddenClass || 'flex'} ${
+                    className={`relative z-30 items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs transition-colors duration-200 ${item.hiddenClass || 'flex'} ${
                       active 
-                        ? 'text-white font-extrabold' 
+                        ? 'bg-brand-50/70 text-brand-900 font-extrabold shadow-xs' 
                         : 'text-slate-700 hover:text-slate-900 font-bold'
                     }`}
                     title={item.title}
                   >
-                    <Icon className={`w-3.5 h-3.5 ${active ? 'text-white' : 'text-brand-700'}`} />
+                    <Icon className={`w-3.5 h-3.5 ${active ? 'text-brand-700' : 'text-slate-600'}`} />
                     <span>{item.name}</span>
                   </Link>
                 );
