@@ -157,11 +157,13 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
           <div className={`flex items-center gap-3 p-3 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-sm ${
             isSidebarCollapsed ? 'justify-center p-2.5' : ''
           }`}>
-            <img 
-              src="/wheat_logo.png" 
-              alt="Kisan-Bhai Wheat Logo" 
-              className="w-10 h-10 rounded-full object-contain filter drop-shadow-md flex-shrink-0" 
-            />
+            <div className="w-10 h-10 bg-gradient-to-tr from-brand-700 via-emerald-600 to-teal-700 rounded-xl flex items-center justify-center p-1.5 shadow-md shadow-brand-700/25 border border-white/60 shrink-0">
+              <img 
+                src="/wheat_stalks.png" 
+                alt="Kisan-Bhai Wheat Logo" 
+                className="w-full h-full object-contain filter drop-shadow-sm" 
+              />
+            </div>
             {!isSidebarCollapsed && (
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-1.5">
@@ -261,11 +263,13 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
 
             {/* Mobile Brand Logo */}
             <div className="flex items-center gap-2.5 lg:hidden">
-              <img 
-                src="/wheat_logo.png" 
-                alt="Kisan-Bhai Wheat Logo" 
-                className="w-9 h-9 rounded-full object-contain filter drop-shadow-sm flex-shrink-0" 
-              />
+              <div className="w-9 h-9 bg-gradient-to-tr from-brand-700 via-emerald-600 to-teal-700 rounded-xl flex items-center justify-center p-1 shadow-sm border border-white/60 shrink-0">
+                <img 
+                  src="/wheat_stalks.png" 
+                  alt="Kisan-Bhai Wheat Logo" 
+                  className="w-full h-full object-contain filter drop-shadow-sm" 
+                />
+              </div>
               <div>
                 <h1 className="font-heading font-extrabold text-base text-slate-900 leading-none">Kisan-Bhai</h1>
                 <p className="text-[9px] font-bold text-brand-600 tracking-wider uppercase mt-0.5">RuralAssist AI</p>

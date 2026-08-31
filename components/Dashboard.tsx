@@ -200,11 +200,13 @@ export const Dashboard: React.FC = () => {
       {/* HEADER SECTION */}
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl">
         <div className="flex items-center gap-5">
-           <img 
-              src="/wheat_logo.png" 
-              alt="Kisan-Bhai Wheat Logo" 
-              className="w-16 h-16 rounded-full object-contain filter drop-shadow-md shrink-0" 
-           />
+           <div className="w-16 h-16 bg-gradient-to-tr from-brand-700 via-emerald-600 to-teal-700 rounded-2xl flex items-center justify-center p-2 border border-white/60 shadow-lg shadow-brand-700/25 shrink-0">
+              <img 
+                src="/wheat_stalks.png" 
+                alt="Kisan-Bhai Wheat Logo" 
+                className="w-full h-full object-contain filter drop-shadow-md" 
+              />
+           </div>
            <div>
              <div className="flex items-center gap-2">
                <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">

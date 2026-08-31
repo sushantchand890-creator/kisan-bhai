@@ -182,11 +182,13 @@ export const Auth: React.FC<AuthProps> = ({ onAuth }) => {
             
             {/* Logo Icon & Header */}
             <div className="flex flex-col items-center mb-6 text-center">
-              <img 
-                src="/wheat_logo.png" 
-                alt="Kisan-Bhai Wheat Logo" 
-                className="w-14 h-14 rounded-full object-contain mb-3 filter drop-shadow-md transition-transform duration-300 hover:scale-105" 
-              />
+              <div className="w-16 h-16 bg-gradient-to-tr from-brand-700 via-emerald-600 to-teal-700 rounded-3xl flex items-center justify-center p-2.5 mb-3 shadow-xl shadow-brand-700/30 border border-white/70 transition-transform duration-300 hover:scale-105">
+                <img 
+                  src="/wheat_stalks.png" 
+                  alt="Kisan-Bhai Wheat Logo" 
+                  className="w-full h-full object-contain filter drop-shadow-md" 
+                />
+              </div>
               <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight transition-all duration-300">
                 {isLogin ? 'Welcome Back' : 'Create Account'}
               </h2>
