@@ -543,53 +543,6 @@ export const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          {/* QUICK ACTIONS TILES */}
-          <div className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl">
-            <h3 className="font-heading font-extrabold text-lg text-slate-900 mb-6">{t.quickActions}</h3>
-
-            <div className="grid grid-cols-2 gap-3.5">
-              <Link
-                to="/planner"
-                className="p-4 bg-white/60 hover:bg-white backdrop-blur-md rounded-2xl text-center transition-all border border-white/80 group shadow-xs hover:shadow-md"
-              >
-                <div className="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
-                  <Calendar className="w-4.5 h-4.5" />
-                </div>
-                <span className="text-xs font-bold text-slate-800 block tracking-tight">{t.cropPlanner}</span>
-              </Link>
-
-              <Link
-                to="/profit"
-                className="p-4 bg-white/60 hover:bg-white backdrop-blur-md rounded-2xl text-center transition-all border border-white/80 group shadow-xs hover:shadow-md"
-              >
-                <div className="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
-                  <TrendingUp className="w-4.5 h-4.5" />
-                </div>
-                <span className="text-xs font-bold text-slate-800 block tracking-tight">{t.financials}</span>
-              </Link>
-
-              <Link
-                to="/growth"
-                className="p-4 bg-white/60 hover:bg-white backdrop-blur-md rounded-2xl text-center transition-all border border-white/80 group shadow-xs hover:shadow-md"
-              >
-                <div className="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
-                  <Sprout className="w-4.5 h-4.5" />
-                </div>
-                <span className="text-xs font-bold text-slate-800 block tracking-tight">{t.growthTracker}</span>
-              </Link>
-
-              <Link
-                to="/schemes"
-                className="p-4 bg-white/60 hover:bg-white backdrop-blur-md rounded-2xl text-center transition-all border border-white/80 group shadow-xs hover:shadow-md"
-              >
-                <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
-                  <FileText className="w-4.5 h-4.5" />
-                </div>
-                <span className="text-xs font-bold text-slate-800 block tracking-tight">{t.schemes}</span>
-              </Link>
-            </div>
-          </div>
-
         </div>
 
       </div>
