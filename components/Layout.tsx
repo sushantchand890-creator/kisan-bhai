@@ -114,6 +114,44 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
     };
   }, [activeNavIndex, location.pathname, isSidebarCollapsed]);
 
+  const topNavItems = [
+    { path: '/agrifarm', name: 'AgriFarm', icon: ShoppingBag, title: 'AgriFarm Direct Marketplace', hiddenClass: 'flex' },
+    { path: '/chat', name: 'Scan Crop', icon: Sparkles, title: 'Scan Crop Disease & Ask AI', hiddenClass: 'hidden sm:flex' },
+    { path: '/schemes', name: 'Schemes', icon: FileText, title: 'View Government Schemes & Subsidies', hiddenClass: 'hidden md:flex' },
+    { path: '/planner', name: 'Crop Planner', icon: Calendar, title: 'Smart Crop Season Planner', hiddenClass: 'hidden lg:flex' },
+  ];
+
+  const activeTopNavIndex = topNavItems.findIndex(item => isActive(item.path));
+  const topNavRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const [topNavSliderStyle, setTopNavSliderStyle] = useState<{ left: number; width: number; ready: boolean }>({
+    left: 0,
+    width: 0,
+    ready: false
+  });
+
+  useEffect(() => {
+    const updateTopNavSlider = () => {
+      if (activeTopNavIndex >= 0 && topNavRefs.current[activeTopNavIndex]) {
+        const activeEl = topNavRefs.current[activeTopNavIndex]!;
+        setTopNavSliderStyle({
+          left: activeEl.offsetLeft,
+          width: activeEl.offsetWidth,
+          ready: true
+        });
+      } else {
+        setTopNavSliderStyle(prev => ({ ...prev, ready: false }));
+      }
+    };
+
+    updateTopNavSlider();
+    const timer = setTimeout(updateTopNavSlider, 100);
+    window.addEventListener('resize', updateTopNavSlider);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', updateTopNavSlider);
+    };
+  }, [activeTopNavIndex, location.pathname]);
+
   const NavLinks = ({ collapsed, onClick, isSidebar }: { collapsed?: boolean; onClick?: () => void; isSidebar?: boolean }) => (
     <>
       {navigation.map((item, index) => {
@@ -323,45 +361,40 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
 
           {/* Center/Right Action Tools: Quick Features & Language Toggle */}
           <div className="flex items-center gap-2 sm:gap-2.5">
-            {/* Quick Feature 1: AgriFarm Direct Market */}
-            <Link
-              to="/agrifarm"
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 via-brand-600 to-teal-600 text-white text-xs font-extrabold shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-95 transition-all"
-              title="AgriFarm Direct Marketplace"
-            >
-              <ShoppingBag className="w-3.5 h-3.5 text-harvest-300" />
-              <span>AgriFarm</span>
-            </Link>
+            {/* Top Navigation Sliding Active Pill Container (WITHOUT light/spotlight beam) */}
+            <div className="relative flex items-center gap-1.5 p-1 bg-white/40 backdrop-blur-md rounded-2xl border border-white/60 shadow-xs overflow-hidden">
+              {/* Smooth Horizontal Slider Pill */}
+              <div 
+                className={`absolute top-1 bottom-1 bg-gradient-to-r from-brand-600 via-emerald-600 to-teal-600 rounded-xl shadow-md transition-all duration-300 ease-out z-10 ${
+                  topNavSliderStyle.ready ? 'opacity-100' : 'opacity-0'
+                }`}
+                style={{
+                  left: `${topNavSliderStyle.left}px`,
+                  width: `${topNavSliderStyle.width}px`
+                }}
+              />
 
-            {/* Quick Feature 2: Scan Crop */}
-            <Link
-              to="/chat"
-              className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/80 hover:bg-white backdrop-blur-md text-slate-800 border border-white/90 text-xs font-extrabold transition-all active:scale-95 shadow-xs"
-              title="Scan Crop Disease & Ask AI"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-brand-600" />
-              <span>Scan Crop</span>
-            </Link>
-
-            {/* Quick Feature 3: Government Schemes */}
-            <Link
-              to="/schemes"
-              className="hidden md:flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/80 hover:bg-white backdrop-blur-md text-slate-800 border border-white/90 text-xs font-extrabold transition-all active:scale-95 shadow-xs"
-              title="View Government Schemes & Subsidies"
-            >
-              <FileText className="w-3.5 h-3.5 text-harvest-600" />
-              <span>Schemes</span>
-            </Link>
-
-            {/* Quick Feature 4: Crop Planner */}
-            <Link
-              to="/planner"
-              className="hidden lg:flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/80 hover:bg-white backdrop-blur-md text-slate-800 border border-white/90 text-xs font-extrabold transition-all active:scale-95 shadow-xs"
-              title="Smart Crop Season Planner"
-            >
-              <Calendar className="w-3.5 h-3.5 text-brand-600" />
-              <span>Crop Planner</span>
-            </Link>
+              {topNavItems.map((item, idx) => {
+                const Icon = item.icon;
+                const active = isActive(item.path);
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    ref={el => { topNavRefs.current[idx] = el; }}
+                    className={`relative z-20 items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs transition-colors duration-200 ${item.hiddenClass || 'flex'} ${
+                      active 
+                        ? 'text-white font-extrabold' 
+                        : 'text-slate-700 hover:text-slate-900 font-bold'
+                    }`}
+                    title={item.title}
+                  >
+                    <Icon className={`w-3.5 h-3.5 ${active ? 'text-white' : 'text-brand-700'}`} />
+                    <span>{item.name}</span>
+                  </Link>
+                );
+              })}
+            </div>
 
             {/* Multi-lingual Selector */}
             <LanguageToggle currentLang={lang} onLanguageChange={handleLanguageChange} />
