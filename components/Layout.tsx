@@ -222,7 +222,7 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
 
       {/* DESKTOP SIDEBAR (FIXED TO VIEWPORT ON SCROLL) */}
       <aside
-        className={`hidden lg:flex flex-col bg-white/45 backdrop-blur-xl border-r border-white/60 fixed top-0 left-0 h-screen z-40 shadow-xl transition-all duration-300 ${isSidebarCollapsed ? 'w-20' : 'w-72'
+        className={`hidden lg:flex flex-col bg-white/45 backdrop-blur-xl border-r border-white/60 fixed top-0 left-0 h-screen z-40 shadow-xl overflow-x-hidden transition-all duration-300 ${isSidebarCollapsed ? 'w-20' : 'w-72'
           }`}
       >
         {/* Brand Header */}
@@ -250,7 +250,7 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
         </div>
 
         {/* Navigation Links with Limelight Active Height Slide Effect */}
-        <nav className="flex-1 px-3 space-y-1 overflow-y-auto custom-scrollbar relative">
+        <nav className="flex-1 px-3 space-y-1 overflow-y-auto overflow-x-hidden custom-scrollbar relative">
           {/* Animated Limelight Height Slide Indicator Bar */}
           <div 
             className={`absolute left-0.5 w-1.5 bg-gradient-to-b from-brand-400 via-emerald-500 to-teal-400 rounded-r-full shadow-[0_0_15px_#16a34a] z-20 pointer-events-none transition-all duration-300 ease-in-out ${
@@ -262,7 +262,7 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
             }}
           >
             {/* Limelight Spotlight Beam (Polygon Clip-Path) */}
-            <div className="absolute left-0 top-0 w-64 h-full [clip-path:polygon(0_15%,100%_0,100%_100%,0_85%)] bg-gradient-to-r from-brand-500/30 via-emerald-500/10 to-transparent pointer-events-none" />
+            <div className={`absolute left-0 top-0 ${isSidebarCollapsed ? 'w-16' : 'w-64'} h-full [clip-path:polygon(0_15%,100%_0,100%_100%,0_85%)] bg-gradient-to-r from-brand-500/30 via-emerald-500/10 to-transparent pointer-events-none`} />
           </div>
 
           {!isSidebarCollapsed && (
