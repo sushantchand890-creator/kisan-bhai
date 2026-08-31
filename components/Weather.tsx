@@ -118,7 +118,7 @@ export const Weather: React.FC = () => {
 
       {/* WEATHER ALERTS SECTION */}
       {alerts.length > 0 && (
-        <div className="space-y-4">
+        <div className="animate-fade-in-up opacity-0 [animation-delay:100ms] [animation-fill-mode:forwards] space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-extrabold text-slate-400 uppercase tracking-widest flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-amber-500" /> {t.weatherAlerts} ({alerts.length})
@@ -139,7 +139,7 @@ export const Weather: React.FC = () => {
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {severityAlerts.map((alert: any, i: number) => (
-                      <div key={i} className={`${style.bg} backdrop-blur-md border ${style.border} p-6 rounded-3xl shadow-sm relative overflow-hidden group hover:shadow-md transition-all`}>
+                      <div key={i} className={`${style.bg} backdrop-blur-md border ${style.border} p-6 rounded-3xl shadow-sm relative overflow-hidden group hover:shadow-md hover:scale-[1.01] transition-all duration-300`}>
                         <div className="flex justify-between items-start mb-4">
                           <div className={`p-3 ${style.accent} rounded-2xl text-white shadow-sm`}>
                             <Icon className="w-5 h-5" />
@@ -177,7 +177,7 @@ export const Weather: React.FC = () => {
           <p className="text-xs font-medium text-slate-400 mt-1">Connecting to agricultural weather intelligence system</p>
         </div>
       ) : currentWeather ? (
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="animate-fade-in-up opacity-0 [animation-delay:200ms] [animation-fill-mode:forwards] grid lg:grid-cols-3 gap-8">
           {/* Main Current Weather */}
           <div className="lg:col-span-2 bg-gradient-to-br from-blue-600 via-indigo-700 to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
             <div className="relative z-10">

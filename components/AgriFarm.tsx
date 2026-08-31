@@ -224,7 +224,7 @@ export const AgriFarm: React.FC = () => {
   return (
     <div className="space-y-6 pb-12 font-sans">
       {/* Top Banner Hero */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-brand-800 via-emerald-800 to-teal-900 p-6 sm:p-10 text-white shadow-xl">
+      <div className="animate-fade-in-up opacity-0 [animation-delay:100ms] [animation-fill-mode:forwards] relative overflow-hidden rounded-3xl bg-gradient-to-r from-brand-800 via-emerald-800 to-teal-900 p-6 sm:p-10 text-white shadow-xl">
         <div className="absolute top-0 right-0 -mt-10 -mr-10 w-80 h-80 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl space-y-3">
@@ -244,7 +244,7 @@ export const AgriFarm: React.FC = () => {
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <button
               onClick={() => setIsSellModalOpen(true)}
-              className="px-5 py-3 rounded-2xl bg-harvest-500 hover:bg-harvest-400 text-slate-900 font-extrabold text-xs flex items-center gap-2 shadow-lg shadow-harvest-500/30 active:scale-95 transition-all"
+              className="px-5 py-3 rounded-2xl bg-harvest-500 hover:bg-harvest-400 text-slate-900 font-extrabold text-xs flex items-center gap-2 shadow-lg shadow-harvest-500/30 hover:scale-105 active:scale-95 transition-all"
             >
               <Plus className="w-4 h-4" />
               <span>Sell Produce / List Item</span>
@@ -259,7 +259,7 @@ export const AgriFarm: React.FC = () => {
       </div>
 
       {/* Controls Bar: Search & Filters */}
-      <div className="bg-white/70 backdrop-blur-2xl p-5 rounded-3xl border border-white/80 shadow-xl space-y-4">
+      <div className="animate-fade-in-up opacity-0 [animation-delay:200ms] [animation-fill-mode:forwards] bg-white/70 backdrop-blur-2xl p-5 rounded-3xl border border-white/80 shadow-xl space-y-4">
         <div className="flex flex-col sm:flex-row items-center gap-3">
           {/* Search Bar */}
           <div className="relative flex-1 w-full">

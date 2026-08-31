@@ -374,7 +374,7 @@ export const Chat: React.FC = () => {
 
         {/* PROMPT SUGGESTIONS CHIPS (ULTRA-TRANSPARENT GLASS) */}
         {messages.length === 1 && !isLoading && (
-          <div className="space-y-4 pt-6 pb-6">
+          <div className="animate-fade-in-up opacity-0 [animation-delay:200ms] [animation-fill-mode:forwards] space-y-4 pt-6 pb-6">
             <p className="text-[10px] font-extrabold text-slate-500 uppercase tracking-widest text-center">
               {t.tryAsking}
             </p>
@@ -383,9 +383,9 @@ export const Chat: React.FC = () => {
                 <button 
                   key={i} 
                   onClick={() => handleSend(sug.text)} 
-                  className="flex items-center gap-3.5 p-4 bg-white/20 backdrop-blur-md border border-white/50 rounded-2xl text-left hover:bg-white/40 hover:shadow-md transition-all group"
+                  className="flex items-center gap-3.5 p-4 bg-white/20 backdrop-blur-md border border-white/50 rounded-2xl text-left hover:bg-white/40 hover:border-brand-400/60 hover:shadow-md hover:scale-[1.02] transition-all duration-300 group"
                 >
-                  <div className="w-10 h-10 bg-white/40 border border-white/60 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 bg-white/40 border border-white/60 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                     <sug.icon className={`w-4 h-4 ${sug.color}`} />
                   </div>
                   <span className="text-xs font-bold text-slate-900 leading-snug">{sug.text}</span>

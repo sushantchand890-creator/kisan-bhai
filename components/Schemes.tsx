@@ -31,9 +31,9 @@ export const Schemes: React.FC = () => {
   );
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500 pb-10 font-sans">
+    <div className="space-y-8 pb-10 font-sans">
       {/* HEADER BAR */}
-      <header className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <header className="animate-fade-in-up opacity-0 [animation-delay:100ms] [animation-fill-mode:forwards] bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5 mb-1">
             <div className="p-2 rounded-xl bg-amber-50 text-amber-600 shadow-xs">
@@ -63,11 +63,11 @@ export const Schemes: React.FC = () => {
           <p className="text-xs font-medium text-slate-400 mt-1">Fetching live government records for {user?.location || 'India'}</p>
         </div>
       ) : (
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="animate-fade-in-up opacity-0 [animation-delay:200ms] [animation-fill-mode:forwards] grid md:grid-cols-2 gap-6">
           {filteredSchemes.map((scheme, i) => (
             <div 
               key={i} 
-              className="bg-white/45 backdrop-blur-xl rounded-3xl border border-white/70 shadow-md hover:shadow-xl transition-all overflow-hidden flex flex-col justify-between group"
+              className="bg-white/45 backdrop-blur-xl rounded-3xl border border-white/70 shadow-md hover:shadow-xl hover:scale-[1.01] hover:border-brand-300 transition-all duration-300 overflow-hidden flex flex-col justify-between group"
             >
               <div className="p-6 sm:p-8 flex-1">
                 <div className="flex justify-between items-start mb-4">

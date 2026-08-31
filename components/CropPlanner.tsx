@@ -28,7 +28,7 @@ export const CropPlanner: React.FC = () => {
 
   return (
     <div className="space-y-8 pb-10 font-sans">
-      <header className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <header className="animate-fade-in-up opacity-0 [animation-delay:100ms] [animation-fill-mode:forwards] bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5 mb-1">
             <div className="p-2 rounded-xl bg-brand-50 text-brand-700 shadow-xs">
@@ -40,7 +40,7 @@ export const CropPlanner: React.FC = () => {
         </div>
       </header>
 
-      <div className="bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl space-y-6">
+      <div className="animate-fade-in-up opacity-0 [animation-delay:200ms] [animation-fill-mode:forwards] bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl space-y-6">
         <h2 className="font-heading text-lg font-extrabold text-slate-900 border-b border-white/60 pb-4">
           Regional Parameters
         </h2>
