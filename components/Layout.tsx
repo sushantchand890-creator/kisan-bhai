@@ -153,7 +153,7 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
             <img 
               src="/wheat_stalks.png" 
               alt="Kisan-Bhai Wheat Logo" 
-              className="w-14 h-14 object-contain filter drop-shadow-md flex-shrink-0 transition-transform duration-200 hover:scale-105" 
+              className="w-16 h-16 object-contain filter drop-shadow-md flex-shrink-0 transition-transform duration-200 hover:scale-110" 
             />
             {!isSidebarCollapsed && (
               <div className="min-w-0 flex-1">
