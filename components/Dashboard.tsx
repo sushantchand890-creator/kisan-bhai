@@ -201,9 +201,9 @@ export const Dashboard: React.FC = () => {
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white/45 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/70 shadow-xl">
         <div className="flex items-center gap-5">
            <img 
-              src="/wheat_logo.jpg" 
+              src="/wheat_logo.png" 
               alt="Kisan-Bhai Wheat Logo" 
-              className="w-16 h-16 rounded-2xl object-cover border border-white/40 shadow-md shadow-brand-600/20 shrink-0" 
+              className="w-16 h-16 rounded-full object-contain filter drop-shadow-md shrink-0" 
            />
            <div>
              <div className="flex items-center gap-2">

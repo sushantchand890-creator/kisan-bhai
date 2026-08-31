@@ -158,9 +158,9 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
             isSidebarCollapsed ? 'justify-center p-2.5' : ''
           }`}>
             <img 
-              src="/wheat_logo.jpg" 
+              src="/wheat_logo.png" 
               alt="Kisan-Bhai Wheat Logo" 
-              className="w-10 h-10 rounded-xl object-cover shadow-md shadow-emerald-700/20 border border-emerald-400/40 flex-shrink-0" 
+              className="w-10 h-10 rounded-full object-contain filter drop-shadow-md flex-shrink-0" 
             />
             {!isSidebarCollapsed && (
               <div className="min-w-0 flex-1">
@@ -262,9 +262,9 @@ export const Layout: React.FC<LayoutProps> = ({ onLogout }) => {
             {/* Mobile Brand Logo */}
             <div className="flex items-center gap-2.5 lg:hidden">
               <img 
-                src="/wheat_logo.jpg" 
+                src="/wheat_logo.png" 
                 alt="Kisan-Bhai Wheat Logo" 
-                className="w-9 h-9 rounded-xl object-cover shadow-sm border border-emerald-400/40 flex-shrink-0" 
+                className="w-9 h-9 rounded-full object-contain filter drop-shadow-sm flex-shrink-0" 
               />
               <div>
                 <h1 className="font-heading font-extrabold text-base text-slate-900 leading-none">Kisan-Bhai</h1>
